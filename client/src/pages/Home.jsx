@@ -1,12 +1,44 @@
-import React from 'react'
+import React, { useEffect, useRef } from "react";
 
 import codeEditor from "../Assests/codeEditor.svg";
+import ToastMessage from "../components/ToastMessage/ToastMessage";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const toastRef = useRef(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = window.localStorage.getItem("UserID");
+    if (token) {
+      toastRef.current.toast();
+    } else {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div>
-      {/* <h1>This is Home page</h1> */}
-     <img className='sample-edior-img' src={codeEditor} />
+      <ToastMessage
+        message="you are succussfully logged in"
+        type="success"
+        ref={toastRef}
+      />
+      <div className="home">
+        <div className="left-pane">
+          <div>
+            <h1 className="hero-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elitw sed do
+              eiusmod ut et.
+            </h1>
+            <Link to="/register">
+              <button>Get Started </button>
+            </Link>
+          </div>
+        </div>
+        <div className="right-pane">
+          <img className="sample-edior-img" src={codeEditor} />
+        </div>
+      </div>
     </div>
-  )
+  );
 }

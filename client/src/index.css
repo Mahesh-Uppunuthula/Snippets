@@ -47,6 +47,7 @@ body {
   font-size: var(--links-font-size);
   font-weight: var(--light-weight);
   color: var(--dark-text-color);
+  cursor: pointer;
 }
 
 /* ------------------------------------------------ */
@@ -88,10 +89,11 @@ nav button {
   width: 5.5em;
   height: 90%;
   text-align: center;
+  cursor: pointer;
   color: var(--light-text-color);
   border: none;
   background-image: linear-gradient(
-    to top right,
+    to bottom right,
     var(--primary-gradient-start-color),
     var(--primary-gradient-end-color)
   );
@@ -100,7 +102,68 @@ nav button {
   font-size: var(--side-heading-font-size);
 }
 
+nav button .link-item {
+  color: white;
+  font-weight: var(--bold-weight);
+  font-size: var(--side-heading-font-size);
+}
+
 /* ------------------------------------------------ */
+/* HOME PAGE STYES */
+
+.home {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: blue; */
+}
+
+.right-pane{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-pane img{
+  width: 80%;
+  /* background-color: red; */
+}
+
+.left-pane {
+  width: 50%;
+  /* background-color: #e100ff; */
+  display: flex;
+  margin-left: 5em;
+}
+
+.hero-text {
+  width: 80%;
+  font-size: var(--main-heading-font-size);
+  font-weight: var(--bold-weight);
+  margin-block: 2em;
+}
+
+.left-pane button {
+  width: 13em;
+  height: 3em;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: var(--bold-weight);
+  font-size: var(--sub-heading-font-size);
+  border-radius: var(--small-radius);
+  background-image: linear-gradient(
+    to bottom right,
+    var(--primary-gradient-start-color),
+    var(--primary-gradient-end-color)
+  );
+}
+
+
 
 /* ------------------------------------------------ */
 
@@ -181,49 +244,11 @@ nav button {
   font-weight: bold;
 }
 
-/* ------------------------------------------------ */
-/* TOAST MESSAGE STYLLES */
-
 .motive-text {
   text-align: center;
   font-size: 2em;
   margin-block: 0.5em;
 }
-
-.message {
-  width: 60%;
-  padding: 0.5em;
-  display: flex;
-  margin: auto;
-  border: none;
-  border-radius: 0.5em;
-  background-color: hsl(120, 100%, 25%, 0.8);
-  visibility: hidden;
-  transition: all 1s ease-in;
-}
-
-.message-text-container {
-  width: 100%;
-  text-align: center;
-}
-
-.message p {
-  font-size: 1em;
-  color: white;
-  font-weight: bold;
-}
-
-.message img {
-  width: 0.8em;
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  margin-right: 0.5em;
-  cursor: pointer;
-  filter: invert(100%) sepia(42%) saturate(0%) hue-rotate(342deg)
-    brightness(112%) contrast(101%);
-}
-
-/* ------------------------------------------------ */
 
 /* body {
   margin: 0;

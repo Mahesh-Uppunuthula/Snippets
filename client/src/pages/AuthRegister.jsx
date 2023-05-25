@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Form from "../components/Form";
+import ToastMessage from "../components/ToastMessage/ToastMessage";
 
 function AuthRegister() {
-  const userRef = useRef();
-  const [errMsg, setErrMsg] = useState("");
-
+  const toastRef = useRef(null);
   const [email, setEmail] = useState("");
   const [isValidEmail, setValidEmail] = useState(false);
   const [isEmailFocused, setEmailFocused] = useState(false);
@@ -21,6 +20,11 @@ function AuthRegister() {
 
   const navigate = useNavigate();
 
+  const [toastState, setToastState] = useState({
+    message: "",
+    type: "",
+  });
+
   /*
    *if user is already authenticated redirect user to home page
    */
@@ -28,12 +32,11 @@ function AuthRegister() {
     const token = window.localStorage.getItem("UserID");
     console.log(token);
     if (token) {
-      navigate("/");
+      navigate("/login");
     }
   }, []);
 
   // VALIDATIONS
-
   useEffect(() => {
     // email validation
     const result = EMAIL_REGEX.test(email);
@@ -58,16 +61,25 @@ function AuthRegister() {
           if (statusCode === 409) {
             // pass a toast message here for conflict
 
-            alert("user already exists");
+            setToastState((prev) => ({
+              message: "User already exists",
+              type: "error",
+            }));
+
+            toastRef.current.toast();
           } else {
-            console.log("axios login post req", response);
-            navigate("/login");
+            setToastState((prev) => ({
+              message: "Registration successfull, redirecting to login page",
+              type: "success",
+            }));
+            toastRef.current.toast();
+
+            setTimeout(() => {
+              navigate("/login");
+            }, 3000);
+
             setEmail("");
             setPassword("");
-
-            // pass a toast message here
-
-            alert("registered succefully");
           }
         })
         .catch((err) => {
@@ -82,28 +94,37 @@ function AuthRegister() {
           }
         });
     } else {
-      // pass a toast message here
-
-      alert("invalid password");
+      setToastState((prev) => ({
+        message: "choose vaild email and password",
+        type: "error",
+      }));
+      toastRef.current.toast();
     }
   }
 
   return (
-    <Form
-      email={email}
-      password={password}
-      onEmailChange={(event) => {
-        console.log(event.target.value);
-        setEmail(event.target.value);
-      }}
-      onPasswordChange={(event) => {
-        setPassword(event.target.value);
-      }}
-      label={"Sign Up"}
-      handleSubmit={RegisterUser}
-      isValidEmail={isValidEmail}
-      isValidPassword={isValidPassword}
-    />
+    <>
+      <ToastMessage
+        message={toastState.message}
+        type={toastState.type}
+        ref={toastRef}
+      />
+      <Form
+        email={email}
+        password={password}
+        onEmailChange={(event) => {
+          console.log(event.target.value);
+          setEmail(event.target.value);
+        }}
+        onPasswordChange={(event) => {
+          setPassword(event.target.value);
+        }}
+        label={"Sign Up"}
+        handleSubmit={RegisterUser}
+        isValidEmail={isValidEmail}
+        isValidPassword={isValidPassword}
+      />
+    </>
   );
 }
 

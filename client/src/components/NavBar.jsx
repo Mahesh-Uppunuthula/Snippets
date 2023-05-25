@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import ToastMessage from "./ToastMessage/ToastMessage";
 
 function NavBar() {
-  const [isLoggdIn, setLoggedIn] = useState(false);
+  const toastRef = useRef(null);
+  
+  const token = window.localStorage.getItem("UserID");
+
+  const [isLoggdIn, setLoggedIn] = useState(true);
   useEffect(() => {
-    const token = window.localStorage.getItem("UserID");
-    if (token) {
-      setLoggedIn(true);
+    if (!token) {
+      setLoggedIn(false);
     }
-  }, []);
+  }, [token]);
 
   function logUserOut(event){
+  
+    toastRef.current.toast();
     window.localStorage.removeItem("UserID");
     setLoggedIn(false);
   }
 
   return (
+    <>
     <header>
       <nav>
         <div>
@@ -29,11 +36,13 @@ function NavBar() {
             <div className="vertical-line "/>
             <Link className="nav-link link-item" to="/editor">Editor</Link>
             <div className="vertical-line "/>
-            {isLoggdIn ? <button onClick={logUserOut}>Log Out</button> : <button><Link to="/login">Login</Link></button>}
+            {!isLoggdIn ? <button><Link className="link-item" to="/login">Login</Link></button> : <button   onClick={logUserOut}>Log Out</button> }
           </ul>
         </div>
       </nav>
     </header>
+    <ToastMessage message={"you are logged out"} type = {"error"} ref={toastRef}/>
+    </>
   );
 }
 

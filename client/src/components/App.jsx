@@ -11,7 +11,7 @@ import Profie from "../pages/Profile";
 import AuthRegister from "../pages/AuthRegister";
 import AuthLogin from "../pages/AuthLogin";
 
-import Message from "./Message";
+import ToastMessage from "./ToastMessage/ToastMessage";
 
 // const urlPath = "http://localhost:5000/";
 
@@ -30,7 +30,7 @@ const App = () => {
   return (
       <Router> 
         <NavBar />
-        {/* <Message /> */}
+        {/* <ToastMessage /> */}
         <Routes>
           <Route path="/" Component={Home}></Route>
           <Route path="/dashboard" Component={Dashboard}></Route>

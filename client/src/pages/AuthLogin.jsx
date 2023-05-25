@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Form from "../components/Form";
-import Message from "../components/Message";
+import ToastMessage from "../components/ToastMessage/ToastMessage";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 function AuthLogin() {
+  const toastRef = useRef(null);
+
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [_, setCookies] = useCookies(["access_token"]);
 
-  const [finalResponse, setFinalResponse] = useState({});
+  const [toastState, setToastState] = useState({
+    message: "",
+    type: "",
+  });
 
-  console.log(email, password);
-  const navigate = useNavigate();
-
-  /*
-   *if user is already authenticated redirect user to home page
+  /**
+   * if user is already authenticated redirect user to home page
    */
   useEffect(() => {
     const token = window.localStorage.getItem("UserID");
@@ -24,7 +28,9 @@ function AuthLogin() {
     if (token) {
       navigate("/");
     }
-  }, []);
+
+    console.log("toast state ", toastState);
+  }, [toastState.message]);
 
   function loginUser(event) {
     event.preventDefault();
@@ -33,46 +39,49 @@ function AuthLogin() {
       .then((response) => {
         const statusCode = response.data.status;
         if (statusCode === 401) {
-          // show toast message saying username or password incorrect
-          alert("username or password incorrect");
+          // show toast message saying Invalid Credentials
+
+          setToastState(() => ({
+            message: "Invalid Credentials",
+            type: "error",
+          }));
+          toastRef.current.toast();
         } else {
           setCookies("access_token", response.data.token);
           window.localStorage.setItem("UserID", response.data.UserID);
-
-          <Message
-            message={"You are successfully logged in"}
-            type={"notification"}
-          />;
           console.log("axios login post req", response);
 
           setEmail("");
           setPassword("");
 
-          navigate("/");
+          window.location.pathname="/"
         }
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        console.log("usernma or password incorret");
-        // <Message message={"Username or Password Incorrect"} type = {"error"} />
       });
   }
 
   return (
-    <Form
-      email={email}
-      password={password}
-      onEmailChange={(event) => {
-        setEmail(event.target.value);
-      }}
-      onPasswordChange={(event) => {
-        setPassword(event.target.value);
-      }}
-      label={"Sign In"}
-      handleSubmit={loginUser}
-    />
+    <>
+      <ToastMessage
+        message={toastState.message}
+        type={toastState.type}
+        ref={toastRef}
+      />
+      <Form
+        email={email}
+        password={password}
+        onEmailChange={(event) => {
+          setEmail(event.target.value);
+        }}
+        onPasswordChange={(event) => {
+          setPassword(event.target.value);
+        }}
+        label={"Sign In"}
+        handleSubmit={loginUser}
+      />
+    </>
   );
 }
 

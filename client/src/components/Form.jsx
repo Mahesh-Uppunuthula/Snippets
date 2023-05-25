@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import ToastMessage from "./ToastMessage/ToastMessage";
 
 function Form(props) {
-  console.log("form ema", props.isValidEmail);
-  console.log("form pass", props.isValidPassword);
-
   return (
     <div className="auth">
+      {/* <ToastMessage message="You are successfull logged in" type="success" />; */}
       <div className="auth-container">
         <form onSubmit={(event) => props.handleSubmit(event)}>
           <h1 auth-label>{props.label}</h1>
           <p className="motive-text">
             {props.label.toLowerCase() === "sign up"
               ? "Create your account "
-              : "Now, log into your account"}
+              : "Log into your account"}
           </p>
           <div className="form-container">
             <label htmlFor="Email">Email</label>
