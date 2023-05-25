@@ -9,7 +9,10 @@ exports.registerUser = async (req, res) => {
 
   UserModel.findOne({ email }).then((foundUser) => {
     if (foundUser) {
-      return res.send("user already exists");
+      /*
+       *express resource conflict
+       */
+      return res.json({ message: "user already exists", status: 409 });
     }
 
     // hashing passwords with bcrypt
@@ -21,7 +24,8 @@ exports.registerUser = async (req, res) => {
           res.send("Registered Succuessfully!");
         })
         .catch((err) => {
-          res.send("Something went wrong, Please try again later");
+          // res.send("Something went wrong, Please try again later");
+          res.send(err);
           console.error("Registration error", err);
         });
     });
@@ -35,20 +39,28 @@ exports.loginUser = async (req, res) => {
   UserModel.findOne({ email }).then((foundUser) => {
     // if foundUser is null
     if (!foundUser) {
-        console.error("User doesn't exist");
-      return res.json({ message: "User doesn't exist" });
+      /*
+        * send reponse as invalid credentials 401
+      */
+      return res.json({
+        message: "Invalid Username",
+        status: 401,
+      });
     }
 
     bcrypt.compare(password, foundUser.password).then((isMatch) => {
       if (!isMatch) {
-        console.error("password doesn't match");
-        return res.json({ message: "Username or Password Incorrect" });
+        /*
+          * send reponse as invalid credentials 401
+        */
+        return res.json({
+          message: "Username or Password incorrect",
+          status: 401,
+        });
       }
 
-      console.log("Authenticated User");
-
       const token = jwt.sign({ id: foundUser._id }, JWT_SECRET_KEY);
-      res.json({ token, UserID: foundUser._id });
+      res.json({ token, UserID: foundUser._id, userStatusCodeForAuth: 3 });
     });
   });
 };

@@ -1,26 +1,40 @@
-import React  from "react";
-import profileImg from "../Assests/person.svg";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import {Link} from "react-router-dom";
+function NavBar() {
+  const [isLoggdIn, setLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = window.localStorage.getItem("UserID");
+    if (token) {
+      setLoggedIn(true);
+    }
+  }, []);
 
-function NavBar()
-{
-    return <header>
-        {/* <a className="brand" href="/"><h1>Snippets</h1></a> */}
-        <Link to="/">Snippets</Link>
-        <nav>
-            <ul>
-                {/* <li className="nav-item"><a className="nav-link" href="/">Dashboard</a></li>
-                <li> <a  href="/"><img className="profile-icon" src={profileImg}></img></a></li> */}
-                <Link to="/dashboard">Dashboard</Link>                
-                <Link to="/profile"><img alt="Open Profile" className="profile-icon" src={profileImg}></img></Link>                
-                {/* <Link to="/Auth">Auth</Link>                 */}
-                {/* <Link to="/Create">Create</Link>                 */}
-            </ul>
-        </nav>
-       
+  function logUserOut(event){
+    window.localStorage.removeItem("UserID");
+    setLoggedIn(false);
+  }
+
+  return (
+    <header>
+      <nav>
+        <div>
+          <Link className="brand link-item" to="/">
+            Snippets
+          </Link>
+        </div>
+        <div>
+          <ul>
+            <Link className="nav-link link-item" to="/dashboard">Dashboard</Link>
+            <div className="vertical-line "/>
+            <Link className="nav-link link-item" to="/editor">Editor</Link>
+            <div className="vertical-line "/>
+            {isLoggdIn ? <button onClick={logUserOut}>Log Out</button> : <button><Link to="/login">Login</Link></button>}
+          </ul>
+        </div>
+      </nav>
     </header>
-    
+  );
 }
 
 export default NavBar;

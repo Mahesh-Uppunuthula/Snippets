@@ -21,7 +21,7 @@ app.get("/", (req, res)=>{
     res.send("helllo !")
 })
 
-app.use("/auth", userRoute);
+app.use("/", userRoute);
 
 app.get("/getData", (req, res)=>{
     res.json("this data is sent from server");
