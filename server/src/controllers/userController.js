@@ -2,7 +2,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/Users");
-const { log } = require("console");
+const UserDirectory = require("../models/UserDirectory");
 
 exports.registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -21,10 +21,16 @@ exports.registerUser = async (req, res) => {
       newUser
         .save()
         .then(() => {
-          res.send("Registered Succuessfully!");
+          const newUserDirectory = new UserDirectory.UserDirectoryModel({
+            _id: newUser._id,
+            userDir: [],
+          });
+
+          newUserDirectory.save();
+
+          res.json({ message: "Registered Succuessfully!" });
         })
         .catch((err) => {
-          // res.send("Something went wrong, Please try again later");
           res.send(err);
           console.error("Registration error", err);
         });
@@ -40,8 +46,8 @@ exports.loginUser = async (req, res) => {
     // if foundUser is null
     if (!foundUser) {
       /*
-        * send reponse as invalid credentials 401
-      */
+       * send reponse as invalid credentials 401
+       */
       return res.json({
         message: "Invalid Username",
         status: 401,
@@ -51,8 +57,8 @@ exports.loginUser = async (req, res) => {
     bcrypt.compare(password, foundUser.password).then((isMatch) => {
       if (!isMatch) {
         /*
-          * send reponse as invalid credentials 401
-        */
+         * send reponse as invalid credentials 401
+         */
         return res.json({
           message: "Username or Password incorrect",
           status: 401,

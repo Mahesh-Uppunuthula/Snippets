@@ -1,0 +1,36 @@
+:root {
+  /* FONT SIZES */
+  --main-heading-font-size: 2em;
+  --sub-heading-font-size: 1.5em;
+  --side-heading-font-size: 1em;
+
+  /* FONT WEIGHTS */
+  --light-weight: 300;
+  --regular-weight: 400;
+  --semi-bold-weight: 600;
+  --bold-weight: 700;
+}
+
+
+.folder-item {
+  /* background-color: red; */
+  display: inline-flex;
+  padding: .5em;
+  align-items: center;
+  font-size: 1.12em;
+  font-weight: var(--light-weight);
+  /* background-color: blue; */
+}
+
+.folder-item p {
+  font-size: 1.1em;
+  overflow: hidden;
+  max-width: 15ch;
+}
+
+.folder-item img {
+  margin-right: 5px;
+  width: 1.1em;
+  margin-top: 5px;
+  /* background-color: red; */
+}

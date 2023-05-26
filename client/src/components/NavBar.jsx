@@ -36,7 +36,7 @@ function NavBar() {
             <div className="vertical-line "/>
             <Link className="nav-link link-item" to="/editor">Editor</Link>
             <div className="vertical-line "/>
-            {!isLoggdIn ? <button><Link className="link-item" to="/login">Login</Link></button> : <button   onClick={logUserOut}>Log Out</button> }
+            {!isLoggdIn ? <button><Link className="link-item" to="/login">Login</Link></button> : <button className="border-btn"  onClick={logUserOut}>Log Out</button> }
           </ul>
         </div>
       </nav>

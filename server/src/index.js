@@ -16,12 +16,17 @@ const SERVER_PORT = process.env.SERVER_PORT;
 
 // ROUTES
 const userRoute = require("./routes/users");
+const dashboardRoute = require("./routes/dashboard");
+const editorRoute = require("./routes/editor");
 
 app.get("/", (req, res)=>{
     res.send("helllo !")
 })
 
 app.use("/", userRoute);
+app.use("/", dashboardRoute);
+app.use("/", editorRoute);
+
 
 app.get("/getData", (req, res)=>{
     res.json("this data is sent from server");

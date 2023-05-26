@@ -108,6 +108,14 @@ nav button .link-item {
   font-size: var(--side-heading-font-size);
 }
 
+.border-btn {
+  color: grey;
+  font-weight: var(--light-weight);
+  background-image: none;
+  background-color: white;
+  border: 1px solid #80808050;
+}
+
 /* ------------------------------------------------ */
 /* HOME PAGE STYES */
 
@@ -120,7 +128,7 @@ nav button .link-item {
   /* background-color: blue; */
 }
 
-.right-pane{
+.right-pane {
   width: 50%;
   height: 100%;
   display: flex;
@@ -128,7 +136,7 @@ nav button .link-item {
   align-items: center;
 }
 
-.right-pane img{
+.right-pane img {
   width: 80%;
   /* background-color: red; */
 }
@@ -163,7 +171,68 @@ nav button .link-item {
   );
 }
 
+/* ------------------------------------------------ */
+/*  DASHBOARD STYLES */
 
+
+.page-top-pane {
+  display: flex;
+  padding: 1em;
+  margin-inline: 5%;
+  justify-content: space-between;
+}
+
+.page-heading {
+  font-size: var(--main-heading-font-size);
+  color: var(--dark-text-color);
+  font-weight: var(--semi-bold-weight);
+}
+
+.call-to-action {
+  padding: 1em;
+  border: none;
+  border-radius: var(--small-radius);
+  display: flex;
+  background-image: linear-gradient(
+    to top right,
+    var(--primary-gradient-start-color),
+    var(--primary-gradient-end-color)
+  );
+  color: var(--light-text-color);
+  font-weight: var(--semi-bold-weight);
+}
+
+.call-to-action img {
+  margin-right: 5px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg)
+    brightness(102%) contrast(102%);
+}
+
+.bottom-pane {
+  /* background-color: red; */
+  margin-inline: 5%;
+  padding: 1em;
+  display: flex;
+  margin-top: 1em;
+}
+
+.folder-container {
+  display: flex;
+  flex-direction: column;
+
+}
+.folder-sub-heading {
+  font-size: var(--sub-heading-font-size);
+}
+
+.bottom-right-pane{
+  margin-left: 10em;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  row-gap: 5em;
+}
 
 /* ------------------------------------------------ */
 
