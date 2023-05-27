@@ -8,7 +8,7 @@ export default function Home() {
   const toastRef = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
-    const token = window.localStorage.getItem("UserID");
+    const token = window.localStorage.getItem("token");
     if (token) {
       toastRef.current.toast();
     } else {

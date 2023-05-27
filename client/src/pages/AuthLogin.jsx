@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import Axios from "axios";
 import Form from "../components/Form";
 import ToastMessage from "../components/ToastMessage/ToastMessage";
 import { useNavigate } from "react-router-dom";
@@ -23,18 +23,24 @@ function AuthLogin() {
    * if user is already authenticated redirect user to home page
    */
   useEffect(() => {
-    const token = window.localStorage.getItem("UserID");
-    console.log(token);
+    const token = window.localStorage.getItem("token");
     if (token) {
-      navigate("/");
+      Axios
+        .get("/verify", { headers: { Authorization: token } })
+        .then((response) => {
+          console.log("reponse from /verify router in auth login", response);
+          if (!response.isVerified.data) {
+            localStorage.clear();
+            navigate("/");
+          }
+        })
     }
-
     console.log("toast state ", toastState);
   }, [toastState.message]);
 
   function loginUser(event) {
     event.preventDefault();
-    axios
+    Axios
       .post("http://localhost:5000/login", { email, password })
       .then((response) => {
         const statusCode = response.data.status;
@@ -47,14 +53,15 @@ function AuthLogin() {
           }));
           toastRef.current.toast();
         } else {
+          console.log("auth login response ", response);
           setCookies("access_token", response.data.token);
-          window.localStorage.setItem("UserID", response.data.UserID);
+          window.localStorage.setItem("token", response.data.token);
           console.log("axios login post req", response);
 
           setEmail("");
           setPassword("");
 
-          window.location.pathname="/"
+          window.location.pathname = "/";
         }
       })
       .catch((err) => {

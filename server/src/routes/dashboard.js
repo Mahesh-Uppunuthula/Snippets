@@ -2,6 +2,6 @@ const router = require("express").Router();
 
 const dashboardController = require("../controllers/dashboardController");
 
-router.post("/dashboard", dashboardController.getUserDirectory)
+router.get("/dashboard", dashboardController.getUserDirectory)
 
 module.exports = router;

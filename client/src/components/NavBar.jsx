@@ -5,7 +5,7 @@ import ToastMessage from "./ToastMessage/ToastMessage";
 function NavBar() {
   const toastRef = useRef(null);
   
-  const token = window.localStorage.getItem("UserID");
+  const token = window.localStorage.getItem("token");
 
   const [isLoggdIn, setLoggedIn] = useState(true);
   useEffect(() => {
@@ -17,7 +17,7 @@ function NavBar() {
   function logUserOut(event){
   
     toastRef.current.toast();
-    window.localStorage.removeItem("UserID");
+    window.localStorage.removeItem("token");
     setLoggedIn(false);
   }
 

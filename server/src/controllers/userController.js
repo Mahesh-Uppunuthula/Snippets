@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const UserModel = require("../models/Users");
 const UserDirectory = require("../models/UserDirectory");
+const auth = require("../middlware/auth");
 
 exports.registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -65,8 +66,30 @@ exports.loginUser = async (req, res) => {
         });
       }
 
-      const token = jwt.sign({ id: foundUser._id }, JWT_SECRET_KEY);
-      res.json({ token, UserID: foundUser._id, userStatusCodeForAuth: 3 });
+      const token = jwt.sign({ id: foundUser._id }, JWT_SECRET_KEY, {
+        expiresIn: "1d",
+      });
+      
+      console.log("login token ", token);
+      // res.json({ token, UserID: afoundUser._id});
+      res.json({ token });
     });
+  });
+};
+
+exports.verifiedUser = async (req, res) => {
+  const token = req.header("Authorization");
+  if (!token) return res.json({ isVerified: false });
+
+  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, verifiedToken) => {
+    if (err) res.json({ isVerified: false });
+    UserModel.findOne({ _id: verifiedToken.id })
+      .then((reponse) => {
+        if (!reponse) res.json({ isVerified: false });
+        res.json({ isVerified: true });
+      })
+      .catch((err) => {
+        res.json({ message: err });
+      });
   });
 };
