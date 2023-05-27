@@ -25,7 +25,7 @@ app.get("/", (req, res)=>{
 
 app.use("/", userRoute);
 app.use("/", dashboardRoute);
-app.use("/", editorRoute);
+app.use("/editor", editorRoute);
 
 
 app.get("/getData", (req, res)=>{

@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
 
-const editorSchema = mongoose.Schema(
+const snippetSchema = mongoose.Schema(
   {
     userId:{type:mongoose.Schema.Types.ObjectId, require:true},
+    folderId:{type:mongoose.Schema.Types.ObjectId, require:true},
     title: { type: String, required: true },
     content: { type: String, required: true },
     language: { type: String, required: true },
-    folder: { type: String, required: true },
+    folderName: { type: String, required: true },
     date:{type:Date, default: Date.now}
   },
 );
 
 
-const EditorModel = new mongoose.model("snippet", editorSchema);
-module.exports = {editorSchema, EditorModel};
+const SnippetModel = new mongoose.model("snippet", snippetSchema);
+module.exports = {snippetSchema, SnippetModel};

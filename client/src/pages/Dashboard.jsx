@@ -36,7 +36,7 @@ export default function Dashboard() {
         //   })
       });
     }
-  });
+  },[token]);
 
   // useEffect(() => {
   //   if (!token) {

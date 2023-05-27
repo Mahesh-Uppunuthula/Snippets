@@ -19,6 +19,8 @@ function NavBar() {
     toastRef.current.toast();
     window.localStorage.removeItem("token");
     setLoggedIn(false);
+    window.location.pathname="/"
+    
   }
 
   return (
