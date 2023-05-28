@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
-const Snippet = require("./Snippet");
-
-// const editorSchema = Editor.editorSchema;
 
 const folderSchema = mongoose.Schema({
-  // userId: { type: mongoose.Schema.Types.ObjectId, require: true },
-  userId:String,
+  // userId:String,
+  
+  userId:{type:mongoose.Schema.Types.ObjectId, required :true},
   name: { type: String, required : true, unique:true},
+  date:{type:Date, default: Date.now}
 });
 
 const FolderModel = new mongoose.model("folder", folderSchema);

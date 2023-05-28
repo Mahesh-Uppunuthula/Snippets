@@ -1,7 +1,15 @@
 const router = require("express").Router();
+const auth = require("../middlware/auth");
 
 const dashboardController = require("../controllers/dashboardController");
 
-router.get("/dashboard", dashboardController.getUserDirectory)
+router
+    .route("/")
+    .get(auth, dashboardController.getAllFolders)
+    .post(auth, dashboardController.createFolder)
+
+router
+    .route("/:folderId")
+    .get(auth, dashboardController.getAllSnippetsOfAFolder);
 
 module.exports = router;

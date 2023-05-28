@@ -24,7 +24,7 @@ app.get("/", (req, res)=>{
 })
 
 app.use("/", userRoute);
-app.use("/", dashboardRoute);
+app.use("/dashboard", dashboardRoute);
 app.use("/editor", editorRoute);
 
 

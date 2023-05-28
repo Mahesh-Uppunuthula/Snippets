@@ -2,23 +2,15 @@
 const Folder = require("../models/Folder");
 const Snippet = require("../models/Snippet");
 
-exports.getAllSnippets = async (req, res) => {
-  const { folderId } = req.body;
-  Snippet.SnippetModel.find({ folderId })
-    .then((foundSnippets) => {
-      res.json({ snippets: foundSnippets });
-    })
-    .catch((err) => {
-      console.log("get all snippets err", err);
-      res.json({
-        message: "something went wrong while fetching all snippets of a folder",
-      });
-    });
-};
-
 exports.getSnippet = async (req, res) => {
+  const userId = req.user.id;
   const { folderId, snippetId } = req.params;
-  Snippet.SnippetModel.findOne({ folderId: folderId, _id: snippetId })
+
+  Snippet.SnippetModel.findOne({
+    userId: userId,
+    folderId: folderId,
+    _id: snippetId,
+  })
     .then((foundSnippet) => {
       res.json({ snippet: foundSnippet });
     })
@@ -29,7 +21,8 @@ exports.getSnippet = async (req, res) => {
 };
 
 exports.saveSnippet = async (req, res) => {
-  const { userId, title, content, language, folderName } = req.body;
+  const { title, content, language, folderName } = req.body;
+  const userId = req.user.id;
   console.log("req body", req.body);
 
   /** assumptions THERS EXISTS A FOLDER ALREADY BEFORE ADDING A SNIPPET & FOLDER NAMES ARE UNIQUE
@@ -76,11 +69,13 @@ exports.editSnippet = async (req, res) => {
    *
    */
 
+  const userId = req.user.id;
   const { folderId, snippetId } = req.params;
   const { title, content } = req.body;
   Snippet.SnippetModel.findOneAndUpdate(
     // filter
     {
+      userId: userId,
       folderId: folderId,
       _id: snippetId,
     },
@@ -101,9 +96,14 @@ exports.editSnippet = async (req, res) => {
 };
 
 exports.deleteSnippet = async (req, res) => {
+  const userId = req.user.id;
   const { folderId, snippetId } = req.params;
 
-  Snippet.SnippetModel.findOneAndDelete({ folderId: folderId, _id: snippetId })
+  Snippet.SnippetModel.findOneAndDelete({
+    userId: userId,
+    folderId: folderId,
+    _id: snippetId,
+  })
     .then((response) => {
       console.log("response from findOneAndDelete Method", response);
       res.json({ message: "snippet deleted successfully" });

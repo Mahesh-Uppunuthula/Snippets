@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const snippetSchema = mongoose.Schema(
   {
-    userId:{type:mongoose.Schema.Types.ObjectId, require:true},
-    folderId:{type:mongoose.Schema.Types.ObjectId, require:true},
+    userId:{type:mongoose.Schema.Types.ObjectId, required :true},
+    folderId:{type:mongoose.Schema.Types.ObjectId, required :true},
     title: { type: String, required: true },
     content: { type: String, required: true },
     language: { type: String, required: true },
