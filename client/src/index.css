@@ -174,7 +174,6 @@ nav button .link-item {
 /* ------------------------------------------------ */
 /*  DASHBOARD STYLES */
 
-
 .page-top-pane {
   display: flex;
   padding: 1em;
@@ -225,7 +224,7 @@ nav button .link-item {
   font-size: var(--sub-heading-font-size);
 }
 
-.bottom-right-pane{
+.bottom-right-pane {
   margin-left: 10em;
   width: 100%;
   height: 100%;
@@ -234,6 +233,113 @@ nav button .link-item {
   row-gap: 5em;
   /* background-color: violet; */
 }
+
+.dashboard-options {
+  display: flex;
+  /* background-color: red; */
+}
+
+.dashboard-options .border-btn {
+  background-color: transparent;
+  border-radius: var(--small-radius);
+  padding: 1em;
+  margin-right: 1em;
+  display: flex;
+  font-weight: var(--semi-bold-weight);
+}
+
+.dashboard-options .border-btn img {
+  margin-right: 8px;
+  margin-top: 2px;
+  filter: invert(52%) sepia(0%) saturate(1518%) hue-rotate(178deg)
+    brightness(97%) contrast(90%);
+}
+
+/* ------------------------------------------------ */
+/* EDITOR PAGE STYLES */
+
+.page-bottom-pane{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: red; */
+}
+
+.editor-heading{
+  position: absolute;
+  top: 20%; 
+}
+
+.delete-btn {
+  background-color: #EF3C66;
+  padding: 1em;
+  border: none;
+  border-radius: var(--small-radius);
+  color: var(--light-text-color);
+  font-weight: var(--semi-bold-weight);
+}
+/* .code-editor{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.editor-bg{
+  margin-top: 5em;
+  width: 70%;
+  aspect-ratio:  1 / .5;
+  align-items: center;
+  margin-inline: 4em;
+  padding-block: 2em;
+  border-radius: var(--big-radius);
+  background-image: linear-gradient(to top right,var(--primary-gradient-start-color), var(--primary-gradient-end-color));
+  display: flex;
+  justify-content: center;
+}
+
+.code-editor{
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.tab-bar {
+  width: 100%;
+  height: 10%;
+  border-radius: 10px 10px 0 0;
+  background-color: #37495a;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.editor-controls {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+.editor-controls div {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  margin-left: 0.5em;
+}
+
+.editor-controls .red {
+  background-color: red;
+}
+
+.editor-controls .yellow {
+  background-color: yellow;
+}
+
+.editor-controls .green {
+  background-color: green;
+}
+
 
 /* ------------------------------------------------ */
 

@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
+import Modal from "../components/Modal/Modal";
+
 import addIcon from "../Assests/add.svg";
+import addFolderIcon from "../Assests/add-folder.svg";
 import Folder from "../components/Folder/Folder.js";
 import Card from "../components/Card/Card";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const [isClickedFolderYet, setClickedFolderYet] = useState(false);
+
+  const [isAddNewFolderClicked, setAddNewFolder] = useState(false);
+  const [newFolderName, setNewFolderName] = useState("");
 
   const [folders, setFolders] = useState([
     {
@@ -77,11 +84,12 @@ export default function Dashboard() {
           });
       });
     }
-  }, []);
+  });
 
-  function openFolder(folder_id) {
+  function getSnippetsOfAFolder(folder_id) {
     console.log("open this folder with id", folder_id);
     const url = "http://localhost:5000/dashboard/" + folder_id;
+
     Axios.get(url, {
       headers: {
         Authorization: token,
@@ -93,22 +101,77 @@ export default function Dashboard() {
 
         setFolderSnippets(folderSnippetsArray);
         console.log("folderSnippets", folderSnippets);
+
+        setClickedFolderYet(true);
       })
       .catch((err) => {
         console.log("client open folder err", err);
       });
   }
 
-  function openSnippet(snippet_id){
-    console.log("clicked on snippet with id",snippet_id);
+  function openSnippet(snippet_id) {
+    console.log("clicked on snippet with id", snippet_id);
+  }
+
+  // function
+
+  function createNewFolder() {
+    const isValidFolderName = newFolderName.trim().length !== 0;
+
+    console.log("isValidFolderName", isValidFolderName);
+
+    if (isValidFolderName) {
+      Axios.post(
+        "http://localhost:5000/dashboard/",
+        {
+          folderName: newFolderName,
+        },
+        {
+          headers: { Authorization: token },
+        }
+      )
+        .then((response) => {
+          console.log("response after creating new folder", response);
+          setAddNewFolder(false);
+        })
+        .catch((err) => {
+          console.log("create new folder client err", err);
+        });
+    } else {
+      /**
+       *  Show error message
+       */
+    }
   }
 
   return (
     <>
+      {isAddNewFolderClicked && (
+        <Modal
+          onSaveFolder={createNewFolder}
+          onTextChange={(text) => {
+            setNewFolderName(text);
+          }}
+          onCloseModal={() => {
+            setAddNewFolder(false);
+          }}
+        />
+      )}
       <div className="content-pane">
         <div className="page-top-pane">
           <div className="page-heading">Dashboard</div>
-          <div>
+          <div className="dashboard-options">
+            <div
+              className="link-item"
+              onClick={() => {
+                setAddNewFolder(true);
+              }}
+            >
+              <button className="border-btn link-item">
+                <img src={addFolderIcon} alt="add-snippet img" />
+                <p>New folder</p>
+              </button>
+            </div>
             <Link to="/editor" className="link-item">
               <button className="call-to-action link-item">
                 <img src={addIcon} alt="add-snippet img" />
@@ -126,19 +189,27 @@ export default function Dashboard() {
                   <Folder
                     folderName={folder.name}
                     folderId={folder.folder_id}
-                    onClick={openFolder}
-                  /> 
+                    onClick={getSnippetsOfAFolder}
+                  />
                 );
               })}
             </div>
           </div>
           <div className="bottom-right-pane">
-            {folderSnippets.map((snippet) => {
-              return <Card title={snippet.title} date = {snippet.date} snippet_id = {snippet._id} onClick={openSnippet}/>;
-            })}
+            {isClickedFolderYet &&
+              folderSnippets.map((snippet) => {
+                return (
+                  <Card
+                    title={snippet.title}
+                    date={snippet.date}
+                    snippet_id={snippet._id}
+                    onClick={openSnippet}
+                  />
+                );
+              })}
           </div>
-        </div> 
+        </div>
       </div>
     </>
-  ); 
-} 
+  );
+}

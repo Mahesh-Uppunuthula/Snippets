@@ -4,10 +4,10 @@ const snippetSchema = mongoose.Schema(
   {
     userId:{type:mongoose.Schema.Types.ObjectId, required :true},
     folderId:{type:mongoose.Schema.Types.ObjectId, required :true},
-    title: { type: String, required: true },
+    title: { type: String, required: true, trim:true },
     content: { type: String, required: true },
-    language: { type: String, required: true },
-    folderName: { type: String, required: true },
+    language: { type: String, required: true, trim:true},
+    folderName: { type: String, required: true, trim:true},
     date:{type:Date, default: Date.now}
   },
 );

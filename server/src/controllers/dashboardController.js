@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const Folder = require("../models/Folder");
 const Snippet = require("../models/Snippet");
 
@@ -15,8 +16,8 @@ exports.getAllFolders = async(req, res)=>{
 
 exports.createFolder = async(req, res)=>{
     const userId = req.user.id;
-    const {folderName} = req.body;
-
+    let {folderName} = req.body;
+    folderName = _.capitalize(folderName);
     const newFolder = new Folder.FolderModel({
         userId:userId,
         name:folderName

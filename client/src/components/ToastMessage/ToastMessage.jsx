@@ -20,7 +20,7 @@ function ToastMessage(props, ref) {
       id={showToastMessage ? "show" : "hide"}
       className="message"
       style={{
-        backgroundColor: props.type === "success" ? "#00F593" : "#FF0033",
+        backgroundColor: props.type === "success" ? "#00F593" : "#EF3C66",
       }}
     >
       <div className="message-text-container">

@@ -1,0 +1,77 @@
+.bg-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  filter: blur(1px);
+  background-color: #00000060;
+  overflow-y: hidden;
+}
+
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 30rem;
+  background-color: white;
+  padding: 2.5em;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px #00000070;
+}
+
+.heading {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: .5em;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.text-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.text-field input {
+  border: 2px solid #80808040;
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2em;
+  outline: none;
+}
+
+.btn-container{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  /* background-color: red; */
+}
+
+.btn {
+  color: white;
+  font-weight: 600;
+  border: none;
+  height: 100%;
+  padding-block: 1em;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 10px;
+  padding-inline: 1.5em;
+}
+
+.cta{ 
+  background-color: #7f00ff;
+}
+
+.border-btn{
+  border: 1px solid grey;
+  color: grey;
+}

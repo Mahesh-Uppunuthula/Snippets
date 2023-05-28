@@ -1,4 +1,5 @@
 // const UserDirectory = require("../models/UserDirectory");
+const _ = require("lodash");
 const Folder = require("../models/Folder");
 const Snippet = require("../models/Snippet");
 
@@ -40,10 +41,10 @@ exports.saveSnippet = async (req, res) => {
       const newSnippet = new Snippet.SnippetModel({
         userId: userId,
         folderId: foundFolderId,
-        title: title,
+        title: _.capitalize(title),
         content: content,
-        language: language,
-        folderName: folderName,
+        language: _.capitalize(language),
+        folderName: _.capitalize(folderName),
       });
 
       newSnippet
