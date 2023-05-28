@@ -22,46 +22,28 @@ exports.getSnippet = async (req, res) => {
 };
 
 exports.saveSnippet = async (req, res) => {
-  const { title, content, language, folderName } = req.body;
+  const { title, content, folderId, folderName } = req.body;
   const userId = req.user.id;
   console.log("req body", req.body);
 
-  /** assumptions THERS EXISTS A FOLDER ALREADY BEFORE ADDING A SNIPPET & FOLDER NAMES ARE UNIQUE
-   * 1. find the folder _id.
-   * 2. create a new snippet and add it to the snippets folder
-   */
+  // creating new snippet with given speicifications
+  const newSnippet = new Snippet.SnippetModel({
+    userId: userId,
+    folderId: folderId,
+    title: _.capitalize(title),
+    content: content,
+    folderName: _.capitalize(folderName),
+  });
 
-  // finding the folder _id
-  Folder.FolderModel.findOne({ userId: userId, name: folderName })
-    .then((foundFolder) => {
-      console.log("found folder", foundFolder);
-      const foundFolderId = foundFolder._id.toString();
-
-      // creating new snippet with given speicifications
-      const newSnippet = new Snippet.SnippetModel({
-        userId: userId,
-        folderId: foundFolderId,
-        title: _.capitalize(title),
-        content: content,
-        language: _.capitalize(language),
-        folderName: _.capitalize(folderName),
-      });
-
-      newSnippet
-        .save()
-        .then(() => {
-          res.json({ message: "Your snippet saved" });
-        })
-        .catch((err) => {
-          res.json({ message: err.message });
-        });
+  newSnippet
+    .save()
+    .then(() => {
+      res.json({ message: "Your snippet saved" });
     })
     .catch((err) => {
-      console.log("folder search err", err);
-      res.json({
-        message: "Something went wrong while fetching folder details",
-      });
+      res.json({ message: err.message });
     });
+
 };
 
 exports.editSnippet = async (req, res) => {

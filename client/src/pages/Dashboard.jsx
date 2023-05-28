@@ -23,6 +23,11 @@ export default function Dashboard() {
     },
   ]);
 
+  const [activeFolderId, setActiveFolderId] = useState({
+    folderId:"",
+    folderName:""
+  });
+
   // content: "new React code";
   // date: "2023-05-28T00:05:43.591Z";
   // folderId: "6472991b54329683aff581b3";
@@ -59,36 +64,41 @@ export default function Dashboard() {
       }).then((isVerified) => {
         // console.log("reponse from /verify router in auth login", isVerified);
         // fetch user details here
-        console.log("authorized user");
+        if (isVerified) {
+          console.log("authorized user");
 
-        Axios.get("http://localhost:5000/dashboard", {
-          headers: {
-            Authorization: token,
-          },
-        })
-          .then((response) => {
-            const userFolders = response.data.folders;
-            // console.log("client dashboard response", userFolders);
-
-            const folderSpecs = userFolders.map((folder) => {
-              return { name: folder.name, folder_id: folder._id };
-            });
-
-            // console.log("folderSpecs", folderSpecs);
-
-            setFolders(folderSpecs);
-            // console.log("folders", folders);
+          Axios.get("http://localhost:5000/dashboard", {
+            headers: {
+              Authorization: token,
+            },
           })
-          .catch((err) => {
-            console.log("Dashboard client err", err);
-          });
+            .then((response) => {
+              const userFolders = response.data.folders;
+              // console.log("client dashboard response", userFolders);
+
+              const folderSpecs = userFolders.map((folder) => {
+                return { name: folder.name, folder_id: folder._id };
+              });
+
+              // console.log("folderSpecs", folderSpecs);
+
+              setFolders(folderSpecs);
+              // console.log("folders", folders);
+            })
+            .catch((err) => {
+              console.log("Dashboard client err", err);
+            });
+        } else {
+          navigate("/login");
+        }
       });
     }
-  });
+  }, []);
 
-  function getSnippetsOfAFolder(folder_id) {
-    console.log("open this folder with id", folder_id);
-    const url = "http://localhost:5000/dashboard/" + folder_id;
+  function getSnippetsOfAFolder(folderId, folderName) {
+    setActiveFolderId({folderId, folderName});
+    console.log("open this folder with id", folderId);
+    const url = "http://localhost:5000/dashboard/" + folderId;
 
     Axios.get(url, {
       headers: {
@@ -144,10 +154,15 @@ export default function Dashboard() {
     }
   }
 
+  function openEditor(){
+    navigate("/editor", {state:activeFolderId});
+  }
+
   return (
     <>
       {isAddNewFolderClicked && (
         <Modal
+          heading={"Enter folder name"}
           onSaveFolder={createNewFolder}
           onTextChange={(text) => {
             setNewFolderName(text);
@@ -172,12 +187,12 @@ export default function Dashboard() {
                 <p>New folder</p>
               </button>
             </div>
-            <Link to="/editor" className="link-item">
-              <button className="call-to-action link-item">
+            {isClickedFolderYet && (
+              <button className="call-to-action link-item" onClick={openEditor}>
                 <img src={addIcon} alt="add-snippet img" />
                 <p>Add snippet</p>
               </button>
-            </Link>
+            )}
           </div>
         </div>
         <div className="bottom-pane">

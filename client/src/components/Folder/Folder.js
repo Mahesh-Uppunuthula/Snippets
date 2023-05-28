@@ -11,7 +11,7 @@ function Folder(props) {
       className="folder-item"
       onClick={() => {
         setActiveFolder(!isActiveFolder);
-        props.onClick(props.folderId);
+        props.onClick(props.folderId, props.folderName);
       }}
     >
       <div id={isActiveFolder ? "activeIcon" : "inactiveIcon"}>

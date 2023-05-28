@@ -18,7 +18,7 @@ function Modal(props) {
         }}
       ></div>
       <div className="modal-container">
-        <div className="heading">Enter folder name</div>
+        <div className="heading">{props.heading}</div>
         <div className="input">
           <div className="text-field">
             <input
