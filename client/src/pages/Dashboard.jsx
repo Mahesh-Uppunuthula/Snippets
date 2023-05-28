@@ -9,11 +9,39 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Dashboard() {
   const navigate = useNavigate();
 
-  const [dir, setDir] = useState();
+  const [folders, setFolders] = useState([
+    {
+      name: "",
+      folder_id: "",
+    },
+  ]);
+
+  // content: "new React code";
+  // date: "2023-05-28T00:05:43.591Z";
+  // folderId: "6472991b54329683aff581b3";
+  // folderName: "React Snippets";
+  // language: "React";
+  // title: "new React Snippet";
+  // userId: "64723c06d9cea6531e6da007";
+  // __v: 0;
+  // _id: "64729ad754329683aff581ba";
+
+  const [folderSnippets, setFolderSnippets] = useState([
+    {
+      title: "",
+      content: "",
+      language: "",
+      folderName: "",
+      date: "",
+      userId: "",
+      _id: "",
+    },
+  ]);
+
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
-    console.log("dashboard token", token);
+    // console.log("dashboard token", token);
     if (!token) {
       navigate("/login");
     } else {
@@ -22,47 +50,58 @@ export default function Dashboard() {
           Authorization: token,
         },
       }).then((isVerified) => {
-        console.log("reponse from /verify router in auth login", isVerified);
+        // console.log("reponse from /verify router in auth login", isVerified);
         // fetch user details here
-        console.log("verified user ");
+        console.log("authorized user");
 
-        // axios
-        //   .get("http://localhost:5000/dashboard", { userId: token.id })
-        //   .then((response) => {
-        //     console.log("dashbaord axios response port verify",response);
-        //   })
-        //   .catch((err)=>{
-        //     console.log(err);
-        //   })
+        Axios.get("http://localhost:5000/dashboard", {
+          headers: {
+            Authorization: token,
+          },
+        })
+          .then((response) => {
+            const userFolders = response.data.folders;
+            // console.log("client dashboard response", userFolders);
+
+            const folderSpecs = userFolders.map((folder) => {
+              return { name: folder.name, folder_id: folder._id };
+            });
+
+            // console.log("folderSpecs", folderSpecs);
+
+            setFolders(folderSpecs);
+            // console.log("folders", folders);
+          })
+          .catch((err) => {
+            console.log("Dashboard client err", err);
+          });
       });
     }
-  },[token]);
+  }, []);
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/login");
-  //   } else {
-  //     console.log("token client", token);
-  //     Axios.post("http://localhost:5000/dashboard", { userId: token.id }).then(
-  //       (response) => {
-  //         console.log("response from dashboard server", response.data.userDir);
-  //         const userDirectory = response.data.userDir;
+  function openFolder(folder_id) {
+    console.log("open this folder with id", folder_id);
+    const url = "http://localhost:5000/dashboard/" + folder_id;
+    Axios.get(url, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        const folderSnippetsArray = response.data.snippets;
+        console.log("folderSnippetsArray", folderSnippetsArray);
 
-  //         // setDir(userDirectory);
-  //         // console.log("dir", typeof dir);
-  //         // console.log("dir", dir[0].name);
+        setFolderSnippets(folderSnippetsArray);
+        console.log("folderSnippets", folderSnippets);
+      })
+      .catch((err) => {
+        console.log("client open folder err", err);
+      });
+  }
 
-  //         const userFolders = [];
-  //         for (let [key, value] of Object.entries(dir)) {
-  //           userFolders.push(value.name);
-  //           console.log(key, value.name);
-  //         }
-
-  //         // console.log("dir", dir);
-  //       }
-  //     );
-  //   }
-  // }, []);
+  function openSnippet(snippet_id){
+    console.log("clicked on snippet with id",snippet_id);
+  }
 
   return (
     <>
@@ -82,22 +121,24 @@ export default function Dashboard() {
           <div className="folders-list">
             <p className="folder-sub-heading">Folders</p>
             <div className="folder-container">
-              {/* {dir.map((folder)=>{
-                <Folder folderName = {folder.name} />
-              })} */}
+              {folders.map((folder) => {
+                return (
+                  <Folder
+                    folderName={folder.name}
+                    folderId={folder.folder_id}
+                    onClick={openFolder}
+                  /> 
+                );
+              })}
             </div>
           </div>
           <div className="bottom-right-pane">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {folderSnippets.map((snippet) => {
+              return <Card title={snippet.title} date = {snippet.date} snippet_id = {snippet._id} onClick={openSnippet}/>;
+            })}
           </div>
-        </div>
+        </div> 
       </div>
     </>
-  );
-}
+  ); 
+} 

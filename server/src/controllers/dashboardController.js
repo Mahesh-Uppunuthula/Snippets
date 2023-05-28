@@ -37,12 +37,13 @@ exports.getAllSnippetsOfAFolder = async (req, res) => {
     const userId = req.user.id;
     console.log("user id in getAllSnippetsOfAFolder ", userId);
   
-    const { folderId } = req.params
+    const { folderId } = req.params;
+    console.log("folderId in GetAllSnippetsOfAFolder",folderId);
     
     Snippet.SnippetModel.find({userId ,folderId })
       .then((foundSnippets) => {
         res.json({ snippets: foundSnippets });
-      })
+      }) 
       .catch((err) => {
         console.log("get all Snippets Of A Folder err", err);
         res.json({

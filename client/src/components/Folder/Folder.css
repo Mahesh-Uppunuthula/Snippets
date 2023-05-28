@@ -13,7 +13,8 @@
 
 
 .folder-item {
-  /* background-color: red; */
+  cursor: pointer;
+  width: max-content;
   display: inline-flex;
   padding: .5em;
   align-items: center;

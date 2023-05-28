@@ -27,6 +27,7 @@
 .card-heading {
   font-size: 1.2em;
   font-weight: 600;
+  /* margin-right: auto; */
   padding: 1em;
 }
 

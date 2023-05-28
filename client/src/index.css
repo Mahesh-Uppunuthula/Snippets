@@ -219,7 +219,7 @@ nav button .link-item {
 .folder-container {
   display: flex;
   flex-direction: column;
-
+  /* background-color: blue; */
 }
 .folder-sub-heading {
   font-size: var(--sub-heading-font-size);
@@ -232,6 +232,7 @@ nav button .link-item {
   display: grid;
   grid-template-columns: auto auto auto auto;
   row-gap: 5em;
+  /* background-color: violet; */
 }
 
 /* ------------------------------------------------ */
