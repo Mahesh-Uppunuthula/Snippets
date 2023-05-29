@@ -113,20 +113,46 @@ function Editor() {
     navigate("/dashboard");
   }
 
-  function deleteFile() {}
-
-  function updateFile() {
+  function deleteFile() {
     const url = "http://localhost:5000/editor/" + folderId + "/" + snippetId;
-    Axios.put(url,
-      {
-        title:newFileName,
-        content:codeChange,
-      },
-      {
+    Axios.delete(url, {
       headers: {
         Authorization: token,
       },
     })
+      .then((response) => {
+        const statusCode = response.status;
+        if (statusCode === 200) {
+          /**
+           * show message showing that snippet is deleted
+          */
+        }
+        else{
+          /**
+           * show error message
+           * */ 
+        }
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log("err from client in delete snippet ", err);
+      });
+  }
+
+  function updateFile() {
+    const url = "http://localhost:5000/editor/" + folderId + "/" + snippetId;
+    Axios.put(
+      url,
+      {
+        title: newFileName,
+        content: codeChange,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
       .then((response) => {
         // console.log(response);
         setSaveClicked(false);
