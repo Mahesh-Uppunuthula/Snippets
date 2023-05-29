@@ -24,8 +24,8 @@ export default function Dashboard() {
   ]);
 
   const [activeFolderId, setActiveFolderId] = useState({
-    folderId:"",
-    folderName:""
+    folderId: "",
+    folderName: "",
   });
 
   // content: "new React code";
@@ -96,7 +96,7 @@ export default function Dashboard() {
   }, []);
 
   function getSnippetsOfAFolder(folderId, folderName) {
-    setActiveFolderId({folderId, folderName});
+    setActiveFolderId({ folderId, folderName });
     console.log("open this folder with id", folderId);
     const url = "http://localhost:5000/dashboard/" + folderId;
 
@@ -121,6 +121,13 @@ export default function Dashboard() {
 
   function openSnippet(snippet_id) {
     console.log("clicked on snippet with id", snippet_id);
+    navigate("/editor", {
+      state: {
+        folderId: activeFolderId.folderId,
+        snippetId:snippet_id,
+        mode: "view",
+      },
+    });
   }
 
   // function
@@ -154,8 +161,14 @@ export default function Dashboard() {
     }
   }
 
-  function openEditor(){
-    navigate("/editor", {state:activeFolderId});
+  function openEditor() {
+    navigate("/editor", {
+      state: {
+        folderId: activeFolderId.folderId,
+        folderName: activeFolderId.folderName,
+        mode: "create",
+      },
+    });
   }
 
   return (

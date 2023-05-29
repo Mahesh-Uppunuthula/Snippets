@@ -25,6 +25,7 @@ function Modal(props) {
               type="text"
               autoCorrect="false"
               autoFocus="true"
+              // value={props.fileName}
               onChange={(event) => {
                 props.onTextChange(event.target.value)
               }}

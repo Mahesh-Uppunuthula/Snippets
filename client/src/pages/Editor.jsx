@@ -5,8 +5,7 @@ import Axios from "axios";
 
 import CodeEditor from "../components/CodeEditor";
 
-function Editor(props) {
-  
+function Editor() {
   const location = useLocation();
   const [codeChange, setCodeChange] = useState("");
   const [isSaveClicked, setSaveClicked] = useState(false);
@@ -14,6 +13,19 @@ function Editor(props) {
 
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
+
+  const mode = location.state.mode;
+  const folderId = location.state.folderId;
+  const folderName = location.state.folderName;
+  const snippetId = location.state.snippetId;
+  const isCreateMode = mode === "create";
+
+  const [activeSnippet, setActiveSnippet] = useState({
+    title: "",
+    content: "",
+  });
+
+  // console.log("folderId , snippetId ", folderId, snippetId);
 
   useEffect(() => {
     // console.log("dashboard token", token);
@@ -30,29 +42,52 @@ function Editor(props) {
         console.log("authorized user");
 
         if (isVerified) {
-          // Do something
+          /**
+           * get snippet data if the mode is view (or not create mode)
+           * */
+
+          if (!isCreateMode) {
+            const url =
+              "http://localhost:5000/editor/" + folderId + "/" + snippetId;
+            Axios.get(url, {
+              headers: {
+                Authorization: token,
+              },
+            })
+              .then((response) => {
+                const snippet = response.data.snippet;
+                // alert("got data from server")
+                setActiveSnippet({
+                  title: snippet.title,
+                  content: snippet.content,
+                });
+              })
+              .catch((err) => {
+                console.log("err from client in get snippet ", err);
+              });
+          }
         } else {
           navigate("/login");
         }
       });
     }
-  });
+  }, []);
 
   function creatNewFile() {
     const isValidFileName = newFileName.trim().length !== 0;
     if (isValidFileName) {
       // Save the file to db
-    
-      console.log("isValid",isValidFileName);
+
+      console.log("isValid", isValidFileName);
       console.log("folder id sent from dashboard", location.state.folderId);
 
-      Axios.post( 
+      Axios.post(
         "http://localhost:5000/editor",
         {
-          title:newFileName,
-          content:codeChange,
-          folderId:location.state.folderId,
-          folderName: location.state.folderName
+          title: newFileName,
+          content: codeChange,
+          folderId: folderId,
+          folderName: folderName,
         },
         {
           headers: {
@@ -74,15 +109,44 @@ function Editor(props) {
     }
   }
 
+  function goBackToDashboard() {
+    navigate("/dashboard");
+  }
+
+  function deleteFile() {}
+
+  function updateFile() {
+    const url = "http://localhost:5000/editor/" + folderId + "/" + snippetId;
+    Axios.put(url,
+      {
+        title:newFileName,
+        content:codeChange,
+      },
+      {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        // console.log(response);
+        setSaveClicked(false);
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log("err from client in edit snippet ", err);
+      });
+  }
+
   return (
     <>
       {isSaveClicked && (
         <Modal
           heading={"Enter file name"}
-          onSaveFolder={creatNewFile}
+          onSaveFolder={isCreateMode ? creatNewFile : updateFile}
           onTextChange={(text) => {
             setNewFileName(text);
           }}
+          fileName={isCreateMode ? newFileName : activeSnippet.title}
           onCloseModal={() => {
             setSaveClicked(false);
           }}
@@ -92,21 +156,28 @@ function Editor(props) {
         <div className="page-top-pane">
           <div className="page-heading">Editor</div>
           <div className="dashboard-options">
-            <div
-              className="link-item"
+            {!isCreateMode && (
+              <button
+                className="border-btn link-item"
+                onClick={goBackToDashboard}
+              >
+                go back
+              </button>
+            )}
+            <button
+              className="border-btn link-item"
               onClick={() => {
                 setSaveClicked(true);
               }}
             >
-              <button className="border-btn link-item">
-                <p>Save</p>
-              </button>
-            </div>
-            <Link className="link-item" to="/dashboard">
-              <button className="delete-btn link-item">
-                <p>Delete</p>
-              </button>
-            </Link>
+              <p>{isCreateMode ? "save" : "save changes"}</p>
+            </button>
+            <button
+              className="delete-btn link-item"
+              onClick={isCreateMode ? goBackToDashboard : deleteFile}
+            >
+              <p>{isCreateMode ? "cancel" : "delete"}</p>
+            </button>
           </div>
         </div>
         <div className="page-bottom-pane">
@@ -121,6 +192,9 @@ function Editor(props) {
                 </div>
               </div>
               <CodeEditor
+                content={
+                  isCreateMode ? "//some comment" : activeSnippet.content
+                }
                 textChange={(value, event) => {
                   setCodeChange(value);
                 }}
