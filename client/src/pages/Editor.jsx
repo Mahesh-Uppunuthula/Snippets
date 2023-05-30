@@ -168,6 +168,7 @@ function Editor() {
       {isSaveClicked && (
         <Modal
           heading={"Enter file name"}
+          errMsg = {"Invalid file name"}
           onSaveFolder={isCreateMode ? creatNewFile : updateFile}
           onTextChange={(text) => {
             setNewFileName(text);

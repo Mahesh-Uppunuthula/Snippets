@@ -4,7 +4,7 @@ const { response } = require("express");
 
 const auth = (req, res, next)=>{
     const token = req.header("Authorization");
-    console.log("token auth",token);
+    // console.log("token auth",token);
 
     if(!token) {return res.status(401).json({message:"not authorised"})};
 

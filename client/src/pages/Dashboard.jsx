@@ -5,6 +5,7 @@ import Modal from "../components/Modal/Modal";
 
 import addIcon from "../Assests/add.svg";
 import addFolderIcon from "../Assests/add-folder.svg";
+import trashIcon from "../Assests/trash.svg";
 import Folder from "../components/Folder/Folder.js";
 import Card from "../components/Card/Card";
 import { Link, useNavigate } from "react-router-dom";
@@ -93,7 +94,7 @@ export default function Dashboard() {
         }
       });
     }
-  }, []);
+  });
 
   function getSnippetsOfAFolder(folderId, folderName) {
     setActiveFolderId({ folderId, folderName });
@@ -124,7 +125,7 @@ export default function Dashboard() {
     navigate("/editor", {
       state: {
         folderId: activeFolderId.folderId,
-        snippetId:snippet_id,
+        snippetId: snippet_id,
         mode: "view",
       },
     });
@@ -171,11 +172,27 @@ export default function Dashboard() {
     });
   }
 
+  function deleteFolder() {
+    const url = "http://localhost:5000/dashboard/" + activeFolderId.folderId;
+    Axios.delete(url, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        console.log("response of delete folder client", response);
+      })
+      .catch((err) => {
+        console.log("Dashboard client delete folder err", err);
+      });
+  }
+
   return (
     <>
       {isAddNewFolderClicked && (
         <Modal
           heading={"Enter folder name"}
+          errMsg = {"Invalid folder name"}
           onSaveFolder={createNewFolder}
           onTextChange={(text) => {
             setNewFolderName(text);
@@ -201,16 +218,26 @@ export default function Dashboard() {
               </button>
             </div>
             {isClickedFolderYet && (
-              <button className="call-to-action link-item" onClick={openEditor}>
-                <img src={addIcon} alt="add-snippet img" />
-                <p>Add snippet</p>
-              </button>
+              <>
+                <button className="border-btn link-item" onClick={deleteFolder}>
+                  <img src={trashIcon} alt="delete-snippet img" />
+                  Delete folder
+                </button>
+
+                <button
+                  className="call-to-action link-item"
+                  onClick={openEditor}
+                >
+                  <img src={addIcon} alt="add-snippet img" />
+                  <p>Add snippet</p>
+                </button>
+              </>
             )}
           </div>
         </div>
         <div className="bottom-pane">
           <div className="folders-list">
-            <p className="folder-sub-heading">Folders</p>
+            <p className="folder-sub-heading">Repositories</p>
             <div className="folder-container">
               {folders.map((folder) => {
                 return (

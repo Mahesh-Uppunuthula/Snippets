@@ -1,13 +1,23 @@
 import "../Modal/Modal.css";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import warningIcon from "../../Assests/exclamation-circle.svg";
 
 function Modal(props) {
+  const [isValidName, setValidName] = useState(false);
+
   useEffect(() => {
     return () => {
       // cleanup
     };
   }, []);
+
+  function handleOnChange(event) {
+    const isEnteredNameValid = event.target.value.trim().length !== 0;
+    console.log("isEnteredNameValid", isEnteredNameValid);
+    setValidName(isEnteredNameValid);
+    props.onTextChange(event.target.value);
+  }
 
   return (
     <>
@@ -19,6 +29,12 @@ function Modal(props) {
       ></div>
       <div className="modal-container">
         <div className="heading">{props.heading}</div>
+        {!isValidName && (
+          <div className="msg">
+            <img src={warningIcon} />
+            <p>{props.errMsg}</p>
+          </div>
+        )}
         <div className="input">
           <div className="text-field">
             <input
@@ -27,7 +43,7 @@ function Modal(props) {
               autoFocus="true"
               // value={props.fileName}
               onChange={(event) => {
-                props.onTextChange(event.target.value)
+                handleOnChange(event);
               }}
             />
           </div>
