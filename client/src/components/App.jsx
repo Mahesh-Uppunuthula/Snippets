@@ -13,24 +13,11 @@ import AuthLogin from "../pages/AuthLogin";
 import ToastMessage from "./ToastMessage/ToastMessage";
 import Editor from "../pages/Editor";
 
-// const urlPath = "http://localhost:5000/";
-
 const App = () => {
-  // const [data, setData] = useState("");
-  // const getData = async ()=>{
-  //     const response = await Axios.get("http://localhost:5000/getData");
-  //     console.log(response);
-  //     setData(response.data)
-  // }
-
-  // useEffect(()=>{
-  //     getData();
-  // },[])
 
   return (
       <Router> 
         <NavBar />
-        {/* <ToastMessage /> */}
         <Routes>
           <Route path="/" Component={Home}></Route>
           <Route path="/dashboard" Component={Dashboard}></Route>

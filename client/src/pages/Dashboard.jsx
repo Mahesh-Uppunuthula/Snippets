@@ -8,7 +8,9 @@ import addFolderIcon from "../Assests/add-folder.svg";
 import trashIcon from "../Assests/trash.svg";
 import Folder from "../components/Folder/Folder.js";
 import Card from "../components/Card/Card";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import helper from "../Services/helper";
+const BASE_URL = helper.BASE_URL;
 
 export default function Dashboard() {
   const [reloadDash, setReloadDash] = useState(0);
@@ -56,11 +58,11 @@ export default function Dashboard() {
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
-    // console.log("dashboard token", token);
     if (!token) {
       navigate("/login");
     } else {
-      Axios.get("http://localhost:5000/verify", {
+      const url = BASE_URL + "/verify";
+      Axios.get(url, {
         headers: {
           Authorization: token,
         },
@@ -70,7 +72,8 @@ export default function Dashboard() {
         if (response) {
           console.log("authorized user");
 
-          Axios.get("http://localhost:5000/dashboard", {
+          const url = BASE_URL + "/dashboard";
+          Axios.get(url, {
             headers: {
               Authorization: token,
             },
@@ -105,7 +108,7 @@ export default function Dashboard() {
   function getSnippetsOfAFolder(folderId, folderName, date) {
     setActiveFolderId({ folderId, folderName, date });
     console.log("open this folder with id", folderId);
-    const url = "http://localhost:5000/dashboard/" + folderId;
+    const url = BASE_URL + "/dashboard/" + folderId;
 
     Axios.get(url, {
       headers: {
@@ -146,7 +149,7 @@ export default function Dashboard() {
 
     if (isValidFolderName) {
       Axios.post(
-        "http://localhost:5000/dashboard/",
+        BASE_URL + "/dashboard/",
         {
           folderName: newFolderName,
         },
@@ -181,7 +184,7 @@ export default function Dashboard() {
   function deleteFolder() {
     setClickedFolderYet(false);
     setReloadDash(reloadDash - 1);
-    const url = "http://localhost:5000/dashboard/" + activeFolderId.folderId;
+    const url = BASE_URL + "/dashboard/" + activeFolderId.folderId;
     Axios.delete(url, {
       headers: {
         Authorization: token,

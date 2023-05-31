@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../components/Modal/Modal";
 import Axios from "axios";
-
 import CodeEditor from "../components/CodeEditor";
+
+import helper from "../Services/helper";
+const BASE_URL = helper.BASE_URL;
 
 function Editor() {
   const location = useLocation();
@@ -32,7 +34,7 @@ function Editor() {
     if (!token) {
       navigate("/login");
     } else {
-      Axios.get("http://localhost:5000/verify", {
+      Axios.get(BASE_URL + "/verify", {
         headers: {
           Authorization: token,
         },
@@ -47,8 +49,7 @@ function Editor() {
            * */
 
           if (!isCreateMode) {
-            const url =
-              "http://localhost:5000/editor/" + folderId + "/" + snippetId;
+            const url = BASE_URL + "/editor/" + folderId + "/" + snippetId;
             Axios.get(url, {
               headers: {
                 Authorization: token,
@@ -56,6 +57,7 @@ function Editor() {
             })
               .then((response) => {
                 const snippet = response.data.snippet;
+                console.log("snippet", snippet);
                 // alert("got data from server")
                 setActiveSnippet({
                   title: snippet.title,
@@ -71,7 +73,7 @@ function Editor() {
         }
       });
     }
-  },[activeSnippet.content]);
+  }, []);
 
   function creatNewFile() {
     const isValidFileName = newFileName.trim().length !== 0;
@@ -82,7 +84,7 @@ function Editor() {
       console.log("folder id sent from dashboard", location.state.folderId);
 
       Axios.post(
-        "http://localhost:5000/editor",
+        BASE_URL + "/editor",
         {
           title: newFileName,
           content: codeChange,
@@ -114,7 +116,7 @@ function Editor() {
   }
 
   function deleteFile() {
-    const url = "http://localhost:5000/editor/" + folderId + "/" + snippetId;
+    const url = BASE_URL + "/editor/" + folderId + "/" + snippetId;
     Axios.delete(url, {
       headers: {
         Authorization: token,
@@ -125,12 +127,11 @@ function Editor() {
         if (statusCode === 200) {
           /**
            * show message showing that snippet is deleted
-          */
-        }
-        else{
+           */
+        } else {
           /**
            * show error message
-           * */ 
+           * */
         }
         navigate("/dashboard");
       })
@@ -140,7 +141,7 @@ function Editor() {
   }
 
   function updateFile() {
-    const url = "http://localhost:5000/editor/" + folderId + "/" + snippetId;
+    const url = BASE_URL + "/editor/" + folderId + "/" + snippetId;
     Axios.put(
       url,
       {
@@ -168,7 +169,7 @@ function Editor() {
       {isSaveClicked && (
         <Modal
           heading={"Enter file name"}
-          errMsg = {"Invalid file name"}
+          errMsg={"Invalid file name"}
           onSave={isCreateMode ? creatNewFile : updateFile}
           onTextChange={(text) => {
             setNewFileName(text);

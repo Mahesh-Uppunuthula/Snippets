@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Form from "../components/Form";
 import ToastMessage from "../components/ToastMessage/ToastMessage";
+import helper from "../Services/helper";
+const BASE_URL = helper.BASE_URL;
 
 function AuthRegister() {
   const toastRef = useRef(null);
@@ -41,7 +43,8 @@ function AuthRegister() {
     if (!token) {
       navigate("/register");
     } else {
-      Axios.get("http://localhost:5000/verify", {
+      const url = BASE_URL + "/verify";
+      Axios.get(url, {
         headers: {
           Authorization: token,
         },
@@ -74,9 +77,9 @@ function AuthRegister() {
   function RegisterUser(event) {
     event.preventDefault();
 
+    const url = BASE_URL + "/register";
     if (isValidEmail && isValidPassword) {
-      Axios
-        .post("http://localhost:5000/register", { email, password })
+      Axios.post(url, { email, password })
         .then((response) => {
           const statusCode = response.data.status;
 

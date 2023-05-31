@@ -4,7 +4,11 @@ import ToastMessage from "./ToastMessage/ToastMessage";
 import Axios from "axios";
 import logout_btn from "../Assests/logout.svg"
 
+import helper from "../Services/helper";
+const BASE_URL = helper.BASE_URL;
+
 function NavBar() {
+
   const toastRef = useRef(null);
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
@@ -12,13 +16,18 @@ function NavBar() {
 
   const [isLoggdIn, setLoggedIn] = useState(true);
 
+
+  console.log('BASE URL', BASE_URL);
+
   useEffect(() => {
     // console.log("dashboard token", token);
     if (!token) {
       navigate("/login");
       setLoggedIn(false);
     } else {
-      Axios.get("http://localhost:5000/verify", {
+      const url = BASE_URL + "/verify";
+      console.log("URL, ", url);
+      Axios.get(url, {
         headers: {
           Authorization: token,
         },

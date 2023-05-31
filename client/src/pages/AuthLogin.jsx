@@ -5,6 +5,9 @@ import ToastMessage from "../components/ToastMessage/ToastMessage";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
+import helper from "../Services/helper";
+const BASE_URL = helper.BASE_URL;
+
 function AuthLogin() {
   const toastRef = useRef(null);
 
@@ -24,9 +27,11 @@ function AuthLogin() {
    */
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    
+    const url = BASE_URL + "/verify";
     if (token) {
       Axios
-        .get("/verify", { headers: { Authorization: token } })
+        .get(url, { headers: { Authorization: token } })
         .then((response) => {
           console.log("reponse from /verify router in auth login", response);
           if (!response.isVerified.data) {
@@ -40,8 +45,10 @@ function AuthLogin() {
 
   function loginUser(event) {
     event.preventDefault();
+    
+    const url = BASE_URL + "/login";
     Axios
-      .post("http://localhost:5000/login", { email, password })
+      .post(url, { email, password })
       .then((response) => {
         const statusCode = response.data.status;
         if (statusCode === 401) {
