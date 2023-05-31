@@ -19,9 +19,9 @@ const userRoute = require("./routes/users");
 const dashboardRoute = require("./routes/dashboard");
 const editorRoute = require("./routes/editor");
 
-app.get("/", (req, res) => {
-  res.send("helllo !");
-});
+// app.get("/", (req, res) => {
+//   res.send("helllo !");
+// });
 
 app.use("/", userRoute);
 app.use("/dashboard", dashboardRoute);
