@@ -6,7 +6,8 @@ const UserDirectory = require("../models/UserDirectory");
 const auth = require("../middlware/auth");
 
 exports.registerUser = async (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+  email = email.toLowerCase();
 
   UserModel.findOne({ email }).then((foundUser) => {
     if (foundUser) {
@@ -40,8 +41,9 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-  const { email, password } = req.body;
-
+  let { email, password } = req.body;
+  email = email.toLowerCase();
+  
   console.log("login", email, password);
   UserModel.findOne({ email }).then((foundUser) => {
     // if foundUser is null
@@ -90,7 +92,7 @@ exports.verifiedUser = async (req, res) => {
     UserModel.findOne({ _id: verifiedToken.id })
       .then((reponse) => {
         if (!reponse) res.json({ isVerified: false });
-        res.json({ isVerified: true, email:verifiedToken.email });
+        res.json({ isVerified: true, email: verifiedToken.email });
       })
       .catch((err) => {
         res.json({ message: err });

@@ -28,6 +28,7 @@ export default function Dashboard() {
   const [activeFolderId, setActiveFolderId] = useState({
     folderId: "",
     folderName: "",
+    date: "",
   });
 
   // content: "new React code";
@@ -76,10 +77,14 @@ export default function Dashboard() {
           })
             .then((response) => {
               const userFolders = response.data.folders;
-              // console.log("client dashboard response", userFolders);
+              console.log("client dashboard response", userFolders);
 
               const folderSpecs = userFolders.map((folder) => {
-                return { name: folder.name, folder_id: folder._id };
+                return {
+                  name: folder.name,
+                  folder_id: folder._id,
+                  date: folder.date.substring(0, 10),
+                };
               });
 
               // console.log("folderSpecs", folderSpecs);
@@ -97,8 +102,8 @@ export default function Dashboard() {
     }
   }, [reloadDash]);
 
-  function getSnippetsOfAFolder(folderId, folderName) {
-    setActiveFolderId({ folderId, folderName });
+  function getSnippetsOfAFolder(folderId, folderName, date) {
+    setActiveFolderId({ folderId, folderName, date });
     console.log("open this folder with id", folderId);
     const url = "http://localhost:5000/dashboard/" + folderId;
 
@@ -262,6 +267,7 @@ export default function Dashboard() {
                   <Folder
                     folderName={folder.name}
                     folderId={folder.folder_id}
+                    folderDate={folder.date}
                     onClick={getSnippetsOfAFolder}
                   />
                 );
@@ -269,10 +275,12 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="bottom-right-pane">
-            <div className="folder-deets">
-              <div className="name">{activeFolderId.folderName}</div>
-              <div className="date">created on 2023-05-13</div>
-            </div>
+            {isClickedFolderYet && (
+              <div className="folder-deets">
+                <div className="name">{activeFolderId.folderName}</div>
+                <div className="date">created on {activeFolderId.date}</div>
+              </div>
+            )}
 
             <div className="grid-container">
               {isClickedFolderYet &&

@@ -96,6 +96,7 @@ function AuthRegister() {
             }));
             toastRef.current.toast();
 
+            console.log("registration successfull redirect to /login");
             setTimeout(() => {
               navigate("/login");
             }, 3000);

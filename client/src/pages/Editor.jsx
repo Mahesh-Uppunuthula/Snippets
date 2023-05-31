@@ -71,7 +71,7 @@ function Editor() {
         }
       });
     }
-  }, []);
+  },[activeSnippet.content]);
 
   function creatNewFile() {
     const isValidFileName = newFileName.trim().length !== 0;
