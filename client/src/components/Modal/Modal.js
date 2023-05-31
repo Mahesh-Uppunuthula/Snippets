@@ -13,9 +13,15 @@ function Modal(props) {
   }, []);
 
   function handleOnChange(event) {
-    const isEnteredNameValid = event.target.value.trim().length !== 0;
-    console.log("isEnteredNameValid", isEnteredNameValid);
-    setValidName(isEnteredNameValid);
+    const enterdText = event.target.value.trim();
+    const isValidLength = enterdText.length !== 0;
+    const isNum = isNaN(enterdText);
+
+    const isEnteredValidName = isValidLength && isNum;
+
+    console.log("isEntered valid name", isEnteredValidName);
+
+    setValidName(isEnteredValidName);
     props.onTextChange(event.target.value);
   }
 
@@ -57,9 +63,10 @@ function Modal(props) {
               cancel
             </button>
             <button
+              style={{ backgroundColor: !isValidName && "grey" }}
               className="btn cta"
               onClick={() => {
-                props.onSaveFolder();
+                isValidName && props.onSave();
               }}
             >
               Save

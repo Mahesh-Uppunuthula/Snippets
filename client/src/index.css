@@ -24,6 +24,10 @@
   --light-text-color: #ffffff;
 
   --accent-color: blueviolet;
+
+  --err-color: #ff006e;
+  --blue-color: #3a86ff;
+  --yellow-color: #ffbe0b80;
 }
 
 *,
@@ -55,15 +59,20 @@ body {
 /* ------------------------------------------------ */
 /* NAV BAR STYLES */
 
+header {
+  /* background-color: red; */
+  margin-inline: 6%;
+}
+
 nav {
   width: 100%;
   margin-block: 1em;
   /* background-color: blue; */
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
-
 .brand {
+  color: var(--accent-color);
   font-size: var(--sub-heading-font-size);
   font-weight: var(--bold-weight);
 }
@@ -114,6 +123,31 @@ nav button .link-item {
   background-image: none;
   background-color: white;
   border: 1px solid #80808050;
+}
+
+.email-btn {
+  background-image: none;
+  background-color: var(--yellow-color);
+  padding: 10px 1em;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--big-radius);
+  font-weight: var(--light-weight);
+}
+
+.email-btn p {
+  margin-inline: 10px;
+  color: var(--dark-text-color);
+}
+
+.email-btn img {
+  width: 25px;
+  height: 25px;
+  /* filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg)
+    brightness(102%) contrast(102%); */
+  /* background-color: red; */
 }
 
 /* ------------------------------------------------ */
@@ -187,24 +221,80 @@ nav button .link-item {
   font-weight: var(--semi-bold-weight);
 }
 
-.call-to-action {
-  padding: 1em;
+.light-btn {
   border: none;
-  border-radius: var(--small-radius);
+  border-radius: var(--big-radius);
+  width: max-content;
+  padding: 10px 1em;
   display: flex;
-  background-image: linear-gradient(
-    to top right,
-    var(--primary-gradient-start-color),
-    var(--primary-gradient-end-color)
-  );
-  color: var(--light-text-color);
+  font-size: 1em;
+  color: white;
   font-weight: var(--semi-bold-weight);
+  justify-content: space-between;
+  background-color: var(--blue-color);
+  margin-right: 20px;
 }
 
-.call-to-action img {
-  margin-right: 5px;
+.light-btn img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg)
     brightness(102%) contrast(102%);
+}
+
+.call-to-action {
+  width: auto;
+  height: 40px;
+  max-width: 40px;
+  border: none;
+  border-radius: 50px;
+  align-items: center;
+  display: flex;
+  background-color: #8338ec;
+  color: var(--light-text-color);
+  font-size: 1.2em;
+  font-weight: var(--semi-bold-weight);
+  -webkit-transition: max-width 0.5s;
+  transition: max-width 0.5s;
+}
+
+.call-to-action:hover {
+  max-width: 300px;
+}
+
+.expandable-err-btn {
+  width: auto;
+  height: 40px;
+  max-width: 40px;
+  border: none;
+  border-radius: 50px;
+  align-items: center;
+  display: flex;
+  background-color: var(--err-color);
+  color: var(--light-text-color);
+  font-size: 1.2em;
+  font-weight: var(--semi-bold-weight);
+  -webkit-transition: max-width 0.5s;
+  transition: max-width 0.5s;
+  margin-left: 1em;
+}
+
+.expandable-err-btn:hover {
+  max-width: 300px;
+}
+
+.expandable-btn-text {
+  margin: auto 20px auto 10px;
+  white-space: nowrap;
+}
+
+.expandable-btn-icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg)
+    brightness(102%) contrast(102%);
+  margin-inline: 10px;
 }
 
 .bottom-pane {
@@ -216,22 +306,40 @@ nav button .link-item {
 }
 
 .folder-container {
+  margin-top: 1em;
   display: flex;
+  max-height: 30em;
   flex-direction: column;
-  /* background-color: blue; */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+.folder-container::-webkit-scrollbar {
+  width: 12px;
+  background-color: #00000020;
+  border-radius: 20px;
+}
+
+.folder-container::-webkit-scrollbar-thumb {
+  background-color: #88888850;
+  border: none;
+  border-radius: 20px;
+}
+
 .folder-sub-heading {
   font-size: var(--sub-heading-font-size);
+  display: flex;
 }
 
 .bottom-right-pane {
   margin-left: 10em;
   width: 100%;
-  height: 100%;
+  height: 40em;
   display: grid;
   grid-template-columns: auto auto auto auto;
+  position: relative;
   row-gap: 5em;
-  /* background-color: violet; */
+  grid-row: 2;
+  overflow-y: scroll;
 }
 
 .dashboard-options {
@@ -255,10 +363,16 @@ nav button .link-item {
     brightness(97%) contrast(90%);
 }
 
+.count {
+  font-size: 1em;
+  padding-left: 10px;
+  color: red;
+  font-weight: bold;
+}
 /* ------------------------------------------------ */
 /* EDITOR PAGE STYLES */
 
-.page-bottom-pane{
+.page-bottom-pane {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -266,13 +380,13 @@ nav button .link-item {
   /* background-color: red; */
 }
 
-.editor-heading{
+.editor-heading {
   position: absolute;
-  top: 20%; 
+  top: 20%;
 }
 
 .delete-btn {
-  background-color: #EF3C66;
+  background-color: #ef3c66;
   padding: 1em;
   border: none;
   border-radius: var(--small-radius);
@@ -286,20 +400,24 @@ nav button .link-item {
   transform: translate(-50%, -50%);
 } */
 
-.editor-bg{
+.editor-bg {
   margin-top: 5em;
   width: 70%;
-  aspect-ratio:  1 / .5;
+  aspect-ratio: 1 / 0.5;
   align-items: center;
   margin-inline: 4em;
   padding-block: 2em;
   border-radius: var(--big-radius);
-  background-image: linear-gradient(to top right,var(--primary-gradient-start-color), var(--primary-gradient-end-color));
+  background-image: linear-gradient(
+    to top right,
+    var(--primary-gradient-start-color),
+    var(--primary-gradient-end-color)
+  );
   display: flex;
   justify-content: center;
 }
 
-.code-editor{
+.code-editor {
   width: 80%;
   height: 100%;
   display: flex;
@@ -339,7 +457,6 @@ nav button .link-item {
 .editor-controls .green {
   background-color: green;
 }
-
 
 /* ------------------------------------------------ */
 

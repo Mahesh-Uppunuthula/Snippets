@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import Axios from "axios";
 import Form from "../components/Form";
 import ToastMessage from "../components/ToastMessage/ToastMessage";
 
@@ -28,13 +28,35 @@ function AuthRegister() {
   /*
    *if user is already authenticated redirect user to home page
    */
+  // useEffect(() => {
+  //   console.log(token);
+  //   if (token) {
+  //     navigate("/login");
+  //   }
+  // }, []);
+  const token = window.localStorage.getItem("token");
+
   useEffect(() => {
-    const token = window.localStorage.getItem("UserID");
-    console.log(token);
-    if (token) {
-      navigate("/login");
+    // console.log("dashboard token", token);
+    if (!token) {
+      navigate("/register");
+    } else {
+      Axios.get("http://localhost:5000/verify", {
+        headers: {
+          Authorization: token,
+        },
+      }).then((isVerified) => {
+        // console.log("reponse from /verify router in auth login", isVerified);
+        // fetch user details here
+        if (isVerified) {
+          console.log("authorized user");
+          navigate("/dashboard");
+        } else {
+          navigate("/register");
+        }
+      });
     }
-  }, []);
+  });
 
   // VALIDATIONS
   useEffect(() => {
@@ -53,7 +75,7 @@ function AuthRegister() {
     event.preventDefault();
 
     if (isValidEmail && isValidPassword) {
-      axios
+      Axios
         .post("http://localhost:5000/register", { email, password })
         .then((response) => {
           const statusCode = response.data.status;

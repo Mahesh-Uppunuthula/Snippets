@@ -66,10 +66,14 @@ exports.loginUser = async (req, res) => {
         });
       }
 
-      const token = jwt.sign({ id: foundUser._id }, JWT_SECRET_KEY, {
-        expiresIn: "1d",
-      });
-      
+      const token = jwt.sign(
+        { id: foundUser._id, email: email },
+        JWT_SECRET_KEY,
+        {
+          expiresIn: "1d",
+        }
+      );
+
       console.log("login token ", token);
       // res.json({ token, UserID: afoundUser._id});
       res.json({ token });
@@ -86,7 +90,7 @@ exports.verifiedUser = async (req, res) => {
     UserModel.findOne({ _id: verifiedToken.id })
       .then((reponse) => {
         if (!reponse) res.json({ isVerified: false });
-        res.json({ isVerified: true });
+        res.json({ isVerified: true, email:verifiedToken.email });
       })
       .catch((err) => {
         res.json({ message: err });

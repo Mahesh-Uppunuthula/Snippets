@@ -11,8 +11,9 @@ export default function Home() {
     const token = window.localStorage.getItem("token");
     if (token) {
       toastRef.current.toast();
+      navigate("/dashboard");
     } else {
-      navigate("/");
+      navigate("/")
     }
   }, []);
 

@@ -11,6 +11,7 @@ import Card from "../components/Card/Card";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+  const [reloadDash, setReloadDash] = useState(0);
   const navigate = useNavigate();
   const [isClickedFolderYet, setClickedFolderYet] = useState(false);
 
@@ -62,10 +63,10 @@ export default function Dashboard() {
         headers: {
           Authorization: token,
         },
-      }).then((isVerified) => {
-        // console.log("reponse from /verify router in auth login", isVerified);
+      }).then((response) => {
+        console.log("reponse from /verify router in auth login", response);
         // fetch user details here
-        if (isVerified) {
+        if (response) {
           console.log("authorized user");
 
           Axios.get("http://localhost:5000/dashboard", {
@@ -94,7 +95,7 @@ export default function Dashboard() {
         }
       });
     }
-  });
+  }, [reloadDash]);
 
   function getSnippetsOfAFolder(folderId, folderName) {
     setActiveFolderId({ folderId, folderName });
@@ -131,9 +132,9 @@ export default function Dashboard() {
     });
   }
 
-  // function
-
   function createNewFolder() {
+    setReloadDash(reloadDash + 1);
+    console.log("clicked on save folder");
     const isValidFolderName = newFolderName.trim().length !== 0;
 
     console.log("isValidFolderName", isValidFolderName);
@@ -173,6 +174,7 @@ export default function Dashboard() {
   }
 
   function deleteFolder() {
+    setReloadDash(reloadDash - 1);
     const url = "http://localhost:5000/dashboard/" + activeFolderId.folderId;
     Axios.delete(url, {
       headers: {
@@ -192,8 +194,8 @@ export default function Dashboard() {
       {isAddNewFolderClicked && (
         <Modal
           heading={"Enter folder name"}
-          errMsg = {"Invalid folder name"}
-          onSaveFolder={createNewFolder}
+          errMsg={"Invalid folder name"}
+          onSave={createNewFolder}
           onTextChange={(text) => {
             setNewFolderName(text);
           }}
@@ -204,7 +206,7 @@ export default function Dashboard() {
       )}
       <div className="content-pane">
         <div className="page-top-pane">
-          <div className="page-heading">Dashboard</div>
+          <div className="page-heading">Folders</div>
           <div className="dashboard-options">
             <div
               className="link-item"
@@ -212,24 +214,27 @@ export default function Dashboard() {
                 setAddNewFolder(true);
               }}
             >
-              <button className="border-btn link-item">
+              <button className="light-btn link-item">
                 <img src={addFolderIcon} alt="add-snippet img" />
                 <p>New folder</p>
               </button>
             </div>
             {isClickedFolderYet && (
               <>
-                <button className="border-btn link-item" onClick={deleteFolder}>
-                  <img src={trashIcon} alt="delete-snippet img" />
-                  Delete folder
-                </button>
-
                 <button
                   className="call-to-action link-item"
                   onClick={openEditor}
                 >
-                  <img src={addIcon} alt="add-snippet img" />
-                  <p>Add snippet</p>
+                  <img
+                    className="expandable-btn-icon"
+                    src={addIcon}
+                    alt="add-snippet img"
+                  />
+                  <p className="expandable-btn-text">create</p>
+                </button>
+                <button className="expandable-err-btn link-item" onClick={deleteFolder}>
+                  <img className="expandable-btn-icon" src={trashIcon}  alt="delete-snippet img" />
+                  <p className="expandable-btn-text" >Delete folder</p>
                 </button>
               </>
             )}
@@ -237,7 +242,9 @@ export default function Dashboard() {
         </div>
         <div className="bottom-pane">
           <div className="folders-list">
-            <p className="folder-sub-heading">Repositories</p>
+            <p className="folder-sub-heading">
+              <p>Folders</p> <p className="count">{folders.length}</p>
+            </p>
             <div className="folder-container">
               {folders.map((folder) => {
                 return (
