@@ -2,14 +2,14 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-// DATABASE CONFIG
-require("./connect");
-
 // ENVIRONMENT VARIABLES CONFIG
-require('dotenv').config()
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
+
+// DATABASE CONFIG
+require("./connect");
 
 // CONSTANTS
 const SERVER_PORT = process.env.SERVER_PORT;
@@ -19,18 +19,18 @@ const userRoute = require("./routes/users");
 const dashboardRoute = require("./routes/dashboard");
 const editorRoute = require("./routes/editor");
 
-app.get("/", (req, res)=>{
-    res.send("helllo !")
-})
+app.get("/", (req, res) => {
+  res.send("helllo !");
+});
 
 app.use("/", userRoute);
 app.use("/dashboard", dashboardRoute);
 app.use("/editor", editorRoute);
 
+app.get("/getData", (req, res) => {
+  res.json("this data is sent from server");
+});
 
-app.get("/getData", (req, res)=>{
-    res.json("this data is sent from server");
-})
-
-
-app.listen(5000, ()=>{console.log(`Server started on port ${SERVER_PORT}`);});
+app.listen(5000, () => {
+  console.log(`Server started on port ${SERVER_PORT}`);
+});
