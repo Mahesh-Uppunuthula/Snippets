@@ -174,6 +174,7 @@ export default function Dashboard() {
   }
 
   function deleteFolder() {
+    setClickedFolderYet(false);
     setReloadDash(reloadDash - 1);
     const url = "http://localhost:5000/dashboard/" + activeFolderId.folderId;
     Axios.delete(url, {
@@ -206,7 +207,10 @@ export default function Dashboard() {
       )}
       <div className="content-pane">
         <div className="page-top-pane">
-          <div className="page-heading">Folders</div>
+          <div className="page-heading">
+            <p>Repositories</p>
+            <p className="folders-count">{folders.length}</p>
+          </div>
           <div className="dashboard-options">
             <div
               className="link-item"
@@ -232,9 +236,16 @@ export default function Dashboard() {
                   />
                   <p className="expandable-btn-text">create</p>
                 </button>
-                <button className="expandable-err-btn link-item" onClick={deleteFolder}>
-                  <img className="expandable-btn-icon" src={trashIcon}  alt="delete-snippet img" />
-                  <p className="expandable-btn-text" >Delete folder</p>
+                <button
+                  className="expandable-err-btn link-item"
+                  onClick={deleteFolder}
+                >
+                  <img
+                    className="expandable-btn-icon"
+                    src={trashIcon}
+                    alt="delete-snippet img"
+                  />
+                  <p className="expandable-btn-text">Delete folder</p>
                 </button>
               </>
             )}
@@ -242,9 +253,9 @@ export default function Dashboard() {
         </div>
         <div className="bottom-pane">
           <div className="folders-list">
-            <p className="folder-sub-heading">
+            {/* <p className="folder-sub-heading">
               <p>Folders</p> <p className="count">{folders.length}</p>
-            </p>
+            </p> */}
             <div className="folder-container">
               {folders.map((folder) => {
                 return (
@@ -258,17 +269,24 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="bottom-right-pane">
-            {isClickedFolderYet &&
-              folderSnippets.map((snippet) => {
-                return (
-                  <Card
-                    title={snippet.title}
-                    date={snippet.date}
-                    snippet_id={snippet._id}
-                    onClick={openSnippet}
-                  />
-                );
-              })}
+            <div className="folder-deets">
+              <div className="name">{activeFolderId.folderName}</div>
+              <div className="date">created on 2023-05-13</div>
+            </div>
+
+            <div className="grid-container">
+              {isClickedFolderYet &&
+                folderSnippets.map((snippet) => {
+                  return (
+                    <Card
+                      title={snippet.title}
+                      date={snippet.date}
+                      snippet_id={snippet._id}
+                      onClick={openSnippet}
+                    />
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>

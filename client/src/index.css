@@ -40,7 +40,6 @@
 
 body {
   font-family: "poppins", "san-serif";
-  /* background-color: black; */
 }
 
 /* ------------------------------------------------ */
@@ -61,7 +60,7 @@ body {
 
 header {
   /* background-color: red; */
-  margin-inline: 6%;
+  margin-inline: 5%;
 }
 
 nav {
@@ -158,8 +157,7 @@ nav button .link-item {
   height: 80vh;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  /* background-color: blue; */
+  align-items: center
 }
 
 .right-pane {
@@ -172,12 +170,10 @@ nav button .link-item {
 
 .right-pane img {
   width: 80%;
-  /* background-color: red; */
 }
 
 .left-pane {
   width: 50%;
-  /* background-color: #e100ff; */
   display: flex;
   margin-left: 5em;
 }
@@ -219,6 +215,7 @@ nav button .link-item {
   font-size: var(--main-heading-font-size);
   color: var(--dark-text-color);
   font-weight: var(--semi-bold-weight);
+  display: flex;
 }
 
 .light-btn {
@@ -332,8 +329,30 @@ nav button .link-item {
 
 .bottom-right-pane {
   margin-left: 10em;
+  display: flex;
   width: 100%;
-  height: 40em;
+  flex-direction: column;
+  /* background-color: blue; */
+  justify-content: start;
+}
+
+.folder-deets{
+  margin-left: 15px;
+}
+
+.folder-deets .name{
+  font-size: var(--main-heading-font-size);
+  color: var(--blue-color);
+  margin: 0;
+  padding: 0;
+}
+
+
+.grid-container{
+  margin-top: 2em;
+  /* background-color: red; */
+  width: 100%;
+  height: 30em;
   display: grid;
   grid-template-columns: auto auto auto auto;
   position: relative;
@@ -363,9 +382,8 @@ nav button .link-item {
     brightness(97%) contrast(90%);
 }
 
-.count {
-  font-size: 1em;
-  padding-left: 10px;
+.folders-count {
+  font-size: .5em;
   color: red;
   font-weight: bold;
 }
