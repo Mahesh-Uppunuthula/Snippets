@@ -99,3 +99,7 @@ exports.verifiedUser = async (req, res) => {
       });
   });
 };
+
+exports.justHomeRoute = async (req, res) =>{
+  res.send("this is home page and its running")
+}

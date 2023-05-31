@@ -12,7 +12,7 @@ app.use(cors());
 require("./connect");
 
 // CONSTANTS
-const SERVER_PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 // ROUTES
 const userRoute = require("./routes/users");
@@ -31,8 +31,8 @@ app.get("/getData", (req, res) => {
   res.json("this data is sent from server");
 });
 
-console.log(SERVER_PORT);
+// console.log(PORT);
 
-app.listen(SERVER_PORT || 5000, () => {
-  console.log(`Server started on port ${SERVER_PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
