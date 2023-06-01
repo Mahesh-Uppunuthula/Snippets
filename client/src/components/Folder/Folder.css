@@ -9,19 +9,26 @@
   --regular-weight: 400;
   --semi-bold-weight: 600;
   --bold-weight: 700;
+
+  /* COLORS */
+  --faded-light-blue: #3a86ff30;
 }
 
 
 
 .folder-item {
   cursor: pointer;
-  width: max-content;
+  width: 13em;
   display: inline-flex;
   padding: 0.5em;
   align-items: center;
   font-size: 1.12em;
   font-weight: var(--light-weight);
-  /* background-color: blue; */
+  border-radius: 20px;
+}
+
+.folder-item:hover{
+  background-color: var(--faded-light-blue);
 }
 
 .folder-item p {

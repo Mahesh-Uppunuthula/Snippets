@@ -211,23 +211,25 @@ function Editor() {
         <div className="page-bottom-pane">
           <p className="editor-heading">Paste your code in the editor below</p>
           <div className="editor-bg">
-            <div className="code-editor">
-              <div className="tab-bar">
-                <div className="editor-controls">
-                  <div className="red"></div>
-                  <div className="yellow"></div>
-                  <div className="green"></div>
+            {activeSnippet.content && (
+              <div className="code-editor">
+                <div className="tab-bar">
+                  <div className="editor-controls">
+                    <div className="red"></div>
+                    <div className="yellow"></div>
+                    <div className="green"></div>
+                  </div>
                 </div>
+                <CodeEditor
+                  content={
+                    isCreateMode ? "//some comment" : activeSnippet.content
+                  }
+                  textChange={(value, event) => {
+                    setCodeChange(value);
+                  }}
+                />
               </div>
-              <CodeEditor
-                content={
-                  isCreateMode ? "//some comment" : activeSnippet.content
-                }
-                textChange={(value, event) => {
-                  setCodeChange(value);
-                }}
-              />
-            </div>
+            )}
           </div>
         </div>
       </div>
