@@ -67,7 +67,7 @@ export default function Dashboard() {
           Authorization: token,
         },
       }).then((response) => {
-        console.log("reponse from /verify router in auth login", response);
+        // console.log("reponse from /verify router in auth login", response);
         // fetch user details here
         if (response) {
           console.log("authorized user");
@@ -80,7 +80,7 @@ export default function Dashboard() {
           })
             .then((response) => {
               const userFolders = response.data.folders;
-              console.log("client dashboard response", userFolders);
+              // console.log("client dashboard response", userFolders);
 
               const folderSpecs = userFolders.map((folder) => {
                 return {
@@ -96,7 +96,7 @@ export default function Dashboard() {
               // console.log("folders", folders);
             })
             .catch((err) => {
-              console.log("Dashboard client err", err);
+              // console.log("Dashboard client err", err);
             });
         } else {
           navigate("/login");
@@ -107,7 +107,7 @@ export default function Dashboard() {
 
   function getSnippetsOfAFolder(folderId, folderName, date) {
     setActiveFolderId({ folderId, folderName, date });
-    console.log("open this folder with id", folderId);
+    // console.log("open this folder with id", folderId);
     const url = BASE_URL + "/dashboard/" + folderId;
 
     Axios.get(url, {
@@ -117,20 +117,20 @@ export default function Dashboard() {
     })
       .then((response) => {
         const folderSnippetsArray = response.data.snippets;
-        console.log("folderSnippetsArray", folderSnippetsArray);
+        // console.log("folderSnippetsArray", folderSnippetsArray);
 
         setFolderSnippets(folderSnippetsArray);
-        console.log("folderSnippets", folderSnippets);
+        // console.log("folderSnippets", folderSnippets);
 
         setClickedFolderYet(true);
       })
       .catch((err) => {
-        console.log("client open folder err", err);
+        // console.log("client open folder err", err);
       });
   }
 
   function openSnippet(snippet_id) {
-    console.log("clicked on snippet with id", snippet_id);
+    // console.log("clicked on snippet with id", snippet_id);
     navigate("/editor", {
       state: {
         folderId: activeFolderId.folderId,
@@ -142,10 +142,10 @@ export default function Dashboard() {
 
   function createNewFolder() {
     setReloadDash(reloadDash + 1);
-    console.log("clicked on save folder");
+    // console.log("clicked on save folder");
     const isValidFolderName = newFolderName.trim().length !== 0;
 
-    console.log("isValidFolderName", isValidFolderName);
+    // console.log("isValidFolderName", isValidFolderName);
 
     if (isValidFolderName) {
       Axios.post(
@@ -158,11 +158,11 @@ export default function Dashboard() {
         }
       )
         .then((response) => {
-          console.log("response after creating new folder", response);
+          // console.log("response after creating new folder", response);
           setAddNewFolder(false);
         })
         .catch((err) => {
-          console.log("create new folder client err", err);
+          // console.log("create new folder client err", err);
         });
     } else {
       /**
@@ -191,10 +191,10 @@ export default function Dashboard() {
       },
     })
       .then((response) => {
-        console.log("response of delete folder client", response);
+        // console.log("response of delete folder client", response);
       })
       .catch((err) => {
-        console.log("Dashboard client delete folder err", err);
+        // console.log("Dashboard client delete folder err", err);
       });
   }
 

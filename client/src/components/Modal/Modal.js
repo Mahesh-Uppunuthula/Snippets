@@ -19,7 +19,7 @@ function Modal(props) {
 
     const isEnteredValidName = isValidLength && isNum;
 
-    console.log("isEntered valid name", isEnteredValidName);
+    // console.log("isEntered valid name", isEnteredValidName);
 
     setValidName(isEnteredValidName);
     props.onTextChange(event.target.value);

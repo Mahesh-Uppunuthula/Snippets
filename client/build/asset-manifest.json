@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9881c39c.css",
+    "main.js": "/static/js/main.a355babd.js",
+    "static/media/codeEditor.svg": "/static/media/codeEditor.d80aa2b75341625d37b47805316a564c.svg",
+    "static/media/logout.svg": "/static/media/logout.107c0a521e936b85001a92dd07e425be.svg",
+    "static/media/calender-rounded-corners.svg": "/static/media/calender-rounded-corners.89b0f71b979008178a564aba25fd8050.svg",
+    "static/media/close.svg": "/static/media/close.545af728e76af3d92a9d04bbd4a941f4.svg",
+    "index.html": "/index.html",
+    "static/media/add-folder.svg": "/static/media/add-folder.8f3b6fc28b3a5c90857611d40bcdb971.svg",
+    "static/media/folder.svg": "/static/media/folder.3df355105ce1cd6346c5dfbec91d47a6.svg",
+    "static/media/trash.svg": "/static/media/trash.3533bf93c28289586c172997d8703057.svg",
+    "static/media/exclamation-circle.svg": "/static/media/exclamation-circle.56ace8943d65cce3fb00c350d983e5dc.svg",
+    "static/media/arrow-right.svg": "/static/media/arrow-right.73edd4dd8f4e9309e08b13737573ed38.svg",
+    "static/media/add.svg": "/static/media/add.84478f1596d8d93aef242201a227b42b.svg",
+    "main.9881c39c.css.map": "/static/css/main.9881c39c.css.map",
+    "main.a355babd.js.map": "/static/js/main.a355babd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9881c39c.css",
+    "static/js/main.a355babd.js"
+  ]
+}

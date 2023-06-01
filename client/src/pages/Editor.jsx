@@ -41,7 +41,7 @@ function Editor() {
       }).then((isVerified) => {
         // console.log("reponse from /verify router in auth login", isVerified);
         // fetch user details here
-        console.log("authorized user");
+        // console.log("authorized user");
 
         if (isVerified) {
           /**
@@ -57,7 +57,7 @@ function Editor() {
             })
               .then((response) => {
                 const snippet = response.data.snippet;
-                console.log("snippet", snippet);
+                // console.log("snippet", snippet);
                 // alert("got data from server")
                 setActiveSnippet({
                   title: snippet.title,
@@ -65,7 +65,7 @@ function Editor() {
                 });
               })
               .catch((err) => {
-                console.log("err from client in get snippet ", err);
+                // console.log("err from client in get snippet ", err);
               });
           }
         } else {
@@ -80,8 +80,8 @@ function Editor() {
     if (isValidFileName) {
       // Save the file to db
 
-      console.log("isValid", isValidFileName);
-      console.log("folder id sent from dashboard", location.state.folderId);
+      // console.log("isValid", isValidFileName);
+      // console.log("folder id sent from dashboard", location.state.folderId);
 
       Axios.post(
         BASE_URL + "/editor",
@@ -98,12 +98,12 @@ function Editor() {
         }
       )
         .then((response) => {
-          console.log("reponse from create new file client", response);
+          // console.log("reponse from create new file client", response);
           setSaveClicked(false);
           navigate("/dashboard");
         })
         .catch((err) => {
-          console.log("err from client create new file", err);
+          // console.log("err from client create new file", err);
           // show err message
         });
     } else {
@@ -136,7 +136,7 @@ function Editor() {
         navigate("/dashboard");
       })
       .catch((err) => {
-        console.log("err from client in delete snippet ", err);
+        // console.log("err from client in delete snippet ", err);
       });
   }
 
@@ -160,7 +160,7 @@ function Editor() {
         navigate("/dashboard");
       })
       .catch((err) => {
-        console.log("err from client in edit snippet ", err);
+        // console.log("err from client in edit snippet ", err);
       });
   }
 

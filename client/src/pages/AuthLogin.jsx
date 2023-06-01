@@ -33,14 +33,14 @@ function AuthLogin() {
       Axios
         .get(url, { headers: { Authorization: token } })
         .then((response) => {
-          console.log("reponse from /verify router in auth login", response);
+          // console.log("reponse from /verify router in auth login", response);
           if (!response.isVerified.data) {
             localStorage.clear();
             navigate("/");
           }
         })
     }
-    console.log("toast state ", toastState);
+    // console.log("toast state ", toastState);
   }, [toastState.message]);
 
   function loginUser(event) {
@@ -60,10 +60,10 @@ function AuthLogin() {
           }));
           toastRef.current.toast();
         } else {
-          console.log("auth login response ", response);
+          // console.log("auth login response ", response);
           setCookies("access_token", response.data.token);
           window.localStorage.setItem("token", response.data.token);
-          console.log("axios login post req", response);
+          // console.log("axios login post req", response);
 
           setEmail("");
           setPassword("");
@@ -72,7 +72,7 @@ function AuthLogin() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }
 

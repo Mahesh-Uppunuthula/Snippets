@@ -52,7 +52,7 @@ function AuthRegister() {
         // console.log("reponse from /verify router in auth login", isVerified);
         // fetch user details here
         if (isVerified) {
-          console.log("authorized user");
+          // console.log("authorized user");
           navigate("/dashboard");
         } else {
           navigate("/register");
@@ -99,7 +99,7 @@ function AuthRegister() {
             }));
             toastRef.current.toast();
 
-            console.log("registration successfull redirect to /login");
+            // console.log("registration successfull redirect to /login");
             setTimeout(() => {
               navigate("/login");
             }, 3000);
@@ -109,14 +109,14 @@ function AuthRegister() {
           }
         })
         .catch((err) => {
-          console.log("err ", err);
+          // console.log("err ", err);
           console.log("err response", err.response);
           if (!err?.response) {
             console.log("no server response");
           } else if (err.response?.status === 409) {
-            console.log("username is taken");
+            // console.log("username is taken");
           } else {
-            console.log("registration failed");
+            // console.log("registration failed");
           }
         });
     } else {
@@ -139,7 +139,7 @@ function AuthRegister() {
         email={email}
         password={password}
         onEmailChange={(event) => {
-          console.log(event.target.value);
+          // console.log(event.target.value);
           setEmail(event.target.value);
         }}
         onPasswordChange={(event) => {

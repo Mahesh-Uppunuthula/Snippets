@@ -1,0 +1,19 @@
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<svg id="Component_17_2" data-name="Component 17 – 2" xmlns="http://www.w3.org/2000/svg" width="860" height="472" viewBox="0 0 860 472">
+  <rect id="Rectangle_10" data-name="Rectangle 10" width="200" height="200" rx="20" transform="translate(600)" fill="#18dfd2"/>
+  <circle id="Ellipse_7" data-name="Ellipse 7" cx="200" cy="200" r="200" transform="translate(0 9)" fill="#ef3c66"/>
+  <g id="Component_6_3" data-name="Component 6 – 3" transform="translate(141 63)">
+    <path id="Path_208" data-name="Path 208" d="M18.044,0H590.956C600.921,0,609,8.954,609,20V266c0,11.046-8.079,20-18.044,20H18.044C8.079,286,0,277.046,0,266V20C0,8.954,8.079,0,18.044,0Z" transform="translate(0 5)" fill="#263238"/>
+    <text id="function_helloWorld_console.log_Hello_World_" data-name="function helloWorld() {
+ console.log(&apos;Hello World!&apos;);
+}" transform="translate(41 158)" fill="#ee8a33" font-size="35" font-family="SegoeUI-Semibold, Segoe UI" font-weight="600"><tspan x="0" y="0">function </tspan><tspan y="0" fill="#b58ccc">helloWorld</tspan><tspan y="0" fill="#fff">() {</tspan><tspan fill="#fff"><tspan x="0" y="47"> </tspan><tspan y="47" fill="#ad60c1">console.log</tspan><tspan y="47">(</tspan><tspan y="47" fill="#3e7bfa">&apos;Hello World!&apos;</tspan><tspan y="47">);</tspan><tspan x="0" y="94">}</tspan></tspan></text>
+    <path id="Rectangle_9" data-name="Rectangle 9" d="M20,0H589a20,20,0,0,1,20,20V95a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z" fill="#333e44"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" cx="15" cy="15" r="15" transform="translate(30 33)" fill="#ec5252"/>
+    <circle id="Ellipse_5" data-name="Ellipse 5" cx="15" cy="15" r="15" transform="translate(70 33)" fill="#ecc352"/>
+    <circle id="Ellipse_6" data-name="Ellipse 6" cx="15" cy="15" r="15" transform="translate(110 33)" fill="#52ec7b"/>
+    <path id="Rectangle_8" data-name="Rectangle 8" d="M10,0H290a10,10,0,0,1,10,10V74a0,0,0,0,1,0,0H0a0,0,0,0,1,0,0V10A10,10,0,0,1,10,0Z" transform="translate(145 22)" fill="#263238"/>
+    <text id="JS" transform="translate(173 72)" fill="#e8da14" font-size="35" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">JS</tspan></text>
+    <text id="hello-world.js" transform="translate(215 74)" fill="#fafafa" font-size="35" font-family="SegoeUI-Semilight, Segoe UI" font-weight="300"><tspan x="0" y="0">hello-world.js</tspan></text>
+  </g>
+  <path id="Polygon_1" data-name="Polygon 1" d="M141.4,24.686a20,20,0,0,1,33.195,0L295.05,203.841A20,20,0,0,1,278.453,235H37.547a20,20,0,0,1-16.6-31.159Z" transform="translate(544 237)" fill="#ffce47"/>
+</svg>
