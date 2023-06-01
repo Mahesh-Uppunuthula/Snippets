@@ -211,7 +211,7 @@ function Editor() {
         <div className="page-bottom-pane">
           <p className="editor-heading">Paste your code in the editor below</p>
           <div className="editor-bg">
-            {activeSnippet.content && (
+            {(activeSnippet.content || isCreateMode) && (
               <div className="code-editor">
                 <div className="tab-bar">
                   <div className="editor-controls">
