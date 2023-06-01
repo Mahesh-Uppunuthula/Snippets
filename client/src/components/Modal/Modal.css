@@ -80,7 +80,7 @@
 
 .msg {
   display: inline-flex;
-  background-color: #ff996670;
+  background-color: #FB560730;
   border: none;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -92,7 +92,7 @@
     brightness(104%) contrast(104%);
 }
 .msg p {
-  color: #ff9966;
+  color: #FB5607;
   font-weight: 100;
   font-size: .8em;
   padding: 1em;

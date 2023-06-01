@@ -27,6 +27,7 @@
 
   --err-color: #ff006e;
   --blue-color: #3a86ff;
+  --warning-color: #FB5607;
   --yellow-color: #ffbe0b80;
 }
 
@@ -36,7 +37,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  /* background-color: wheat; */
 }
 
 body {
@@ -359,7 +359,16 @@ nav button .link-item {
   position: relative;
   row-gap: 5em;
   grid-row: 2;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.grid-container ::-webkit-scrollbar{
+  width: 12px;
+  background-color: red;
+}
+
+.grid-container ::-webkit-scrollbar-thumb{
+  background-color: blue;
 }
 
 .dashboard-options {

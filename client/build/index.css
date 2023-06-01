@@ -1,0 +1,130 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+:root {
+  --accent-color: blueviolet;
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.body{
+    font-family: "poppins", "san-serif";
+}
+
+.auth {
+  width: 30rem;
+  max-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.auth-container {
+  width: 100%;
+  margin: auto;
+}
+
+.form-container {
+  padding: 1em;
+  border: 0.2px solid #00000020;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-shadow: 1px 1px 10px 1px #00000015 inset;
+}
+
+.auth-container h1 {
+  color: #121212;
+  margin: 1em 10px;
+  text-align: center;
+}
+
+.form-container label {
+  font-size: 1em;
+  padding-block: 0.5em;
+}
+
+.form-container input {
+  min-height: 20px;
+  width: 100%;
+  border: 0.5px solid #00000030;
+  border-radius: 0.5em;
+  font-size: 15px;
+  padding: 1em 0.5em;
+  outline-width: 1px;
+  outline-color: var(--accent-color);
+}
+
+.form-container button {
+  width: 100%;
+  align-self: center;
+  margin-block: 2em;
+  padding-block: 1em;
+  border: none;
+  border-radius: 1em;
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+  background-color: var(--accent-color);
+  cursor: pointer;
+}
+
+.helper-text {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.authRedirectLink {
+  padding-left: 10px;
+  font-size: 1em;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.motive-text {
+  text-align: center;
+  font-size: 2em;
+  margin-block: 0.5em;
+}
+
+.message {
+  width: 60%;
+  padding: 0.5em;
+  display: flex;
+  margin: auto;
+  border: none;
+  border-radius: 0.5em;
+  background-color: hsl(120, 100%, 25%, 0.8);
+  visibility: hidden;
+  transition: all 1s ease-in;
+}
+
+.message-text-container {
+  width: 100%;
+  text-align: center;
+}
+
+.message p {
+  font-size: 1em;
+  color: white;
+  font-weight: bold;
+}
+
+.message img {
+  width: 0.8em;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  margin-right: 0.5em;
+  cursor: pointer;
+  filter: invert(100%) sepia(42%) saturate(0%) hue-rotate(342deg)
+    brightness(112%) contrast(101%);
+} */

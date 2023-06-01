@@ -12,7 +12,7 @@ app.use(cors());
 require("./connect");
 
 // CONSTANTS
-const SERVER_PORT = process.env.PORT;
+const SERVER_PORT = process.env.PORT || 5000;
 
 // ROUTES
 const userRoute = require("./routes/users");

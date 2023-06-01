@@ -9,9 +9,12 @@
   --regular-weight: 400;
   --semi-bold-weight: 600;
   --bold-weight: 700;
+
+  /* COLORS */
+
+  --faded-blue-color: #3a86ff30;
+  --warning-color: #fb5607;
 }
-
-
 
 .folder-item {
   cursor: pointer;
@@ -21,7 +24,11 @@
   align-items: center;
   font-size: 1.12em;
   font-weight: var(--light-weight);
-  /* background-color: blue; */
+  border-radius: 20px;
+}
+
+.folder-item:hover {
+  background-color: var(--faded-blue-color);
 }
 
 .folder-item p {
@@ -39,13 +46,11 @@
   /* background-color: red; */
 }
 
-.delete{
-  width: .8em;
+.delete {
+  width: 0.8em;
   margin-top: 5px;
   margin-left: 10px;
-  /* visibility: hidden; */
 }
-
 
 /* #activeIcon {
   filter: invert(12%) sepia(81%) saturate(7354%) hue-rotate(272deg)

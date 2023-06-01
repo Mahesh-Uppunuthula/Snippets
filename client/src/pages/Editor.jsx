@@ -27,8 +27,7 @@ function Editor() {
     content: "",
   });
 
-  // console.log("folderId , snippetId ", folderId, snippetId);
-
+  console.log("active snippet", activeSnippet.content);
   useEffect(() => {
     // console.log("dashboard token", token);
     if (!token) {
@@ -73,7 +72,7 @@ function Editor() {
         }
       });
     }
-  }, []);
+  }, [activeSnippet.content]);
 
   function creatNewFile() {
     const isValidFileName = newFileName.trim().length !== 0;
@@ -180,7 +179,7 @@ function Editor() {
           }}
         />
       )}
-      <div content-pane>
+      <div className="content-pane">
         <div className="page-top-pane">
           <div className="page-heading">Editor</div>
           <div className="dashboard-options">
@@ -211,23 +210,25 @@ function Editor() {
         <div className="page-bottom-pane">
           <p className="editor-heading">Paste your code in the editor below</p>
           <div className="editor-bg">
-            <div className="code-editor">
-              <div className="tab-bar">
-                <div className="editor-controls">
-                  <div className="red"></div>
-                  <div className="yellow"></div>
-                  <div className="green"></div>
+            {activeSnippet.content && (
+              <div className="code-editor">
+                <div className="tab-bar">
+                  <div className="editor-controls">
+                    <div className="red"></div>
+                    <div className="yellow"></div>
+                    <div className="green"></div>
+                  </div>
                 </div>
+                <CodeEditor
+                  content={
+                    isCreateMode ? "//some comment" : activeSnippet.content
+                  }
+                  textChange={(value, event) => {
+                    setCodeChange(value);
+                  }}
+                />
               </div>
-              <CodeEditor
-                content={
-                  isCreateMode ? "//some comment" : activeSnippet.content
-                }
-                textChange={(value, event) => {
-                  setCodeChange(value);
-                }}
-              />
-            </div>
+            )}
           </div>
         </div>
       </div>
