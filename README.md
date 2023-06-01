@@ -1,4 +1,4 @@
-# MERN Snippet Manager
+# Snippets
 
 This project is a MERN (MongoDB, Express, React, Node.js) application that empowers users to perform CRUD operations seamlessly. 
 Leveraging the power of MongoDB, Express.js, React, and Node.js, users can effortlessly create, read, update, and delete data. 
