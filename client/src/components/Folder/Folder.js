@@ -20,10 +20,6 @@ function Folder(props) {
       <div id={isActiveFolder ? "activeFolderHeading" : "inactiveHeading"}>
         <p>{props.folderName.substring(0, folderNameLength)}</p>
       </div>
-
-      {/* <div>
-        <img className="delete" src={closeIcon} />
-      </div> */}
     </div>
   );
 }

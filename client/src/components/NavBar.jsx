@@ -62,10 +62,6 @@ function NavBar() {
         </div>
         <div>
           <ul>
-            {/* <Link className="nav-link link-item" to="/dashboard">Dashboard</Link> */}
-            {/* <div className="vertical-line "/> */}
-            {/* <Link className="nav-link link-item" to="/editor">Editor</Link> */}
-            {/* <div className="vertical-line "/> */}
             {!isLoggdIn ? <button><Link className="link-item" to="/login">Login</Link></button> : <button className="email-btn"  onClick={logUserOut}><p>{userEmail}</p><img src={logout_btn}/></button> }
           </ul>
         </div>

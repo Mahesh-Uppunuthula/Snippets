@@ -33,15 +33,6 @@ export default function Dashboard() {
     date: "",
   });
 
-  // content: "new React code";
-  // date: "2023-05-28T00:05:43.591Z";
-  // folderId: "6472991b54329683aff581b3";
-  // folderName: "React Snippets";
-  // language: "React";
-  // title: "new React Snippet";
-  // userId: "64723c06d9cea6531e6da007";
-  // __v: 0;
-  // _id: "64729ad754329683aff581ba";
 
   const [folderSnippets, setFolderSnippets] = useState([
     {
@@ -261,9 +252,6 @@ export default function Dashboard() {
         </div>
         <div className="bottom-pane">
           <div className="folders-list">
-            {/* <p className="folder-sub-heading">
-              <p>Folders</p> <p className="count">{folders.length}</p>
-            </p> */}
             <div className="folder-container">
               {folders.map((folder) => {
                 return (

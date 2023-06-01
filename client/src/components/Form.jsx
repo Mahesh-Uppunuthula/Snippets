@@ -5,7 +5,6 @@ import ToastMessage from "./ToastMessage/ToastMessage";
 function Form(props) {
   return (
     <div className="auth">
-      {/* <ToastMessage message="You are successfull logged in" type="success" />; */}
       <div className="auth-container">
         <form onSubmit={(event) => props.handleSubmit(event)}>
           <h1 auth-label>{props.label}</h1>

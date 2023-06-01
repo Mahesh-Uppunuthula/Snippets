@@ -47,7 +47,6 @@ function Modal(props) {
               type="text"
               autoCorrect="false"
               autoFocus="true"
-              // value={props.fileName}
               onChange={(event) => {
                 handleOnChange(event);
               }}

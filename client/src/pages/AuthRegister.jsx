@@ -27,15 +27,6 @@ function AuthRegister() {
     type: "",
   });
 
-  /*
-   *if user is already authenticated redirect user to home page
-   */
-  // useEffect(() => {
-  //   console.log(token);
-  //   if (token) {
-  //     navigate("/login");
-  //   }
-  // }, []);
   const token = window.localStorage.getItem("token");
 
   useEffect(() => {
