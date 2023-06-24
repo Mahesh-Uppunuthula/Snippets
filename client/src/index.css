@@ -147,6 +147,34 @@ nav button .link-item {
   height: 25px;
 }
 
+.web_ext_switch{
+  height: 40px;
+  width: fit-content;
+  border: 1px solid #80808050;
+  border-radius: 50px;
+  background-color: transparent;
+  display: flex;
+  text-align: center;
+}
+
+.web_ext_switch_item {
+  cursor: pointer;
+  width: max-content;
+  height: 100%;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 50px;
+}
+.web_ext_switch_item p{
+  padding-inline: 20px;
+}
+
+.web_ext_switch_item_active{
+  background-color: #FFBB00;
+  font-weight: 400;
+  color: white;
+}
+
 /* ------------------------------------------------ */
 /* HOME PAGE STYES */
 
