@@ -164,6 +164,7 @@ nav button .link-item {
   font-size: 20px;
   text-align: center;
   border-radius: 50px;
+  font-weight: 300;
 }
 .web_ext_switch_item p{
   padding-inline: 20px;
@@ -171,7 +172,7 @@ nav button .link-item {
 
 .web_ext_switch_item_active{
   background-color: #FFBB00;
-  font-weight: 400;
+  font-weight: 600;
   color: white;
 }
 
