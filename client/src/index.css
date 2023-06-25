@@ -147,35 +147,6 @@ nav button .link-item {
   height: 25px;
 }
 
-.web_ext_switch{
-  height: 40px;
-  width: fit-content;
-  border: 1px solid #80808050;
-  border-radius: 50px;
-  background-color: transparent;
-  display: flex;
-  text-align: center;
-}
-
-.web_ext_switch_item {
-  cursor: pointer;
-  width: max-content;
-  height: 100%;
-  font-size: 20px;
-  text-align: center;
-  border-radius: 50px;
-  font-weight: 300;
-}
-.web_ext_switch_item p{
-  padding-inline: 20px;
-}
-
-.web_ext_switch_item_active{
-  background-color: #FFBB00;
-  font-weight: 600;
-  color: white;
-}
-
 /* ------------------------------------------------ */
 /* HOME PAGE STYES */
 
@@ -184,7 +155,7 @@ nav button .link-item {
   height: 80vh;
   display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }
 
 .right-pane {
@@ -230,6 +201,41 @@ nav button .link-item {
 
 /* ------------------------------------------------ */
 /*  DASHBOARD STYLES */
+
+.web_ext_switch {
+  height: 40px;
+  width: fit-content;
+  border: 1px solid #80808050;
+  border-radius: 50px;
+  background-color: transparent;
+  display: flex;
+  text-align: center;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%);
+  margin-block: 1em;
+}
+
+.web_ext_switch_item {
+  cursor: pointer;
+  width: max-content;
+  height: 100%;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 50px;
+  font-weight: 300;
+}
+.web_ext_switch_item p {
+  padding: 5px 20px;
+}
+
+.web_ext_switch_item_active {
+  background-color: #ffbb00;
+  font-weight: 600;
+  color: white;
+}
 
 .page-top-pane {
   display: flex;
@@ -361,19 +367,18 @@ nav button .link-item {
   justify-content: start;
 }
 
-.folder-deets{
+.folder-deets {
   margin-left: 15px;
 }
 
-.folder-deets .name{
+.folder-deets .name {
   font-size: var(--main-heading-font-size);
   color: var(--blue-color);
   margin: 0;
   padding: 0;
 }
 
-
-.grid-container{
+.grid-container {
   margin-top: 2em;
   width: 100%;
   height: 30em;
@@ -406,7 +411,7 @@ nav button .link-item {
 }
 
 .folders-count {
-  font-size: .5em;
+  font-size: 0.5em;
   color: red;
   font-weight: bold;
 }

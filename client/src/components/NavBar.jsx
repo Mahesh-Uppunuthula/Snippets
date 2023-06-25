@@ -60,10 +60,6 @@ function NavBar() {
             Snippets
           </Link>
         </div>
-        <div className="web_ext_switch">
-          <div className="web_ext_switch_item web_ext_switch_item_active"><p>Overview</p></div>
-          <div className="web_ext_switch_item"><p>Extension</p></div>
-        </div>
         <div>
           <ul>
             {!isLoggdIn ? <button><Link className="link-item" to="/login">Login</Link></button> : <button className="email-btn"  onClick={logUserOut}><p>{userEmail}</p><img src={logout_btn}/></button> }

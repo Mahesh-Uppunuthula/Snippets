@@ -33,7 +33,6 @@ export default function Dashboard() {
     date: "",
   });
 
-
   const [folderSnippets, setFolderSnippets] = useState([
     {
       title: "",
@@ -47,6 +46,8 @@ export default function Dashboard() {
   ]);
 
   const token = window.localStorage.getItem("token");
+  const [isOverviewClicked, setOverviewClick] = useState(true);
+  const [isExtensionClicked, setExtensionClick] = useState();
 
   useEffect(() => {
     if (!token) {
@@ -188,9 +189,36 @@ export default function Dashboard() {
         // console.log("Dashboard client delete folder err", err);
       });
   }
-
-  return (
+function renderOverviewPage(){
+  setOverviewClick(true);
+  setExtensionClick(false);
+}
+function renderExtensionPage(){
+  setOverviewClick(false);
+  setExtensionClick(true);
+}
+return (
     <>
+      <div className="web_ext_switch">
+        <div
+          className={
+            isOverviewClicked
+              ? "web_ext_switch_item web_ext_switch_item_active"
+              : "web_ext_switch_item"
+          }
+        >
+          <p onClick={renderOverviewPage}>Overview</p>
+        </div>
+        <div
+          className={
+            isExtensionClicked
+              ? "web_ext_switch_item web_ext_switch_item_active"
+              : "web_ext_switch_item"
+          }
+        >
+          <p onClick={renderExtensionPage}>Extension</p>
+        </div>
+      </div>
       {isAddNewFolderClicked && (
         <Modal
           heading={"Enter folder name"}
