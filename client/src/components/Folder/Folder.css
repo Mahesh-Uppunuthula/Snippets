@@ -11,7 +11,8 @@
   --bold-weight: 700;
 
   /* COLORS */
-  --faded-light-blue: #3a86ff30;
+  /* --faded-light-blue: #3a86ff30; */
+  --faded-light-grey: #80808020;
 }
 
 
@@ -28,7 +29,7 @@
 }
 
 .folder-item:hover{
-  background-color: var(--faded-light-blue);
+  background-color: var(--faded-light-grey);
 }
 
 .folder-item p {

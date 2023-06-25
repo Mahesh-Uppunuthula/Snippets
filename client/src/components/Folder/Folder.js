@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import folderIcon from "../../Assests/folder.svg";
-import closeIcon from "../../Assests/close.svg";
+import folderIcon from "../../Assests/right_arrow_without_tail.svg";
 import "../Folder/Folder.css";
 
 function Folder(props) {
