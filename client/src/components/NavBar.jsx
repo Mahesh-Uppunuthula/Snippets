@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ToastMessage from "./ToastMessage/ToastMessage";
 import Axios from "axios";
-import logout_btn from "../Assests/logout.svg";
 import profileIcon from "../Assests/default_profile_icon.svg";
 import helper from "../Services/helper";
 const BASE_URL = helper.BASE_URL;

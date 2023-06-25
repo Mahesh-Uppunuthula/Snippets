@@ -135,6 +135,7 @@ nav button .link-item {
   text-align: right;
   padding: 5px 15px;
   background-color: #8338EC15;
+  cursor: pointer;
 }
 
 .details-section .username
