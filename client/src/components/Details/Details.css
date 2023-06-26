@@ -1,3 +1,53 @@
-.pane_heading{
+:root{
+    --sm-font-size:15px;
+    --md-font-size:20px;
+
+    /* FONT WEIGHTS */
+    --light-weight: 300;
+    --regular-weight: 400;
+    --semi-bold-weight: 600;
+    --bold-weight: 700;
+
+    --light-grey-color: #80808080;
+    
+}
+.details-container{
     /* background-color: red; */
+    padding: 10px 10px;
+}
+.std-details{
+    margin-top: 10px;
+    /* background-color: blueviolet; */
+}
+
+.std-details label{
+    font-weight: var(--semi-bold-weight);
+}
+
+.std-details .details-input{
+    width: 100%;
+    height: 30px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--light-grey-color);
+    font-size: var(--sm-font-size);
+}
+.std-details .details-input:focus{
+    border-bottom: 2px solid var(--primary-gradient-start-color);
+}
+
+.std-details .details-textarea{
+    width: 100%;
+    min-height: 100px;
+    padding: 8px;
+    resize: none;
+    background-color: transparent;
+    outline: none;
+    border: 1px solid var(--light-grey-color);
+    border-radius: 10px;
+    font-size: var(--sm-font-size);
+}
+.std-details .details-textarea:focus{
+    border: 2px solid var(--primary-gradient-start-color);
 }

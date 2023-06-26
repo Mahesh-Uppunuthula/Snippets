@@ -11,7 +11,7 @@ function Details(props) {
   let deleteStr = `delete this ${props.type === "file" ? "snippet" : "folder"}`;
   return (
     <div className="details-container">
-      <div className="pane_heading all-caps">about</div>
+      <p className="side-heading all-caps pane-heading">about</p>
       <div className="std-details">
         <label>{props.type}name</label>
         <input

@@ -22,7 +22,6 @@
   --primary-gradient-end-color: #7f00ff;
 
   --dark-text-color: #121212;
-  --dark-faded-color: #121212;
   --light-text-color: #ffffff;
 
   --accent-color: blueviolet;
@@ -108,7 +107,7 @@ body {
   left: 0%;
   right: 0%;
   font-size: var(--helper-text);
-  background-color: var(--dark-faded-color);
+  background-color: var(--dark-text-color);
   border-radius: 3px;
   color: var(--light-text-color);
   width: max-content;
@@ -374,8 +373,8 @@ nav button .link-item {
   box-shadow: 1px 1px 10px #80808080;
 }
 
-.folder-container .top-pane .pane-heading{
-  color: var(--dark-faded-color);
+ .pane-heading{
+  color: var(--dark-text-color);
 }
 
 .folder-container .top-pane .img-cont img {
@@ -401,7 +400,7 @@ nav button .link-item {
 .content-pane .right-pane{
   width: var(--right-pane-dim);
   height: 100%;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 
