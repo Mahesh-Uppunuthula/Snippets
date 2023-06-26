@@ -256,8 +256,14 @@ export default function Dashboard() {
             <div className="folders-list"></div>
           </div>
         </div>
-        <div className="middle-pane"></div>
-        <div className="right-pane"></div>
+        <div className="middle-pane">
+          {isOverviewClicked ? (
+            <div className="overview-content">Overview content</div>
+          ) : (
+            <div className="extension-content">Extension Content</div>
+          )}
+        </div>
+        <div className="right-pane">AD</div>
       </div>
     </>
   );
