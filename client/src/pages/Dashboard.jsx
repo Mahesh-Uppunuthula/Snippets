@@ -1,15 +1,26 @@
+// HOOKS
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// LIBS
 import Axios from "axios";
 
+// MODAL
 import Modal from "../components/Modal/Modal";
 
+// ICONS
 import addIcon from "../Assests/add.svg";
 import addFolderIcon from "../Assests/add-folder.svg";
 import trashIcon from "../Assests/trash.svg";
+
+// COMPONENTS
 import Folder from "../components/Folder/Folder.js";
 import Card from "../components/Card/Card";
-import { useNavigate } from "react-router-dom";
+import Details from "../components/Details/Details";
+
+// SERVICE
 import helper from "../Services/helper";
+
 const BASE_URL = helper.BASE_URL;
 
 export default function Dashboard() {
@@ -263,7 +274,7 @@ export default function Dashboard() {
             <div className="extension-content">Extension Content</div>
           )}
         </div>
-        <div className="right-pane">AD</div>
+        <div className="right-pane"><Details/></div>
       </div>
     </>
   );

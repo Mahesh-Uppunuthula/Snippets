@@ -341,7 +341,6 @@ nav button .link-item {
 /* LEFT PANE STYLES */
 
 .content-pane {
-  /* background-color: blue; */
   margin-inline: 20px;
   display: flex;
   justify-content: space-evenly;
@@ -355,7 +354,6 @@ nav button .link-item {
 
 /* LEFT PANE STYLES */
 .content-pane .left-pane {
-  /* width: max-content; */
   width: var(--left-pane-dim)
 }
 
@@ -389,7 +387,6 @@ nav button .link-item {
 .content-pane .middle-pane{
   width: var(--middle-pane-dim);
   height: 100%;
-  /* background-color: blue; */
 }
 
 .content-pane .overview-content{
@@ -403,7 +400,6 @@ nav button .link-item {
 /* RIGHT PANE STYLES */
 .content-pane .right-pane{
   width: var(--right-pane-dim);
-  /* max-width: 20%; */
   height: 100%;
   background-color: yellow;
 }
