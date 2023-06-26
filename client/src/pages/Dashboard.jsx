@@ -98,7 +98,9 @@ export default function Dashboard() {
   }, [reloadDash]);
 
   function getSnippetsOfAFolder(folderId, folderName, date) {
+    console.log("get snipepts of a folder");
     setActiveFolderId({ folderId, folderName, date });
+    console.log("folder ", folderId, folderName, date);
     // console.log("open this folder with id", folderId);
     const url = BASE_URL + "/dashboard/" + folderId;
 
@@ -109,7 +111,7 @@ export default function Dashboard() {
     })
       .then((response) => {
         const folderSnippetsArray = response.data.snippets;
-        // console.log("folderSnippetsArray", folderSnippetsArray);
+        console.log("folderSnippetsArray", folderSnippetsArray);
 
         setFolderSnippets(folderSnippetsArray);
         // console.log("folderSnippets", folderSnippets);
@@ -189,15 +191,15 @@ export default function Dashboard() {
         // console.log("Dashboard client delete folder err", err);
       });
   }
-function renderOverviewPage(){
-  setOverviewClick(true);
-  setExtensionClick(false);
-}
-function renderExtensionPage(){
-  setOverviewClick(false);
-  setExtensionClick(true);
-}
-return (
+  function renderOverviewPage() {
+    setOverviewClick(true);
+    setExtensionClick(false);
+  }
+  function renderExtensionPage() {
+    setOverviewClick(false);
+    setExtensionClick(true);
+  }
+  return (
     <>
       <div className="web_ext_switch">
         <div
@@ -233,90 +235,152 @@ return (
         />
       )}
       <div className="content-pane">
-        <div className="page-top-pane">
-          <div className="page-heading">
-            <p>Repositories</p>
-            <p className="folders-count">{folders.length}</p>
-          </div>
-          <div className="dashboard-options">
-            <div
-              className="link-item"
-              onClick={() => {
-                setAddNewFolder(true);
-              }}
-            >
-              <button className="light-btn link-item">
-                <img src={addFolderIcon} alt="add-snippet img" />
-                <p>New folder</p>
-              </button>
-            </div>
-            {isClickedFolderYet && (
-              <>
-                <button
-                  className="call-to-action link-item"
-                  onClick={openEditor}
-                >
-                  <img
-                    className="expandable-btn-icon"
-                    src={addIcon}
-                    alt="add-snippet img"
-                  />
-                  <p className="expandable-btn-text">create</p>
-                </button>
-                <button
-                  className="expandable-err-btn link-item"
-                  onClick={deleteFolder}
-                >
-                  <img
-                    className="expandable-btn-icon"
-                    src={trashIcon}
-                    alt="delete-snippet img"
-                  />
-                  <p className="expandable-btn-text">Delete folder</p>
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-        <div className="bottom-pane">
-          <div className="folders-list">
-            <div className="folder-container">
-              {folders.map((folder) => {
-                return (
-                  <Folder
-                    folderName={folder.name}
-                    folderId={folder.folder_id}
-                    folderDate={folder.date}
-                    onClick={getSnippetsOfAFolder}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          <div className="bottom-right-pane">
-            {isClickedFolderYet && (
-              <div className="folder-deets">
-                <div className="name">{activeFolderId.folderName}</div>
-                <div className="date">created on {activeFolderId.date}</div>
+        <div className="left-pane">
+          <div className="folder-container">
+            <div className="top-pane">
+              <p className="side-heading all-caps">collection</p>
+              <div className="img-cont">
+                <img
+                  className="icon-d lg-icon link-item"
+                  onClick={() => {
+                    setAddNewFolder(true);
+                  }}
+                  src={addFolderIcon}
+                />
+                <div className="img-bg">
+                  <p className="img-desc">create new folder</p>
+                </div>
               </div>
-            )}
-
-            <div className="grid-container">
-              {isClickedFolderYet &&
-                folderSnippets.map((snippet) => {
-                  return (
-                    <Card
-                      title={snippet.title}
-                      date={snippet.date}
-                      snippet_id={snippet._id}
-                      onClick={openSnippet}
-                    />
-                  );
-                })}
             </div>
+            <Folder folders={folders} onClick={getSnippetsOfAFolder} />
+            <div className="folders-list"></div>
           </div>
         </div>
+        <div className="middle-pane"></div>
+        <div className="right-pane"></div>
       </div>
     </>
   );
+  // return (
+  //     <>
+  //       <div className="web_ext_switch">
+  //         <div
+  //           className={
+  //             isOverviewClicked
+  //               ? "web_ext_switch_item web_ext_switch_item_active"
+  //               : "web_ext_switch_item"
+  //           }
+  //         >
+  //           <p onClick={renderOverviewPage}>Overview</p>
+  //         </div>
+  //         <div
+  //           className={
+  //             isExtensionClicked
+  //               ? "web_ext_switch_item web_ext_switch_item_active"
+  //               : "web_ext_switch_item"
+  //           }
+  //         >
+  //           <p onClick={renderExtensionPage}>Extension</p>
+  //         </div>
+  //       </div>
+  //       {isAddNewFolderClicked && (
+  //         <Modal
+  //           heading={"Enter folder name"}
+  //           errMsg={"Invalid folder name"}
+  //           onSave={createNewFolder}
+  //           onTextChange={(text) => {
+  //             setNewFolderName(text);
+  //           }}
+  //           onCloseModal={() => {
+  //             setAddNewFolder(false);
+  //           }}
+  //         />
+  //       )}
+  //       <div className="content-pane">
+  //         <div className="page-top-pane">
+  //           <div className="page-heading">
+  //             <p>Repositories</p>
+  //             <p className="folders-count">{folders.length}</p>
+  //           </div>
+  //           <div className="dashboard-options">
+  //             <div
+  //               className="link-item"
+  //               onClick={() => {
+  //                 setAddNewFolder(true);
+  //               }}
+  //             >
+  //               <button className="light-btn link-item">
+  //                 <img src={addFolderIcon} alt="add-snippet img" />
+  //                 <p>New folder</p>
+  //               </button>
+  //             </div>
+  //             {isClickedFolderYet && (
+  //               <>
+  //                 <button
+  //                   className="call-to-action link-item"
+  //                   onClick={openEditor}
+  //                 >
+  //                   <img
+  //                     className="expandable-btn-icon"
+  //                     src={addIcon}
+  //                     alt="add-snippet img"
+  //                   />
+  //                   <p className="expandable-btn-text">create</p>
+  //                 </button>
+  //                 <button
+  //                   className="expandable-err-btn link-item"
+  //                   onClick={deleteFolder}
+  //                 >
+  //                   <img
+  //                     className="expandable-btn-icon"
+  //                     src={trashIcon}
+  //                     alt="delete-snippet img"
+  //                   />
+  //                   <p className="expandable-btn-text">Delete folder</p>
+  //                 </button>
+  //               </>
+  //             )}
+  //           </div>
+  //         </div>
+  //         <div className="bottom-pane">
+  //           <div className="folders-list">
+  //             <div className="folder-container">
+  // {folders.map((folder) => {
+  //   return (
+  //     <Folder
+  //       folderName={folder.name}
+  //       folderId={folder.folder_id}
+  //       folderDate={folder.date}
+  //       onClick={getSnippetsOfAFolder}
+  //     />
+  //   );
+  // })}
+  //             </div>
+  //           </div>
+  //           <div className="bottom-right-pane">
+  //             {isClickedFolderYet && (
+  //               <div className="folder-deets">
+  //                 <div className="name">{activeFolderId.folderName}</div>
+  //                 <div className="date">created on {activeFolderId.date}</div>
+  //               </div>
+  //             )}
+
+  //             <div className="grid-container">
+  //               {isClickedFolderYet &&
+  //                 folderSnippets.map((snippet) => {
+  //                   return (
+  //                     <Card
+  //                       title={snippet.title}
+  //                       date={snippet.date}
+  //                       snippet_id={snippet._id}
+  //                       onClick={openSnippet}
+  //                     />
+  //                   );
+  //                 })}
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
 }
