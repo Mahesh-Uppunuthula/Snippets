@@ -6,7 +6,6 @@ function Folder(props) {
   const [activeFolderId, setActiveFolderId] = useState();
 
   let folders = props.folders;
-  console.log("folders", folders);
 
   return folders.map((folder, index) => {
     return (

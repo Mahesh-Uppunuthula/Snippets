@@ -60,6 +60,12 @@ export default function Dashboard() {
   const [isOverviewClicked, setOverviewClick] = useState(true);
   const [isExtensionClicked, setExtensionClick] = useState();
 
+  const [entityNameChanged, setEntityName] = useState("");
+  const [entityDescChanged, setEntityDesc] = useState("");
+
+  console.log('entityNameChanged', entityNameChanged);
+  console.log('entityDescChanged', entityDescChanged);
+
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -111,7 +117,7 @@ export default function Dashboard() {
   function getSnippetsOfAFolder(folderId, folderName, date) {
     console.log("get snipepts of a folder");
     setActiveFolderId({ folderId, folderName, date });
-    console.log("folder ", folderId, folderName, date);
+    // console.log("folder ", folderId, folderName, date);
     // console.log("open this folder with id", folderId);
     const url = BASE_URL + "/dashboard/" + folderId;
 
@@ -122,7 +128,7 @@ export default function Dashboard() {
     })
       .then((response) => {
         const folderSnippetsArray = response.data.snippets;
-        console.log("folderSnippetsArray", folderSnippetsArray);
+        // console.log("folderSnippetsArray", folderSnippetsArray);
 
         setFolderSnippets(folderSnippetsArray);
         // console.log("folderSnippets", folderSnippets);
@@ -210,6 +216,9 @@ export default function Dashboard() {
     setOverviewClick(false);
     setExtensionClick(true);
   }
+  function redirectToExtn(){
+    console.log("redirect to extn");
+  }
   return (
     <>
       <div className="web_ext_switch">
@@ -274,7 +283,15 @@ export default function Dashboard() {
             <div className="extension-content">Extension Content</div>
           )}
         </div>
-        <div className="right-pane"><Details/></div>
+        <div className="right-pane">
+          <Details 
+            type={"folder"} 
+            desc={"hehe haha"}
+            onNameChange={(e)=>{setEntityName(e.target.value)}}
+            onDescriptionChange={(e)=>{setEntityDesc(e.target.value)}}
+            showOptionals = {true}
+            redirectToExtn={redirectToExtn}/>
+        </div>
       </div>
     </>
   );
