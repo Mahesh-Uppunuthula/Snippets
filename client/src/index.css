@@ -22,7 +22,7 @@
   --primary-gradient-end-color: #7f00ff;
 
   --dark-text-color: #121212;
-  --dark-faded-color: #12121280;
+  --dark-faded-color: #121212;
   --light-text-color: #ffffff;
 
   --accent-color: blueviolet;
@@ -75,21 +75,28 @@ body {
 /* IMAGE CONTAINER */
 
 /* ICON WITH DESCRIPTION */
-.icon-d:hover + .img-bg{
+.icon-d:hover + .img-bg {
   visibility: visible;
   background-color: blue;
   display: inline;
 }
 
-.img-cont{
+.img-cont {
+  border-radius: 50px;
+  padding: 7px;
   position: relative;
+  display: flex;
 }
 
-.img-bg{
+.img-cont:hover {
+  background-color: #80808040;
+}
+
+.img-bg {
   display: none;
 }
 
-.img-desc{
+.img-desc {
   padding: 2px 5px;
   position: absolute;
   bottom: -60%;
@@ -102,7 +109,7 @@ body {
   width: max-content;
 }
 
-.img-desc:hover{
+.img-desc:hover {
   visibility: visible;
 }
 
@@ -352,6 +359,15 @@ nav button .link-item {
   border: 1px solid #80808080;
   border-radius: var(--big-radius);
   box-shadow: 1px 1px 10px #80808080;
+}
+
+.folder-container .top-pane .pane-heading{
+  color: var(--dark-faded-color);
+}
+
+.folder-container .top-pane .img-cont img {
+  filter: invert(57%) sepia(3%) saturate(0%) hue-rotate(160deg) brightness(87%)
+    contrast(88%);
 }
 
 /* 

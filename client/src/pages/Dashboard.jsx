@@ -238,7 +238,7 @@ export default function Dashboard() {
         <div className="left-pane">
           <div className="folder-container">
             <div className="top-pane">
-              <p className="side-heading all-caps">collection</p>
+              <p className="side-heading all-caps pane-heading">collection</p>
               <div className="img-cont">
                 <img
                   className="icon-d lg-icon link-item"
