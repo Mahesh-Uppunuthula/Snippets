@@ -76,9 +76,10 @@ export default function Dashboard() {
           Authorization: token,
         },
       }).then((response) => {
-        // console.log("reponse from /verify router in auth login", response);
+        console.log("reponse from /verify router in auth login", response);
         // fetch user details here
-        if (response) {
+        let isAuthorisedUser = response.data.isVerified;
+        if (isAuthorisedUser) {
           console.log("authorized user");
 
           const url = BASE_URL + "/dashboard";
@@ -285,9 +286,11 @@ export default function Dashboard() {
             )}
           </div>
           <div className="right-pane">
+          <hr/>
             <Details
               type={"folder"}
               desc={"hehe haha"}
+              isfav={false}
               onNameChange={(e) => {
                 setEntityName(e.target.value);
               }}

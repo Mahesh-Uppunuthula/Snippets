@@ -69,8 +69,15 @@ body {
 }
 
 .active-btn {
-  background-color: blue;
   padding: 10px;
+  border: none;
+  border-radius: var(--small-radius);
+  color: var(--light-text-color);
+}
+
+.active-btn img {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(119deg)
+    brightness(106%) contrast(101%);
 }
 
 .all-caps {
@@ -83,22 +90,12 @@ body {
 }
 
 .border-btn {
-  border: 1px solid #80808050;
   border-radius: var(--small-radius);
   padding: 10px;
   width: 100%;
+  border: 1px solid #80808030;
 }
 
-.border-btn.fav-yellow {
-  filter: invert(66%) sepia(93%) saturate(1097%) hue-rotate(359deg)
-    brightness(102%) contrast(106%);
-}
-
-.border-btn.err-red {
-  color: var(--err-red);
-  filter: invert(45%) sepia(20%) saturate(5591%) hue-rotate(334deg)
-    brightness(94%) contrast(76%);
-}
 
 .btn-w-icon {
   display: flex;
@@ -431,6 +428,12 @@ nav button .link-item {
   height: 100%;
   flex-basis: 16%;
   /* background-color: red; */
+  display: flex;
+
+}
+
+.right-pane hr{
+  border: 1px solid #80808050;
 }
 
 /* 

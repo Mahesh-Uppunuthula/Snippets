@@ -8,7 +8,7 @@ import heartFillIcon from "../../Assests/heart-fill.svg";
 import trashIcon from "../../Assests/trash.svg";
 
 function Details(props) {
-  let deleteStr = `delete ${props.type === "file" ? "snippet" : "folder"}`;
+  let deleteStr = `delete this ${props.type === "file" ? "snippet" : "folder"}`;
   return (
     <div className="details-container">
       <p className="side-heading all-caps pane-heading">about</p>
@@ -37,12 +37,12 @@ function Details(props) {
       <div className="options">
         {props.showOptionals && (
           <div className="optional">
-            <div className="link-item ">
+            <div className="btn-w-icon link-item active-btn primary-color">
               <img src={addIcon} /> add new snippet
             </div>
             {props.isfav ? (
               <div
-                className="link-item active-btn"
+                className="btn-w-icon link-item active-btn fav-yellow"
                 onClick={props.redirectToExtn}
               >
                 <img src={heartFillIcon} />
@@ -60,7 +60,8 @@ function Details(props) {
           </div>
         )}
         <div className="btn-w-icon link-item border-btn err-red">
-          <img src={trashIcon} />{deleteStr}
+          <img src={trashIcon} />
+          {deleteStr}
         </div>
       </div>
     </div>
