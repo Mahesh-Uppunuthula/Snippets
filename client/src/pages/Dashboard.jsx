@@ -63,8 +63,8 @@ export default function Dashboard() {
   const [entityNameChanged, setEntityName] = useState("");
   const [entityDescChanged, setEntityDesc] = useState("");
 
-  console.log('entityNameChanged', entityNameChanged);
-  console.log('entityDescChanged', entityDescChanged);
+  console.log("entityNameChanged", entityNameChanged);
+  console.log("entityDescChanged", entityDescChanged);
 
   useEffect(() => {
     if (!token) {
@@ -216,7 +216,7 @@ export default function Dashboard() {
     setOverviewClick(false);
     setExtensionClick(true);
   }
-  function redirectToExtn(){
+  function redirectToExtn() {
     console.log("redirect to extn");
   }
   return (
@@ -255,42 +255,49 @@ export default function Dashboard() {
         />
       )}
       <div className="content-pane">
-        <div className="left-pane">
-          <div className="folder-container">
-            <div className="top-pane">
-              <p className="side-heading all-caps pane-heading">collection</p>
-              <div className="img-cont">
-                <img
-                  className="icon-d lg-icon link-item"
-                  onClick={() => {
-                    setAddNewFolder(true);
-                  }}
-                  src={addFolderIcon}
-                />
-                <div className="img-bg">
-                  <p className="img-desc">create new folder</p>
+        <div className="content-container">
+          <div className="left-pane">
+            <div className="folder-container">
+              <div className="top-pane">
+                <p className="side-heading all-caps pane-heading">collection</p>
+                <div className="img-cont">
+                  <img
+                    className="icon-d lg-icon link-item"
+                    onClick={() => {
+                      setAddNewFolder(true);
+                    }}
+                    src={addFolderIcon}
+                  />
+                  <div className="img-bg">
+                    <p className="img-desc">create new folder</p>
+                  </div>
                 </div>
               </div>
+              <Folder folders={folders} onClick={getSnippetsOfAFolder} />
+              <div className="folders-list"></div>
             </div>
-            <Folder folders={folders} onClick={getSnippetsOfAFolder} />
-            <div className="folders-list"></div>
           </div>
-        </div>
-        <div className="middle-pane">
-          {isOverviewClicked ? (
-            <div className="overview-content">Overview content</div>
-          ) : (
-            <div className="extension-content">Extension Content</div>
-          )}
-        </div>
-        <div className="right-pane">
-          <Details 
-            type={"folder"} 
-            desc={"hehe haha"}
-            onNameChange={(e)=>{setEntityName(e.target.value)}}
-            onDescriptionChange={(e)=>{setEntityDesc(e.target.value)}}
-            showOptionals = {true}
-            redirectToExtn={redirectToExtn}/>
+          <div className="middle-pane">
+            {isOverviewClicked ? (
+              <div className="overview-content">Overview content</div>
+            ) : (
+              <div className="extension-content">Extension Content</div>
+            )}
+          </div>
+          <div className="right-pane">
+            <Details
+              type={"folder"}
+              desc={"hehe haha"}
+              onNameChange={(e) => {
+                setEntityName(e.target.value);
+              }}
+              onDescriptionChange={(e) => {
+                setEntityDesc(e.target.value);
+              }}
+              showOptionals={true}
+              redirectToExtn={redirectToExtn}
+            />
+          </div>
         </div>
       </div>
     </>

@@ -8,34 +8,38 @@ import heartFillIcon from "../../Assests/heart-fill.svg";
 import trashIcon from "../../Assests/trash.svg";
 
 function Details(props) {
-  let deleteStr = `delete this ${props.type === "file" ? "snippet" : "folder"}`;
+  let deleteStr = `delete ${props.type === "file" ? "snippet" : "folder"}`;
   return (
     <div className="details-container">
       <p className="side-heading all-caps pane-heading">about</p>
       <div className="std-details">
-        <label>{props.type}name</label>
-        <input
-          className="details-input"
-          onChange={props.onNameChange}
-          type="text"
-        />
+        <div>
+          <label>{props.type}name</label>
+          <input
+            className="details-input"
+            onChange={props.onNameChange}
+            type="text"
+          />
+        </div>
 
-        <label>description</label>
-        <textarea
-          className="details-textarea"
-          onChange={props.onDescriptionChange}
-          type="text"
-        >
-          {props.desc}
-        </textarea>
+        <div>
+          <label>description</label>
+          <textarea
+            className="details-textarea"
+            onChange={props.onDescriptionChange}
+            type="text"
+          >
+            {props.desc}
+          </textarea>
+        </div>
       </div>
 
       <div className="options">
-        {props.showOptionals && <div className="optional">
-          <div className="link-item ">
-            <img src={addIcon} /> add new snippet
-          </div>
-          <div className="link-item ">
+        {props.showOptionals && (
+          <div className="optional">
+            <div className="link-item ">
+              <img src={addIcon} /> add new snippet
+            </div>
             {props.isfav ? (
               <div
                 className="link-item active-btn"
@@ -46,7 +50,7 @@ function Details(props) {
               </div>
             ) : (
               <div
-                className="link-item border-btn"
+                className=" btn-w-icon link-item border-btn fav-yellow"
                 onClick={props.redirectToExtn}
               >
                 <img src={heartEmptyIcon} />
@@ -54,10 +58,9 @@ function Details(props) {
               </div>
             )}
           </div>
-        </div>}
-        <div className="link-item border-btn delete">
-          <img src={trashIcon} />
-          {deleteStr}
+        )}
+        <div className="btn-w-icon link-item border-btn err-red">
+          <img src={trashIcon} />{deleteStr}
         </div>
       </div>
     </div>

@@ -12,16 +12,28 @@
     
 }
 .details-container{
-    /* background-color: red; */
-    padding: 10px 10px;
+    padding: 10px;
+    /* background-color: yellow; */
+    width: 100%;
+    height: 100%;
 }
+
+
+/* STANDARD DETAILS */
 .std-details{
     margin-top: 10px;
     /* background-color: blueviolet; */
 }
 
+.std-details > div{
+    margin-bottom: 10px;
+}
+
 .std-details label{
     font-weight: var(--semi-bold-weight);
+    display: inline-block;
+    margin-bottom:5px;
+
 }
 
 .std-details .details-input{
@@ -51,3 +63,15 @@
 .std-details .details-textarea:focus{
     border: 2px solid var(--primary-gradient-start-color);
 }
+
+/* OPTIONS */
+.options{
+    /* background-color: red; */
+    margin-top: 30px;
+}
+
+.options .optional{
+    /* background-color: red; */
+    padding: 10px;
+}
+
