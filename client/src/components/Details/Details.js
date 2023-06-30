@@ -14,11 +14,12 @@ function Details(props) {
       <p className="side-heading all-caps pane-heading">about</p>
       <div className="std-details">
         <div>
-          <label>{props.type}name</label>
+          <label>{props.type} name</label>
           <input
             className="details-input"
             onChange={props.onNameChange}
             type="text"
+            value={props.activeFolderName}
           />
         </div>
 
@@ -29,7 +30,7 @@ function Details(props) {
             onChange={props.onDescriptionChange}
             type="text"
           >
-            {props.desc}
+            {props.activeFolderDesc}
           </textarea>
         </div>
       </div>
@@ -59,7 +60,8 @@ function Details(props) {
             )}
           </div>
         )}
-        <div className="btn-w-icon link-item border-btn err-red">
+        <div className="btn-w-icon link-item border-btn err-red"
+        onClick={props.deleteEntity}>
           <img src={trashIcon} />
           {deleteStr}
         </div>

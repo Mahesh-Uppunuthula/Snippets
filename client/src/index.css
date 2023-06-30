@@ -401,7 +401,8 @@ nav button .link-item {
 }
 
 .pane-heading {
-  color: var(--dark-text-color);
+  color: #80808080;
+  font-weight: var(--bold-weight);
 }
 
 .folder-container .top-pane .img-cont img {
@@ -415,12 +416,12 @@ nav button .link-item {
   height: 100%;
 }
 
-.content-pane .overview-content {
+/* .content-pane .overview-content {
   background-color: red;
 }
 .content-pane .extension-content {
   background-color: blue;
-}
+} */
 
 /* RIGHT PANE STYLES */
 .content-pane .right-pane {

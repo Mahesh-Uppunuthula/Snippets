@@ -1,3 +1,17 @@
+:root {
+  --title-font-size: 30px;
+  --side-heading-font-size: 20px;
+
+  --dark-hint-color: #12121280;
+  --dark-grey-color: #808080;
+  --light-grey-color: #80808050;
+
+  --lang-cont-radius: 10px;
+}
+
+::placeholder {
+  color: var(--dark-hint-color);
+}
 .bg-container {
   position: fixed;
   z-index: 10;
@@ -15,7 +29,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -100%);
-  width: 30rem;
+  width: 60rem;
   background-color: white;
   padding: 2.5em;
   border-radius: 20px;
@@ -23,35 +37,42 @@
   z-index: 10;
 }
 
+.modal-container .top-pane {
+  display: flex;
+}
+
 .heading {
   font-size: 1.3em;
-  font-weight: bold;
-  margin-bottom: 0.5em;
+  color: var(--dark-grey-color);
+  margin-bottom: 1.5em;
+  flex-basis: content;
 }
 
 .input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* background-color: red; */
 }
 
 .text-field {
   width: 100%;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.text-field input {
-  border: 2px solid #80808040;
-  border-radius: 10px;
-  height: 100%;
-  width: 100%;
-  padding: 10px;
-  font-size: 1.2em;
+.text-field .title {
+  font-size: var(--title-font-size);
+  /* background-color: red; */
+  border: none;
   outline: none;
+  border-bottom: 1px solid;
+  font-weight: 600;
+  border-bottom-color: var(--dark-grey-color);
 }
 
 .btn-container {
-  width: 100%;
+  margin-left: auto;
   display: flex;
   justify-content: end;
 }
@@ -60,7 +81,7 @@
   color: white;
   font-weight: 600;
   border: none;
-  height: 100%;
+  height: 50px;
   padding-block: 1em;
   cursor: pointer;
   margin-left: 10px;
@@ -72,26 +93,145 @@
   background-color: #7f00ff;
 }
 
-.border-btn {
+.cancel-btn {
   border: 1px solid grey;
   color: grey;
+  width: fit-content;
 }
 
 .msg {
   display: inline-flex;
-  background-color: #FB560730;
+  /* background-color: #FB560730; */
   border: none;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .msg img {
-  margin-left: 0.5em;
-  filter: invert(79%) sepia(12%) saturate(5410%) hue-rotate(316deg)
-    brightness(104%) contrast(104%);
+  filter: invert(15%) sepia(94%) saturate(7183%) hue-rotate(355deg)
+    brightness(102%) contrast(118%);
 }
 .msg p {
-  color: #FB5607;
-  font-size: .8em;
-  padding: 1em;
+  margin-left: 10px;
+  color: red;
+  font-size: 0.8em;
+}
+
+.lang-container {
+  width: max-content;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-inline: auto;
+  border: 1px solid var(--light-grey-color);
+  border-radius: var(--lang-cont-radius);
+}
+
+.LANG {
+  color: black;
+  padding: 10px;
+  border: none;
+  width: max-content;
+cursor: pointer;
+font-weight: 600;
+border-left: 1px solid var(--light-grey-color);
+}
+
+.lang-container :first-child {
+  border-top-left-radius: var(--lang-cont-radius);
+  border-bottom-left-radius: var(--lang-cont-radius);
+  margin: 0;
+}
+
+.lang-container :last-child {
+  border-top-right-radius: var(--lang-cont-radius);
+  border-bottom-right-radius: var(--lang-cont-radius);
+  margin: 0;
+}
+
+.lang-container > * {
+  /* margin-inline: 10px; */
+}
+
+/* .HTML {
+  background-color: #e64c18;
+}
+.CSS {
+  background-color: #264de4;
+}
+.TYPESCRIPT {
+  background-color: #2d79c7;
+}
+.JAVASCRIPT {
+  color: black;
+  background-color: #f0dc4e;
+}
+.JSON {
+  background-color: black;
+}
+.LESS {
+  background-color: #1d365d;
+}
+.SCSS {
+  background-color: #bf4080;
+} */
+
+
+
+.HTML {
+  color: white;
+  background-color: #e64c18;
+}
+.CSS {
+  color: white;
+  background-color: #264de4;
+}
+.TYPESCRIPT {
+  color: white;
+  background-color: #2d79c7;
+}
+.JAVASCRIPT {
+  color: black;
+  background-color: #f0dc4e;
+}
+.JSON {
+  color: white;
+  background-color: black;
+}
+.LESS {
+  color: white;
+  background-color: #1d365d;
+}
+.SCSS {
+  color: white;
+  background-color: #bf4080;
+}
+
+.HTML:hover{
+  color: white;
+  background-color: #e64c18;
+}
+.CSS:hover{
+  color: white;
+  background-color: #264de4;
+}
+.TYPESCRIPT:hover{
+  color: white;
+  background-color: #2d79c7;
+}
+.JAVASCRIPT:hover{
+  color: black;
+  background-color: #f0dc4e;
+}
+.JSON:hover{
+  color: white;
+  background-color: black;
+}
+.LESS:hover{
+  color: white;
+  background-color: #1d365d;
+}
+.SCSS:hover{
+  color: white;
+  background-color: #bf4080;
 }

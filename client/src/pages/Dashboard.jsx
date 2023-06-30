@@ -244,8 +244,7 @@ export default function Dashboard() {
       </div>
       {isAddNewFolderClicked && (
         <Modal
-          heading={"Enter folder name"}
-          errMsg={"Invalid folder name"}
+          type={"folder"}
           onSave={createNewFolder}
           onTextChange={(text) => {
             setNewFolderName(text);
@@ -289,7 +288,8 @@ export default function Dashboard() {
           <hr/>
             <Details
               type={"folder"}
-              desc={"hehe haha"}
+              activeFolderName={activeFolderId.folderName}
+              activeFolderDesc={"hehe haha"}
               isfav={false}
               onNameChange={(e) => {
                 setEntityName(e.target.value);
@@ -299,6 +299,7 @@ export default function Dashboard() {
               }}
               showOptionals={true}
               redirectToExtn={redirectToExtn}
+              deleteEntity = {deleteFolder}
             />
           </div>
         </div>

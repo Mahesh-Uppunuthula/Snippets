@@ -34,42 +34,59 @@ function Modal(props) {
         }}
       ></div>
       <div className="modal-container">
-        <div className="heading">{props.heading}</div>
-        {!isValidName && (
-          <div className="msg">
-            <img src={warningIcon} />
-            <p>{props.errMsg}</p>
-          </div>
-        )}
-        <div className="input">
-          <div className="text-field">
-            <input
-              type="text"
-              autoCorrect="false"
-              autoFocus="true"
-              onChange={(event) => {
-                handleOnChange(event);
-              }}
-            />
-          </div>
+        <div className="top-pane">
+          <div className="heading">{props.type} details</div>
           <div className="btn-container">
-            <button
-              className="border-btn btn"
+            {/* <button
+              className="cancel-btn btn"
               onClick={() => {
                 props.onCloseModal();
               }}
             >
               cancel
-            </button>
+            </button> */}
             <button
-              style={{ backgroundColor: !isValidName && "grey" }}
+              style={{ backgroundColor: !isValidName && "#80808050" }}
               className="btn cta"
               onClick={() => {
                 isValidName && props.onSave();
               }}
             >
-              Save
+              Done
             </button>
+          </div>
+        </div>
+        <div className="input">
+          <div className="text-field">
+            <input
+              className="title"
+              type="text"
+              autoCorrect="false"
+              autoFocus="true"
+              placeholder={`New ${props.type} title goes here..`}
+              onChange={(event) => {
+                handleOnChange(event);
+              }}
+            />
+            {!isValidName && (
+              <div className="msg">
+                <img src={warningIcon} />
+                <p>{`invalid ${props.type} name`}</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="lang-details">
+          <label className="heading">language</label>
+          <div className="lang-container">
+            <div className={`LANG `} >HTML</div>
+            <div className="LANG CSS">CSS</div>
+            <div className="LANG TYPESCRIPT">TYPESCRIPT</div>
+            <div className="LANG JAVASCRIPT">JAVASCRIPT</div>
+            <div className="LANG JSON">JSON</div>
+            <div className="LANG LESS">LESS</div>
+            <div className="LANG SCSS">SCSS</div>
           </div>
         </div>
       </div>
