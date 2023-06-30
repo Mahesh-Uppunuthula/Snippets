@@ -6,9 +6,34 @@ import warningIcon from "../../Assests/exclamation-circle.svg";
 function Modal(props) {
   const [isValidName, setValidName] = useState(false);
 
+  const [selectedLang, setSelectedLang] = useState({
+    HTML: false,
+    CSS: false,
+    TYPESCRIPT: false,
+    JAVASCRIPT: false,
+    JSON: false,
+    LESS: false,
+    SCSS: false,
+  });
+
+  const [prevKey, setPrevKey] = useState("");
+  console.log("lang start", selectedLang);
+
+  // const selectedLangInitialValue = {
+  //   HTML: false,
+  //   CSS: false,
+  //   TYPESCRIPT: false,
+  //   JAVASCRIPT: false,
+  //   JSON: false,
+  //   LESS: false,
+  //   SCSS: false,
+  // };
+
   useEffect(() => {
     return () => {
       // cleanup
+      // setSelectedLang(selectedLangInitialValue);
+      // console.log("lang useeffect", selectedLang);
     };
   }, []);
 
@@ -23,6 +48,20 @@ function Modal(props) {
 
     setValidName(isEnteredValidName);
     props.onTextChange(event.target.value);
+  }
+
+  function highlightSelectedLang(KEY) {
+    console.log("key", KEY);
+    console.log("prev key", prevKey);
+    
+    console.log("prev obj", selectedLang);
+
+    const updatedSelectedLang = { ...selectedLang, [prevKey]: false};
+    console.log("middle obj", selectedLang);
+
+    setSelectedLang({ ...updatedSelectedLang, [KEY]: true});
+    console.log("next obj", selectedLang);
+    setPrevKey(KEY);
   }
 
   return (
@@ -78,15 +117,50 @@ function Modal(props) {
         </div>
 
         <div className="lang-details">
-          <label className="heading">language</label>
+          {/* <label className="heading">language</label> */}
           <div className="lang-container">
-            <div className={`LANG `} >HTML</div>
-            <div className="LANG CSS">CSS</div>
-            <div className="LANG TYPESCRIPT">TYPESCRIPT</div>
-            <div className="LANG JAVASCRIPT">JAVASCRIPT</div>
-            <div className="LANG JSON">JSON</div>
-            <div className="LANG LESS">LESS</div>
-            <div className="LANG SCSS">SCSS</div>
+            <div
+              className={`LANG ${selectedLang.HTML && "HTML"}`}
+              onClick={() => highlightSelectedLang("HTML")}
+            >
+              HTML
+            </div>
+            <div
+              className={`LANG ${selectedLang.CSS && "CSS"}`}
+              onClick={() => highlightSelectedLang("CSS")}
+            >
+              CSS
+            </div>
+            <div
+              className={`LANG ${selectedLang.TYPESCRIPT && "TYPESCRIPT"}`}
+              onClick={() => highlightSelectedLang("TYPESCRIPT")}
+            >
+              TYPESCRIPT
+            </div>
+            <div
+              className={`LANG ${selectedLang.JAVASCRIPT && "JAVASCRIPT"}`}
+              onClick={() => highlightSelectedLang("JAVASCRIPT")}
+            >
+              JAVASCRIPT
+            </div>
+            <div
+              className={`LANG ${selectedLang.JSON && "JSON"}`}
+              onClick={() => highlightSelectedLang("JSON")}
+            >
+              JSON
+            </div>
+            <div
+              className={`LANG ${selectedLang.LESS && "LESS"}`}
+              onClick={() => highlightSelectedLang("LESS")}
+            >
+              LESS
+            </div>
+            <div
+              className={`LANG ${selectedLang.SCSS && "SCSS"}`}
+              onClick={() => highlightSelectedLang("SCSS")}
+            >
+              SCSS
+            </div>
           </div>
         </div>
       </div>
