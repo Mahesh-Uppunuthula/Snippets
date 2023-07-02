@@ -53,13 +53,13 @@ function Modal(props) {
   function highlightSelectedLang(KEY) {
     console.log("key", KEY);
     console.log("prev key", prevKey);
-    
+
     console.log("prev obj", selectedLang);
 
-    const updatedSelectedLang = { ...selectedLang, [prevKey]: false};
+    const updatedSelectedLang = { ...selectedLang, [prevKey]: false };
     console.log("middle obj", selectedLang);
 
-    setSelectedLang({ ...updatedSelectedLang, [KEY]: true});
+    setSelectedLang({ ...updatedSelectedLang, [KEY]: true });
     console.log("next obj", selectedLang);
     setPrevKey(KEY);
   }
@@ -96,7 +96,28 @@ function Modal(props) {
           </div>
         </div>
         <div className="input">
-          <div className="text-field">
+          <div className="title-field">
+            <label className="item-label">title</label>
+            <input
+              className="title"
+              type="text"
+              autoCorrect="false"
+              autoFocus="true"
+              placeholder={`New ${props.type} title goes here..`}
+              onChange={(event) => {
+                handleOnChange(event);
+              }}
+            />
+            {!isValidName && (
+              <div className="msg">
+                <img src={warningIcon} />
+                <p>{`invalid ${props.type} name`}</p>
+              </div>
+            )}
+          </div>
+
+          <div className="desc">
+            <label className="item-label">description</label>
             <input
               className="title"
               type="text"
