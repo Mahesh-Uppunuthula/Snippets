@@ -2,6 +2,7 @@ import "../Modal/Modal.css";
 
 import React, { useEffect, useState } from "react";
 import warningIcon from "../../Assests/exclamation-circle.svg";
+import infoIcon from "../../Assests/info-circle-icon.svg";
 
 function Modal(props) {
   const [isValidName, setValidName] = useState(false);
@@ -14,11 +15,12 @@ function Modal(props) {
     JSON: false,
     LESS: false,
     SCSS: false,
+    OTHER: false,
   });
 
   const [prevKey, setPrevKey] = useState("");
-  console.log("lang start", selectedLang);
 
+  const [isLangClicked, setLangClick] = useState(false);
   // const selectedLangInitialValue = {
   //   HTML: false,
   //   CSS: false,
@@ -51,6 +53,7 @@ function Modal(props) {
   }
 
   function highlightSelectedLang(KEY) {
+    setLangClick(true);
     console.log("key", KEY);
     console.log("prev key", prevKey);
 
@@ -101,7 +104,7 @@ function Modal(props) {
             <input
               className="title"
               type="text"
-              autoCorrect="false"
+              autoCorrect="off"
               autoFocus="true"
               placeholder={`New ${props.type} title goes here..`}
               onChange={(event) => {
@@ -116,73 +119,79 @@ function Modal(props) {
             )}
           </div>
 
-          <div className="desc">
+          <div className="desc-field">
             <label className="item-label">description</label>
-            <input
-              className="title"
+            <textarea
+              className="desc"
               type="text"
-              autoCorrect="false"
-              autoFocus="true"
-              placeholder={`New ${props.type} title goes here..`}
-              onChange={(event) => {
-                handleOnChange(event);
-              }}
-            />
-            {!isValidName && (
-              <div className="msg">
-                <img src={warningIcon} />
-                <p>{`invalid ${props.type} name`}</p>
-              </div>
-            )}
+              autoCorrect="off"
+              placeholder={`(optional) tell us more about "${props.type}" `}
+              // onChange={() => {props.entityDesc()}}
+            ></textarea>
           </div>
         </div>
 
         <div className="lang-details">
-          {/* <label className="heading">language</label> */}
           <div className="lang-container">
             <div
-              className={`LANG ${selectedLang.HTML && "HTML"}`}
+              className={`LANG html ${selectedLang.HTML && "HTML"}`}
               onClick={() => highlightSelectedLang("HTML")}
             >
               HTML
             </div>
             <div
-              className={`LANG ${selectedLang.CSS && "CSS"}`}
+              className={`LANG css ${selectedLang.CSS && "CSS"}`}
               onClick={() => highlightSelectedLang("CSS")}
             >
               CSS
             </div>
             <div
-              className={`LANG ${selectedLang.TYPESCRIPT && "TYPESCRIPT"}`}
+              className={`LANG typescript ${
+                selectedLang.TYPESCRIPT && "TYPESCRIPT"
+              }`}
               onClick={() => highlightSelectedLang("TYPESCRIPT")}
             >
               TYPESCRIPT
             </div>
             <div
-              className={`LANG ${selectedLang.JAVASCRIPT && "JAVASCRIPT"}`}
+              className={`LANG javascript ${
+                selectedLang.JAVASCRIPT && "JAVASCRIPT"
+              }`}
               onClick={() => highlightSelectedLang("JAVASCRIPT")}
             >
               JAVASCRIPT
             </div>
             <div
-              className={`LANG ${selectedLang.JSON && "JSON"}`}
+              className={`LANG json ${selectedLang.JSON && "JSON"}`}
               onClick={() => highlightSelectedLang("JSON")}
             >
               JSON
             </div>
             <div
-              className={`LANG ${selectedLang.LESS && "LESS"}`}
+              className={`LANG less ${selectedLang.LESS && "LESS"}`}
               onClick={() => highlightSelectedLang("LESS")}
             >
               LESS
             </div>
             <div
-              className={`LANG ${selectedLang.SCSS && "SCSS"}`}
+              className={`LANG scss ${selectedLang.SCSS && "SCSS"}`}
               onClick={() => highlightSelectedLang("SCSS")}
             >
               SCSS
             </div>
+            <div
+              className={`LANG other-lang ${selectedLang.OTHER && "OTHER"}`}
+              onClick={() => highlightSelectedLang("OTHER")}
+            >
+              Other
+            </div>
           </div>
+          {isLangClicked && (
+            <div className="note">
+              <img src={infoIcon} />
+              <p>only above mentioned languages have rich IntelliSense and validation</p>
+            </div>
+          )}
         </div>
       </div>
     </>

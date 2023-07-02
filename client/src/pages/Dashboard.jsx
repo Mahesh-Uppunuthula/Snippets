@@ -245,6 +245,7 @@ export default function Dashboard() {
       {isAddNewFolderClicked && (
         <Modal
           type={"folder"}
+          // entityDesc={}
           onSave={createNewFolder}
           onTextChange={(text) => {
             setNewFolderName(text);
