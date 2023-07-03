@@ -29,7 +29,7 @@ export default function Dashboard() {
   const [isClickedFolderYet, setClickedFolderYet] = useState(false);
 
   const [isAddNewFolderClicked, setAddNewFolder] = useState(false);
-  const [newFolderName, setNewFolderName] = useState("");
+  const [newFolder, setNewFolder] = useState({});
 
   const [folders, setFolders] = useState([
     {
@@ -152,35 +152,27 @@ export default function Dashboard() {
     });
   }
 
-  function createNewFolder() {
-    setReloadDash(reloadDash + 1);
-    // console.log("clicked on save folder");
-    const isValidFolderName = newFolderName.trim().length !== 0;
+  function createNewFolder(newFolderObject) {
+    setReloadDash((prev) => prev + 1);
 
-    // console.log("isValidFolderName", isValidFolderName);
+    // setNewFolder(newFolderObject);
 
-    if (isValidFolderName) {
-      Axios.post(
-        BASE_URL + "/dashboard/",
-        {
-          folderName: newFolderName,
-        },
-        {
-          headers: { Authorization: token },
-        }
-      )
-        .then((response) => {
-          // console.log("response after creating new folder", response);
-          setAddNewFolder(false);
-        })
-        .catch((err) => {
-          // console.log("create new folder client err", err);
-        });
-    } else {
-      /**
-       *  Show error message
-       */
-    }
+    Axios.post(
+      BASE_URL + "/dashboard/",
+      {
+        folderName: newFolderObject.title,
+      },
+      {
+        headers: { Authorization: token },
+      }
+    )
+      .then((response) => {
+        // console.log("response after creating new folder", response);
+        setAddNewFolder(false);
+      })
+      .catch((err) => {
+        // console.log("create new folder client err", err);
+      });
   }
 
   function openEditor() {
@@ -245,11 +237,11 @@ export default function Dashboard() {
       {isAddNewFolderClicked && (
         <Modal
           type={"folder"}
-          // entityDesc={}
-          onSave={createNewFolder}
-          onTextChange={(text) => {
-            setNewFolderName(text);
+          onCreateNewFolder={(data) => {
+            createNewFolder(data);
+            setAddNewFolder(false);
           }}
+          // folderDetails={(newFolderDetails) => {setNewFolderDetails}}
           onCloseModal={() => {
             setAddNewFolder(false);
           }}
@@ -286,7 +278,7 @@ export default function Dashboard() {
             )}
           </div>
           <div className="right-pane">
-          <hr/>
+            <hr />
             <Details
               type={"folder"}
               activeFolderName={activeFolderId.folderName}
@@ -300,7 +292,7 @@ export default function Dashboard() {
               }}
               showOptionals={true}
               redirectToExtn={redirectToExtn}
-              deleteEntity = {deleteFolder}
+              deleteEntity={deleteFolder}
             />
           </div>
         </div>
