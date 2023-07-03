@@ -11,8 +11,8 @@ function Modal(props) {
   const titleRef = useRef();
   const descRef = useRef();
 
-  const [isValidDetails, setValidDetails] = useState({
-    result: null,
+  const [isValidTitle, setValidTitle] = useState({
+    status: null,
     msg: "",
   });
 
@@ -28,15 +28,16 @@ function Modal(props) {
   });
 
   const [prevKey, setPrevKey] = useState("");
-
   const [isLangClicked, setLangClick] = useState(false);
+  const [showLangError, setShowLangError] = useState(false);
 
   useEffect(() => {
-    console.log(isValidDetails);
-  }, [isValidDetails]);
+    console.log(isValidTitle);
+  }, [isValidTitle]);
 
   function highlightSelectedLang(KEY) {
     setLangClick(true);
+    setShowLangError(false);
     // console.log("key", KEY);
     // console.log("prev key", prevKey);
 
@@ -51,31 +52,41 @@ function Modal(props) {
   }
 
   function validateData() {
-    console.log("hehe");
+    console.log("validate");
+    let title = titleRef.current.value;
+    console.log("title", title);
+
+    const isValidLength = title.length !== 0;
+    const isNotANum = isNaN(title);
+
+    const err = !isValidLength
+      ? "title cannot be empty"
+      : !isNotANum
+      ? "title cannot be just a number"
+      : "";
+
+    setValidTitle({
+      status: isValidLength && isNotANum,
+      msg: err,
+    });
+
+    const desc = descRef.current.value;
+
     if (props.type === "folder") {
-      let title = titleRef.current.value;
-      console.log("title", title);
-      const desc = descRef.current.value;
-
-      const isValidLength = title.length !== 0;
-      const isNotANum = isNaN(title);
-
-      const err = !isValidLength
-        ? "title cannot be empty"
-        : !isNotANum
-        ? "title cannot be just a number"
-        : "";
-
       if (isValidLength && isNotANum) {
+        console.log("create new folder ");
         props.onCreateNewFolder({ title: title, desc: desc });
       }
-
-      setValidDetails({
-        result: isValidLength && isNotANum,
-        msg: err,
-      });
+    } else if (props.type === "snippet") {
+      if (isValidLength && isNotANum) {
+        if (isLangClicked) {
+          console.log("valid snippet details");
+        }
+        console.log("is lang clicked ", isLangClicked);
+        setShowLangError(true);
+        props.onCreateNewSnippetMetaData({title: title, desc: desc, language: selectedLang})
+      }
     }
-    //  else {}
   }
 
   return (
@@ -107,10 +118,10 @@ function Modal(props) {
               required="true"
               placeholder={`New ${props.type} title goes here..`}
             />
-            {isValidDetails.result !== null && !isValidDetails.result && (
+            {isValidTitle.status !== null && !isValidTitle.status && (
               <div className="msg">
                 <img src={warningIcon} />
-                <p>{isValidDetails.msg}</p>
+                <p>{isValidTitle.msg}</p>
               </div>
             )}
           </div>
@@ -128,8 +139,28 @@ function Modal(props) {
           </div>
         </div>
 
-        {props.type !== "folder" && (
+        {props.type === "snippet" && (
           <div className="lang-details">
+            <label className="item-label">
+              language
+              <span>
+                {!isLangClicked && (
+                  <div className="note">
+                    <img src={infoIcon} />
+                    <p>
+                      choose any language from below for rich intellisense and
+                      validation
+                    </p>
+                  </div>
+                )}
+                {showLangError && (
+                  <div className="msg">
+                    <img src={warningIcon} />
+                    <p>select language to proceed</p>
+                  </div>
+                )}
+              </span>
+            </label>
             <div className="lang-container">
               <div
                 className={`LANG html ${selectedLang.HTML && "HTML"}`}
@@ -184,15 +215,6 @@ function Modal(props) {
                 Other
               </div>
             </div>
-            {isLangClicked && (
-              <div className="note">
-                <img src={infoIcon} />
-                <p>
-                  only above mentioned languages have rich IntelliSense and
-                  validation in editor
-                </p>
-              </div>
-            )}
           </div>
         )}
       </div>

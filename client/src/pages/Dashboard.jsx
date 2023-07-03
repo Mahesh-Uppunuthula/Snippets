@@ -236,11 +236,13 @@ export default function Dashboard() {
       </div>
       {isAddNewFolderClicked && (
         <Modal
-          type={"folder"}
+          type={"snippet"}
           onCreateNewFolder={(data) => {
             createNewFolder(data);
             setAddNewFolder(false);
           }}
+
+          // onCreateNewSnippetMetaData={(data)=>console.log("snippet data ", data)}
           // folderDetails={(newFolderDetails) => {setNewFolderDetails}}
           onCloseModal={() => {
             setAddNewFolder(false);

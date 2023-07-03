@@ -103,7 +103,7 @@
   background-color: #7f00ff;
 }
 
-.disable{
+.disable {
   background-color: #80808080;
 }
 
@@ -135,13 +135,17 @@
   display: flex;
   justify-items: center;
   flex-direction: column;
+  margin-top: 30px;
+}
+
+.lang-details label span{
+  display: block;
 }
 
 .lang-details .note {
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
-  align-self: center;
 }
 
 .note img {
@@ -154,15 +158,13 @@
   font-size: 0.8em;
 }
 
-.lang-container {
+.lang-details .lang-container {
   width: max-content;
   display: flex;
   justify-items: center;
   align-items: center;
-  margin-inline: auto;
   border: 1px solid var(--light-grey-color);
   border-radius: var(--lang-cont-radius);
-  margin-top: 30px;
 }
 
 .LANG {
