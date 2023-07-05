@@ -16,17 +16,27 @@ function LangModal(props) {
     JSON: false,
     LESS: false,
     SCSS: false,
-    OTHER: false,
+    JAVA: false,
+    C_SHARP: false,
+    PYTHON: false,
+    C_PLUS_PLUS: false,
+    XML: false,
+    PHP: false,
+    RUBY: false,
+    R: false,
+    OBJECTIVE_C: false,
+    POWERSHELL: false,
   });
   const [isLangClicked, setLangClick] = useState(false);
   const [showLangError, setShowLangError] = useState(false);
   const [prevKey, setPrevKey] = useState("");
 
   function highlightSelectedLang(KEY) {
-    setLangClick(true);
-    setShowLangError(false);
-    // console.log("key", KEY);
-    // console.log("prev key", prevKey);
+    // setLangClick(true);
+    // setShowLangError(false);
+
+    console.log("key", KEY);
+    console.log("prev key", prevKey);
 
     // console.log("prev obj", selectedLang);
 
@@ -46,26 +56,17 @@ function LangModal(props) {
         }}
       ></div>
       <div className="lang-modal-container">
+        <div className="top-pane">
+          <div className="modal-heading">
+            {props.type} Select language to proceed{" "}
+          </div>
+          <div className="btn-container">
+            <button className={"btn cta"}>Done</button>
+          </div>
+        </div>
         <div className="lang-details">
           <label className="item-label">
-            language
-            <span>
-              {
-                <div className="note">
-                  <img src={infoIcon} />
-                  <p>
-                    choose any language from below for rich intellisense and
-                    validation
-                  </p>
-                </div>
-              }
-              {showLangError && (
-                <div className="msg">
-                  <img src={warningIcon} />
-                  <p>select language to proceed</p>
-                </div>
-              )}
-            </span>
+            languages that have rich intellisense and validation
           </label>
           <div className="lang-container">
             <div
@@ -114,11 +115,76 @@ function LangModal(props) {
             >
               SCSS
             </div>
+          </div>
+          <label className="item-label">
+            languages with only basic syntax colorization
+          </label>
+          <div className="lang-container">
             <div
-              className={`LANG other-lang ${selectedLang.OTHER && "OTHER"}`}
-              onClick={() => highlightSelectedLang("OTHER")}
+              className={`LANG java ${selectedLang.JAVA && "JAVA"}`}
+              onClick={() => highlightSelectedLang("JAVA")}
             >
-              Other
+              JAVA
+            </div>
+            <div
+              className={`LANG c_sharp ${selectedLang.C_SHARP && "C-SHARP"}`}
+              onClick={() => highlightSelectedLang("C_SHARP")}
+            >
+              C#
+            </div>
+            <div
+              className={`LANG python ${selectedLang.PYTHON && "PYTHON"}`}
+              onClick={() => highlightSelectedLang("PYTHON")}
+            >
+              PYTHON
+            </div>
+            <div
+              className={`LANG c-plus-plus ${
+                selectedLang.C_PLUS_PLUS && "C-PLUS-PLUS "
+              }`}
+              onClick={() => highlightSelectedLang("C_PLUS_PLUS")}
+            >
+              C++
+            </div>
+            <div
+              className={`LANG xml ${selectedLang.XML && "XML"}`}
+              onClick={() => highlightSelectedLang("XML")}
+            >
+              XML
+            </div>
+            <div
+              className={`LANG php ${selectedLang.PHP && "PHP"}`}
+              onClick={() => highlightSelectedLang("PHP")}
+            >
+              PHP
+            </div>
+            <div
+              className={`LANG ruby ${selectedLang.RUBY && "RUBY"}`}
+              onClick={() => highlightSelectedLang("RUBY")}
+            >
+              RUBY
+            </div>
+            <div
+              className={`LANG r ${selectedLang.R && "R"}`}
+              onClick={() => highlightSelectedLang("R")}
+            >
+              R
+            </div>
+            <div
+              className={`LANG objective-c ${
+                selectedLang.OBJECTIVE_C && "OBJECTIVEC"
+              }`}
+              onClick={() => highlightSelectedLang("OBJECTIVE_C")}
+            >
+              OBJECTIVE-C
+            </div>
+            <div
+              className={`LANG powershell ${
+                selectedLang.POWERSHELL && "POWERSHELL"
+              }`}
+              onClick={() => highlightSelectedLang("POWERSHELL")}
+            >
+              POWERSHELL
             </div>
           </div>
         </div>

@@ -50,7 +50,7 @@
   z-index: 10;
 }
 
-.modal-container .top-pane {
+.top-pane {
   display: flex;
 }
 
@@ -143,11 +143,35 @@
   font-size: 0.8em;
 }
 
+.note img {
+  filter: invert(64%) sepia(39%) saturate(6873%) hue-rotate(152deg)
+    brightness(92%) contrast(82%);
+}
+.note p {
+  margin-left: 10px;
+  color: #17a2b8;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+
 .lang-details {
   display: flex;
   justify-items: center;
   flex-direction: column;
   margin-top: 30px;
+}
+
+.lang-details .item-label{
+  font-size: 16px;
+  /* color: #17a2b8; */
+  color: grey;
+  font-weight: 300;
+  margin: 15px 0 5px 5px ;
+}
+
+.lang-details .item-label:first-child{
+  margin: 0 0 5px 5px;
 }
 
 .lang-details label span{
@@ -160,23 +184,19 @@
   display: flex;
 }
 
-.note img {
-  filter: invert(64%) sepia(39%) saturate(6873%) hue-rotate(152deg)
-    brightness(92%) contrast(82%);
-}
-.note p {
-  margin-left: 10px;
-  color: #17a2b8;
-  font-size: 0.8em;
+.lang-modal-container .modal-heading{
+  font-weight: 500;
+  font-size: 24px;
 }
 
 .lang-details .lang-container {
-  width: max-content;
+  width: fit-content;
   display: flex;
   justify-items: center;
   align-items: center;
-  border: 1px solid var(--light-grey-color);
-  border-radius: var(--lang-cont-radius);
+  /* border: 1px solid var(--light-grey-color);
+  border-radius: var(--lang-cont-radius); */
+  flex-wrap: wrap;
 }
 
 .LANG {
@@ -186,10 +206,12 @@
   width: max-content;
   cursor: pointer;
   font-weight: 600;
-  border-left: 1px solid var(--light-grey-color);
+  margin: 5px;
+  border: 1px solid var(--light-grey-color);
+  border-radius: var(--lang-cont-radius);
 }
 
-.lang-container :first-child {
+/* .lang-container :first-child {
   border-top-left-radius: var(--lang-cont-radius);
   border-bottom-left-radius: var(--lang-cont-radius);
   margin: 0;
@@ -199,7 +221,7 @@
   border-top-right-radius: var(--lang-cont-radius);
   border-bottom-right-radius: var(--lang-cont-radius);
   margin: 0;
-}
+} */
 
 .desc-field {
   margin-top: 10px;
@@ -276,6 +298,53 @@
   background-color: grey;
 }
 
+.JAVA {
+  color: white;
+  background-color: #d42700;
+}
+.C-SHARP {
+  color: white;
+  background-color: #264de4;
+}
+.PYTHON {
+  color: white;
+  background-color: #ffca1d;
+}
+.C-PLUS-PLUS {
+  color: white;
+  background-color: #230068;
+}
+.XML {
+  color: white;
+  background-color: black;
+}
+
+.PHP{
+  color: black;
+  background-color: #787cb4;
+}
+
+
+.RUBY {
+  color: white;
+  background-color: #ec1521;
+}
+
+.R {
+  color: white;
+  background-color: #2167ba;
+}
+
+.OBJECTIVEC {
+  color: white;
+  background-color: #ab7644;
+}
+
+.POWERSHELL {
+  color: white;
+  background-color: #2570bf;
+}
+
 .html:hover {
   color: white;
   background-color: #e64c18;
@@ -305,7 +374,46 @@
   background-color: #bf4080;
 }
 
-.other-lang:hover {
+.java:hover {
   color: white;
-  background-color: grey;
+  background-color: #d42700;
+}
+.c_sharp:hover {
+  color: white;
+  background-color: #264de4;
+}
+.python:hover {
+  color: white;
+  background-color: #ffca1d;
+}
+.c-plus-plus:hover {
+  color: white;
+  background-color: #230068;
+}
+.xml:hover {
+  color: white;
+  background-color: black;
+}
+.php:hover {
+  color: black;
+  background-color: #787cb4;
+}
+.ruby:hover {
+  color: white;
+  background-color: #ec1521;
+}
+
+.r:hover {
+  color: white;
+  background-color: #2167ba;
+}
+
+.objective-c:hover {
+  color: white;
+  background-color: #ab7644;
+}
+
+.powershell:hover {
+  color: white;
+  background-color: #2570bf;
 }
