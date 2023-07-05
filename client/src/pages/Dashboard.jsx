@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 // MODAL
-import Modal from "../components/Modal/Modal";
+import InputModal from "../components/Modal/InputModal";
 
 // ICONS
 import addIcon from "../Assests/add.svg";
@@ -20,6 +20,7 @@ import Details from "../components/Details/Details";
 
 // SERVICE
 import helper from "../Services/helper";
+import LangModal from "../components/Modal/LangModal";
 
 const BASE_URL = helper.BASE_URL;
 
@@ -234,21 +235,21 @@ export default function Dashboard() {
           <p onClick={renderExtensionPage}>Extension</p>
         </div>
       </div>
-      {isAddNewFolderClicked && (
-        <Modal
-          type={"snippet"}
+      {/* {isAddNewFolderClicked && (
+        <InputModal
+          type={"folder"}
           onCreateNewFolder={(data) => {
             createNewFolder(data);
             setAddNewFolder(false);
           }}
-
           // onCreateNewSnippetMetaData={(data)=>console.log("snippet data ", data)}
           // folderDetails={(newFolderDetails) => {setNewFolderDetails}}
           onCloseModal={() => {
             setAddNewFolder(false);
           }}
         />
-      )}
+      )} */}
+      {isAddNewFolderClicked &&  <LangModal onCloseModal={()=>setAddNewFolder(false)} />}
       <div className="content-pane">
         <div className="content-container">
           <div className="left-pane">

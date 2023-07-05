@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Modal from "../components/Modal/Modal";
+import Modal from "../components/Modal/InputModal";
 import Axios from "axios";
 import CodeEditor from "../components/CodeEditor";
 
