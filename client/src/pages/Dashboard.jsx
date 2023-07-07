@@ -213,6 +213,9 @@ export default function Dashboard() {
   function redirectToExtn() {
     console.log("redirect to extn");
   }
+  function openEditorWithGivenParamz(langSelected){
+    console.log("lang selected", langSelected);
+  }
   return (
     <>
       <div className="web_ext_switch">
@@ -249,7 +252,10 @@ export default function Dashboard() {
           }}
         />
       )} */}
-      {isAddNewFolderClicked &&  <LangModal onCloseModal={()=>setAddNewFolder(false)} />}
+      {isAddNewFolderClicked &&  
+        <LangModal 
+          onCloseModal={()=>setAddNewFolder(false)}
+          onDoneSelectingLang = {openEditorWithGivenParamz} />}
       <div className="content-pane">
         <div className="content-container">
           <div className="left-pane">

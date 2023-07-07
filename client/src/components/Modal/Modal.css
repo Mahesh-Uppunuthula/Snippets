@@ -417,3 +417,10 @@
   color: white;
   background-color: #2570bf;
 }
+
+.options label{
+  font-size: var(--side-heading-font-size);
+  padding-left: 5px;
+  color: #17a2b8;
+  font-weight: 100;
+}
