@@ -154,6 +154,9 @@ export default function Dashboard() {
   }
 
   function createNewFolder(newFolderObject) {
+
+    console.log("inside new folder object");
+    console.log("newFolderObject", newFolderObject);
     setReloadDash((prev) => prev + 1);
 
     // setNewFolder(newFolderObject);
@@ -213,8 +216,8 @@ export default function Dashboard() {
   function redirectToExtn() {
     console.log("redirect to extn");
   }
-  function openEditorWithGivenParamz(langSelected){
-    console.log("lang selected", langSelected);
+  function openEditorWithGivenParamz(langSelected, startWithBoilerPlate){
+    console.log("lang selected", langSelected, startWithBoilerPlate);
   }
   return (
     <>
@@ -238,9 +241,9 @@ export default function Dashboard() {
           <p onClick={renderExtensionPage}>Extension</p>
         </div>
       </div>
-      {/* {isAddNewFolderClicked && (
+      {isAddNewFolderClicked && (
         <InputModal
-          type={"folder"}
+          entityName={"folder"}
           onCreateNewFolder={(data) => {
             createNewFolder(data);
             setAddNewFolder(false);
@@ -251,11 +254,11 @@ export default function Dashboard() {
             setAddNewFolder(false);
           }}
         />
-      )} */}
-      {isAddNewFolderClicked &&  
+      )}
+      {/* {isAddNewFolderClicked &&  
         <LangModal 
           onCloseModal={()=>setAddNewFolder(false)}
-          onDoneSelectingLang = {openEditorWithGivenParamz} />}
+          onDoneSelectingLang = {openEditorWithGivenParamz} />} */}
       <div className="content-pane">
         <div className="content-container">
           <div className="left-pane">

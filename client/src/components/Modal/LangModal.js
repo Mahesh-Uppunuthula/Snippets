@@ -33,7 +33,7 @@ function LangModal(props) {
   });
   const [prevKey, setPrevKey] = useState("");
 
-  const [getBoilerPlateCode, setBoilerPlate] = useState(false);
+  const [startWithBoilerPlateCode, setStartWithBoilerPlateCode] = useState(true);
 
   function highlightSelectedLang(KEY) {
     setLangClick({ status: true, language: KEY });
@@ -66,14 +66,14 @@ function LangModal(props) {
           <div className="btn-container">
             <button
               className={`btn ${isLangClicked ? "cta" : "disable"}`}
-              onClick={() => props.onDoneSelectingLang(isLangClicked.language)}
+              onClick={() => props.onDoneSelectingLang(isLangClicked.language, startWithBoilerPlateCode)}
             >
               Done
             </button>
           </div>
         </div>
         <div className="options">
-          <input type="checkbox" checked="true" onChange={setBoilerPlate(true)}/>
+          <input type="checkbox" checked={startWithBoilerPlateCode} onChange={()=>{setStartWithBoilerPlateCode(!startWithBoilerPlateCode)}} />
           <label className="item-label">start with boiler plate code</label>
         </div>
         <div className="lang-details">

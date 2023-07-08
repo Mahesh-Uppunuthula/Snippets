@@ -14,20 +14,19 @@ function InputModal(props) {
     status: null,
     msg: "",
   });
-
+  const [title, setTitle] = useState();
 
   useEffect(() => {
     console.log(isValidTitle);
   }, [isValidTitle]);
 
-
   function validateData() {
     console.log("validate");
-    let title = titleRef.current.value;
-    console.log("title", title);
+    let titleVal = titleRef.current.value;
+    console.log("title", titleVal);
 
-    const isValidLength = title.length !== 0;
-    const isNotANum = isNaN(title);
+    const isValidLength = titleVal.length !== 0;
+    const isNotANum = isNaN(titleVal);
 
     const err = !isValidLength
       ? "title cannot be empty"
@@ -42,12 +41,12 @@ function InputModal(props) {
 
     const desc = descRef.current.value;
 
-    if (props.type === "folder") {
-      if (isValidLength && isNotANum) {
-        console.log("create new folder ");
-        props.onCreateNewFolder({ title: title, desc: desc });
-      }
+    if (isValidLength && isNotANum) {
+      console.log("create new folder ");
+      props.onCreateNewFolder({ title: titleVal, desc: desc });
+      props.onCloseModal();
     }
+
   }
 
   return (
@@ -60,9 +59,9 @@ function InputModal(props) {
       ></div>
       <div className="modal-container">
         <div className="top-pane">
-          <div className="heading">{props.type} details</div>
+          <div className="heading">{props.entityName} details</div>
           <div className="btn-container">
-            <button className={"btn cta"} onClick={validateData}>
+            <button className={`btn ${title && isNaN(title)? "cta" : "disable"}`} onClick={validateData}>
               Done
             </button>
           </div>
@@ -73,11 +72,13 @@ function InputModal(props) {
             <input
               ref={titleRef}
               className="title"
-              type="text"
+              entityName="text"
               autoCorrect="off"
               autoFocus="true"
               required="true"
-              placeholder={`New ${props.type} title goes here..`}
+              value={title}
+              placeholder={`New ${props.entityName} title goes here..`}
+              onChange={(e) => setTitle(e.target.value)}
             />
             {isValidTitle.status !== null && !isValidTitle.status && (
               <div className="msg">
@@ -92,10 +93,9 @@ function InputModal(props) {
             <textarea
               ref={descRef}
               className="desc"
-              type="text"
+              entityName="text"
               autoCorrect="off"
-              placeholder={`(optional) tell us more about "${props.type}" `}
-              // onChange={() => {props.entityDesc()}}
+              placeholder={`(optional) tell us more about "${title}" `}
             ></textarea>
           </div>
         </div>
