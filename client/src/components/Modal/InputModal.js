@@ -7,23 +7,20 @@ import "../Modal/Modal.css";
 import warningIcon from "../../Assests/exclamation-circle.svg";
 
 function InputModal(props) {
-  const titleRef = useRef();
   const descRef = useRef();
 
   const [isValidTitle, setValidTitle] = useState({
     status: null,
     msg: "",
   });
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     console.log(isValidTitle);
   }, [isValidTitle]);
 
-  function validateData() {
-    console.log("validate");
-    let titleVal = titleRef.current.value;
-    console.log("title", titleVal);
+  function validateTitle(titleVal) {
+    // console.log("trimmed title",titleVal, titleVal.length);
 
     const isValidLength = titleVal.length !== 0;
     const isNotANum = isNaN(titleVal);
@@ -38,15 +35,15 @@ function InputModal(props) {
       status: isValidLength && isNotANum,
       msg: err,
     });
+  }
 
-    const desc = descRef.current.value;
-
-    if (isValidLength && isNotANum) {
+  function getEntityData() {
+    if (isValidTitle.status) {
+      const desc = descRef.current.value.trim();
       console.log("create new folder ");
-      props.onCreateNewFolder({ title: titleVal, desc: desc });
+      props.onCreateNewFolder({ title: title, desc: desc });
       props.onCloseModal();
     }
-
   }
 
   return (
@@ -61,7 +58,10 @@ function InputModal(props) {
         <div className="top-pane">
           <div className="heading">{props.entityName} details</div>
           <div className="btn-container">
-            <button className={`btn ${title && isNaN(title)? "cta" : "disable"}`} onClick={validateData}>
+            <button
+              className={`btn ${isValidTitle.status ? "cta" : "disable"}`}
+              onClick={getEntityData}
+            >
               Done
             </button>
           </div>
@@ -70,7 +70,6 @@ function InputModal(props) {
           <div className="title-field">
             <label className="item-label">title</label>
             <input
-              ref={titleRef}
               className="title"
               entityName="text"
               autoCorrect="off"
@@ -78,7 +77,14 @@ function InputModal(props) {
               required="true"
               value={title}
               placeholder={`New ${props.entityName} title goes here..`}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                /*
+                 *passing value to validateTitle() directly to make the validations faster
+                 *to not wait until title state changes
+                 */
+                validateTitle(e.target.value.trim());
+              }}
             />
             {isValidTitle.status !== null && !isValidTitle.status && (
               <div className="msg">
@@ -95,7 +101,9 @@ function InputModal(props) {
               className="desc"
               entityName="text"
               autoCorrect="off"
-              placeholder={`(optional) tell us more about "${title}" `}
+              placeholder={`(optional) tell us more ${
+                isNaN(title.trim()) ? `about ${title.trim()}...` : "..."
+              } `}
             ></textarea>
           </div>
         </div>
